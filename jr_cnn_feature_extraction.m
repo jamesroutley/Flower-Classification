@@ -1,5 +1,6 @@
-function cnn_imagenet_minimal(imageFileName)
-% CNN_IMAGENET_MINIMAL   Minimalistic demonstration of how to run an ImageNet CNN model
+function jr_cnn_feature_extraction(imageFileName) 
+% JR_CNN_FEATURE_EXTRACTOR Feature extraction using ImageNet CNN model.
+% Based on Vedaldi's CNN_IMAGENET_MINIMAL. 
 
 % setup toolbox
 run(fullfile(fileparts(mfilename('fullpath')), '/matlab/vl_setupnn.m')) ;
@@ -12,7 +13,7 @@ end
 net = load('imagenet-vgg-f.mat') ;
 
 % obtain and preprocess an image
-im = imread(imageFileName) ;
+im = imread(strcat('oxfordflower17/jpg/',imageFileName)) ;
 im_ = single(im) ; % note: 255 range
 im_ = imresize(im_, net.normalization.imageSize(1:2)) ;
 im_ = im_ - net.normalization.averageImage ;
@@ -23,11 +24,3 @@ res(end).x
 
 
 
-%{
-% show the classification result
-scores = squeeze(gather(res(end).x)) ;
-[bestScore, best] = max(scores) ;
-figure(1) ; clf ; imagesc(im) ;
-title(sprintf('%s (%d), score %.3f',...
-   net.classes.description{best}, best, bestScore)) ;
-%}
