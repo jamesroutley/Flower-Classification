@@ -1,3 +1,4 @@
-matlab/**
+cnn_matlab/**
+svn_matlab/**
 imagenet-vgg-f.mat
 oxfordflower17/**
