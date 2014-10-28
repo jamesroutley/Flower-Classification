@@ -6,9 +6,9 @@ function featureVect = jr_cnn(imageFileName)
 run(fullfile(fileparts(mfilename('fullpath')), '/cnn_matlab/vl_setupnn.m')) ;
 
 % download a pre-trained CNN from the web
-if ~exist('imagenet-vgg-f.mat')
+if ~exist('cnn_imagenet-vgg-f.mat')
   urlwrite('http://www.vlfeat.org/matconvnet/models/imagenet-vgg-f.mat', ...
-    'imagenet-vgg-f.mat') ;
+    'cnn_imagenet-vgg-f.mat') ;
 end
 net = load('cnn_imagenet-vgg-f.mat') ;
 
