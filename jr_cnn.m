@@ -1,5 +1,5 @@
-function jr_cnn_feature_extraction(imageFileName) 
-% JR_CNN_FEATURE_EXTRACTOR Feature extraction using ImageNet CNN model.
+function featureVect = jr_cnn(imageFileName) 
+% JR_CNN Feature extraction using ImageNet CNN model.
 % Based on Vedaldi's CNN_IMAGENET_MINIMAL. 
 
 % setup toolbox
@@ -20,7 +20,8 @@ im_ = im_ - net.normalization.averageImage ;
 
 % run the CNN
 res = vl_simplenn(net, im_) ;
-res(end).x
+featureVect = squeeze(gather(res(end).x));
+end
 
 
 
