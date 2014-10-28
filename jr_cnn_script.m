@@ -3,4 +3,5 @@
 
 imageName = jr_import_flower_file_names;
 
+
 featureVect = jr_cnn('image_0001.jpg')
