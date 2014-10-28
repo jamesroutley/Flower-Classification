@@ -10,7 +10,7 @@ if ~exist('imagenet-vgg-f.mat')
   urlwrite('http://www.vlfeat.org/matconvnet/models/imagenet-vgg-f.mat', ...
     'imagenet-vgg-f.mat') ;
 end
-net = load('imagenet-vgg-f.mat') ;
+net = load('cnn_imagenet-vgg-f.mat') ;
 
 % obtain and preprocess an image
 im = imread(strcat('oxfordflower17/jpg/',imageFileName)) ;
