@@ -26,9 +26,17 @@ testIndexVector = [41:80, 121:160, 201:240];
 
 
 % generate trainingInstanceMatrix storing training flower feature data
-trainingInstanceMatrix = ones(size(trainingIndexVector, 2), 1000);
-
-for i = 1 : 10 %size(trainingIndexVector, 2)
-    trainingInstanceMatrix(i, :) = jr_cnn(imageName(trainingIndexVector(i), :));
+if 0
+    trainingInstanceMatrix = ones(size(trainingIndexVector, 2), 1000);
+    for i = 1 : size(trainingIndexVector, 2)
+        trainingInstanceMatrix(i, :) = jr_cnn(imageName(trainingIndexVector(i), :));
+    end
 end
     
+% generate testInstanceMatrix storing training flower feature data
+if 0
+    testInstanceMatrix = ones(size(trainingIndexVector, 2), 1000);
+    for i = 1 : size(trainingIndexVector, 2)
+        testInstanceMatrix(i, :) = jr_cnn(imageName(testIndexVector(i), :));
+    end
+end
