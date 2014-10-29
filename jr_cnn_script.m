@@ -42,18 +42,16 @@ if 0
 end
 
 % generate labelVectors
-if 1
-   lableVectorOne = -ones(1,120);
+if 0
+   lableVectorOne = -ones(120, 1);
    lableVectorOne(1:40) = 1;
    
-   lableVectorTwo = -ones(1,120);
+   lableVectorTwo = -ones(120,1);
    lableVectorTwo(41:80) = 1;
    
-   lableVectorThree = -ones(1,120);
+   lableVectorThree = -ones(120,1);
    lableVectorThree(81:120) = 1;
 end
-
-
 
 
 
