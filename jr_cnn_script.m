@@ -40,3 +40,21 @@ if 0
         testInstanceMatrix(i, :) = jr_cnn(imageName(testIndexVector(i), :));
     end
 end
+
+% generate labelVectors
+if 1
+   lableVectorOne = -ones(1,120);
+   lableVectorOne(1:40) = 1;
+   
+   lableVectorTwo = -ones(1,120);
+   lableVectorTwo(41:80) = 1;
+   
+   lableVectorThree = -ones(1,120);
+   lableVectorThree(81:120) = 1;
+end
+
+
+
+
+
+
