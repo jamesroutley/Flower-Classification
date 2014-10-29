@@ -29,6 +29,7 @@ testIndexVector = [41:80, 121:160, 201:240];
 trainingInstanceMatrix = ones(size(trainingIndexVector, 2), 1000);
 
 for i = 1 : 10 %size(trainingIndexVector, 2)
-    trainingInstanceMatrix(i, :) = jr_cnn(imageName(trainingIndexVector(i), :));
+    trainingInstanceMatrix(i, :) = jr_cnn(imageName(i, :));
 end
+    
     
