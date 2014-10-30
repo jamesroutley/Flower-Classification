@@ -3,6 +3,9 @@
 
 % flowerSetNumber allows easy switching of flower sets. 3, 17 or 102
 flowerSetNumber = 3;
+numberOfImagesPerFlower = 80;
+totalImages = flowerSetNumber * numberOfImagesPerFlower;
+
 
 % import vector of flower file names, change format from cell to matrix
 imageName = jr_import_flower_file_names;
@@ -17,10 +20,35 @@ if flowerSetNumber == 3
 end
 
 % define vectors containing the indeces of training and testing data
-trainingIndexVector = [1:40, 81:120, 161:200];
-testIndexVector = [41:80, 121:160, 201:240];
+% trainingIndexVector = [1:40, 81:120, 161:200];
+% testIndexVector = [41:80, 121:160, 201:240];
 
+% generate vectors containing the indeces of training and testing data
+trainingIndexVector = ones(1, 120);
+testIndexVector = ones(1, 120);
+trainingCount = 0;
+testCount = 0;
+flag = 1;
+for i = 1:240 %size(imageLabels, 2)
+   
+   if flag == 1 
+       trainingCount = trainingCount + 1;
+       trainingIndexVector(trainingCount) = i;
+   end
+   
+   if flag == -1 
+       testCount = testCount + 1;
+       testIndexVector(testCount) = i;
+   end
+   
+   if mod(i, 40) == 0
+       flag = flag * -1;
+   end
+   
+end
 
+trainingIndexVector ;
+testIndexVector ;
 
 
 % load / generate trainingInstanceMatrix storing training flower feature data

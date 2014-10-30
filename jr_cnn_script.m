@@ -1,11 +1,17 @@
 %JR_CNN_SCRIPT Script generates photo file names and passes them to jr_cnn
 %and saves the returned feature vector
 
-% flowerSetNumber allows easy switching of flower sets. 3, 17 or 102
+% initialise variables
 flowerSetNumber = 3;
+numberOfImagesPerFlower = 80;
+numTotalImages = flowerSetNumber * numberOfImagesPerFlower;
+numTrainingImages = numTotalImages/2;
+numTestImages = numTotalImages/2;
 
-% import vector of flower file names, change format from cell to matrix
-imageName = jr_import_flower_file_names;
+
+% import vector of flower file names
+imageName = importdata('oxfordflower3/jpg/files.txt');
+imageName = cell2mat(imageName);
 
 % generate vector of image categorisation labels
 imageLabels = load('oxfordflower3/labels.mat');
@@ -13,25 +19,26 @@ imageLabels = (cell2mat(struct2cell(imageLabels)));
 
 % for simplified 3 flower case only:
 if flowerSetNumber == 3
-    imageLabels = imageLabels(1:240);
+    imageLabels = imageLabels(1:numTotalImages);
 end
 
-% define vectors containing the indeces of training and testing data
-% trainingIndexVector = [1:40, 81:120, 161:200];
-% testIndexVector = [41:80, 121:160, 201:240];
 
 % generate vectors containing the indeces of training and testing data
-trainingIndexVector = [];
-testIndexVector = [];
+trainingIndexVector = ones(1, numTrainingImages);
+testIndexVector = ones(1, numTestImages);
+trainingCount = 0;
+testCount = 0;
 flag = 1;
-for i = 1:240 %size(imageLabels, 2)
+for i = 1:numTotalImages %size(imageLabels, 2)
    
    if flag == 1 
-       trainingIndexVector = [trainingIndexVector i];
+       trainingCount = trainingCount + 1;
+       trainingIndexVector(trainingCount) = i;
    end
    
    if flag == -1 
-       testIndexVector = [testIndexVector i];
+       testCount = testCount + 1;
+       testIndexVector(testCount) = i;
    end
    
    if mod(i, 40) == 0
@@ -40,8 +47,6 @@ for i = 1:240 %size(imageLabels, 2)
    
 end
 
-trainingIndexVector ;
-testIndexVector ;
 
 
 % load / generate trainingInstanceMatrix storing training flower feature data
