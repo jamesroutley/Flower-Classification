@@ -12,10 +12,10 @@ imageName = cell2mat(imageName);
 maxFlowerIndex = size(imageName, 1);
 
 % generate vector of image categorisation labels
+imageLabels = load('oxfordflower3/jpg/labels.mat');
+imageLabels = (cell2mat(struct2cell(imageLabels)));
 if flowerSetNumber == 3
-    imageLabels = labels(1:maxFlowerIndex);
-else
-    imageLabels = labels;
+    imageLabels = imageLabels(1:maxFlowerIndex);
 end
 
 % define vectors containing the indeces of training and testing data
@@ -26,23 +26,25 @@ testIndexVector = [41:80, 121:160, 201:240];
 
 
 % generate trainingInstanceMatrix storing training flower feature data
-if 0
+if ~exist('trainingInstanceMatrix.mat')
     trainingInstanceMatrix = ones(size(trainingIndexVector, 2), 1000);
     for i = 1 : size(trainingIndexVector, 2)
         trainingInstanceMatrix(i, :) = jr_cnn(imageName(trainingIndexVector(i), :));
     end
+    save('trainingInstanceMatrix.mat', 'trainingInstanceMatrix');
 end
     
 % generate testInstanceMatrix storing training flower feature data
-if 0
+if ~exist('testInstanceMatrix.mat')
     testInstanceMatrix = ones(size(trainingIndexVector, 2), 1000);
     for i = 1 : size(trainingIndexVector, 2)
         testInstanceMatrix(i, :) = jr_cnn(imageName(testIndexVector(i), :));
     end
+    save('testInstanceMatrix.mat', 'testInstanceMatrix')
 end
 
 % generate labelVectors
-if 0
+if 1
    lableVectorOne = -ones(120, 1);
    lableVectorOne(1:40) = 1;
    
@@ -53,9 +55,8 @@ if 0
    lableVectorThree(81:120) = 1;
 end
 
-if 0
-    addpath /libsvm-3.18/matlab
-    jr_svm_script
-    rmpath /libsvm-3.18/matlab
+% train mode
+jr_svm_script
+
 
 

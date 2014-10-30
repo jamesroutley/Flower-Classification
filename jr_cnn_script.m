@@ -55,10 +55,8 @@ if 1
    lableVectorThree(81:120) = 1;
 end
 
-if 1
-    addpath libsvm-3.18/matlab
-    jr_svm_script
-    rmpath libsvm-3.18/matlab
-end
+% train and test models 
+jr_svm_script
+
 
 
