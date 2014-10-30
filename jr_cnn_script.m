@@ -4,17 +4,18 @@
 % initialise variables
 flowerSetNumber = 3;
 numberOfImagesPerFlower = 80;
+imageFolder = 'oxfordflower3';
 numTotalImages = flowerSetNumber * numberOfImagesPerFlower;
 numTrainingImages = numTotalImages/2;
 numTestImages = numTotalImages/2;
 
 
 % import vector of flower file names
-imageName = importdata('oxfordflower3/jpg/files.txt');
+imageName = importdata(strcat(imageFolder,'/jpg/files.txt'));
 imageName = cell2mat(imageName);
 
 % generate vector of image categorisation labels
-imageLabels = load('oxfordflower3/labels.mat');
+imageLabels = load(strcat(imageFolder,'/labels.mat'));
 imageLabels = (cell2mat(struct2cell(imageLabels)));
 
 % for simplified 3 flower case only:
@@ -50,27 +51,27 @@ end
 
 
 % load / generate trainingInstanceMatrix storing training flower feature data
-if exist('trainingInstanceMatrix.mat')
-    trainingInstanceMatrix = load('trainingInstanceMatrix.mat');
+if exist(strcat(imageFolder,'/trainingInstanceMatrix.mat'))
+    trainingInstanceMatrix = load(strcat(imageFolder,'/trainingInstanceMatrix.mat'));
     trainingInstanceMatrix = (cell2mat(struct2cell(trainingInstanceMatrix)));
 else
     trainingInstanceMatrix = ones(size(trainingIndexVector, 2), 1000);
     for i = 1 : size(trainingIndexVector, 2)
         trainingInstanceMatrix(i, :) = jr_cnn(imageName(trainingIndexVector(i), :));
     end
-    save('trainingInstanceMatrix.mat', 'trainingInstanceMatrix');
+    save(strcat(imageFolder,'/trainingInstanceMatrix.mat'), 'trainingInstanceMatrix');
 end
 
 % load / generate testInstanceMatrix storing test flower feature data
-if  exist('testInstanceMatrix.mat')
-    testInstanceMatrix = load('testInstanceMatrix.mat');
+if  exist(strcat(imageFolder,'/testInstanceMatrix.mat'))
+    testInstanceMatrix = load(strcat(imageFolder,'/testInstanceMatrix.mat'));
     testInstanceMatrix = (cell2mat(struct2cell(testInstanceMatrix)));
 else
     testInstanceMatrix = ones(size(trainingIndexVector, 2), 1000);
     for i = 1 : size(trainingIndexVector, 2)
         testInstanceMatrix(i, :) = jr_cnn(imageName(testIndexVector(i), :));
     end
-    save('testInstanceMatrix.mat', 'testInstanceMatrix')
+    save(strcat(imageFolder,'/testInstanceMatrix.mat'), 'testInstanceMatrix')
 end
 
 
