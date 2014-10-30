@@ -1,10 +1,10 @@
 
-function [predictLabels, accuracies, decValues]= jr_svm(flowerSetNumber, trainingInstanceMatrix, testInstanceMatrix)
+function [predictLabels, accuracies, decValues]= jr_svm(flowerSetNumber, numTestImages, trainingInstanceMatrix, testInstanceMatrix)
 
 % initialise predictLabels, accuracies, decValues matrices
- predictLabels = ones(flowerSetNumber, 120);
+ predictLabels = ones(flowerSetNumber, numTestImages);
  accuracies = ones(flowerSetNumber, 3);
- decValues = ones(flowerSetNumber, 120);
+ decValues = ones(flowerSetNumber, numTestImages);
  
 for i = 1:flowerSetNumber
     % generate label vectors
@@ -12,7 +12,7 @@ for i = 1:flowerSetNumber
     
     % train + test SVMs  
     addpath libsvm-3.18/matlab
-    model = svmtrain(labelVector, trainingInstanceMatrix, '-c 1 -g 1');
+    model = svmtrain(labelVector, trainingInstanceMatrix, '-c 1 -g 0.001');
     [predict_label, accuracy, dec_values] = svmpredict(labelVector, testInstanceMatrix, model);
     rmpath libsvm-3.18/matlab
     

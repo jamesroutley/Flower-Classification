@@ -2,9 +2,9 @@
 %and saves the returned feature vector
 
 % initialise variables
-flowerSetNumber = 3;
+flowerSetNumber = 5;
 numberOfImagesPerFlower = 80;
-imageFolder = 'oxfordflower3';
+imageFolder = 'oxfordflower5';
 numTotalImages = flowerSetNumber * numberOfImagesPerFlower;
 numTrainingImages = numTotalImages/2;
 numTestImages = numTotalImages/2;
@@ -19,7 +19,7 @@ imageLabels = load(strcat(imageFolder,'/labels.mat'));
 imageLabels = (cell2mat(struct2cell(imageLabels)));
 
 % for simplified 3 flower case only:
-if flowerSetNumber == 3
+if flowerSetNumber == 5
     imageLabels = imageLabels(1:numTotalImages);
 end
 
@@ -77,7 +77,7 @@ end
 
 
 % train and test models 
-[predictLabels, accuracies, decValues] = jr_svm(flowerSetNumber, trainingInstanceMatrix, testInstanceMatrix);
+[predictLabels, accuracies, decValues] = jr_svm(flowerSetNumber, numTestImages, trainingInstanceMatrix, testInstanceMatrix);
 
 
 
