@@ -7,21 +7,41 @@ flowerSetNumber = 3;
 % import vector of flower file names, change format from cell to matrix
 imageName = jr_import_flower_file_names;
 
-% find max index of flowers
-maxFlowerIndex = size(imageName, 1);
-
 % generate vector of image categorisation labels
 imageLabels = load('oxfordflower3/labels.mat');
 imageLabels = (cell2mat(struct2cell(imageLabels)));
+
+% for simplified 3 flower case only:
 if flowerSetNumber == 3
-    imageLabels = imageLabels(1:maxFlowerIndex);
+    imageLabels = imageLabels(1:240);
 end
 
 % define vectors containing the indeces of training and testing data
-trainingIndexVector = [1:40, 81:120, 161:200];
-testIndexVector = [41:80, 121:160, 201:240];
+% trainingIndexVector = [1:40, 81:120, 161:200];
+% testIndexVector = [41:80, 121:160, 201:240];
 
+% generate vectors containing the indeces of training and testing data
+trainingIndexVector = [];
+testIndexVector = [];
+flag = 1;
+for i = 1:240 %size(imageLabels, 2)
+   
+   if flag == 1 
+       trainingIndexVector = [trainingIndexVector i];
+   end
+   
+   if flag == -1 
+       testIndexVector = [testIndexVector i];
+   end
+   
+   if mod(i, 40) == 0
+       flag = flag * -1;
+   end
+   
+end
 
+trainingIndexVector ;
+testIndexVector ;
 
 
 % load / generate trainingInstanceMatrix storing training flower feature data
