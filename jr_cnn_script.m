@@ -6,7 +6,7 @@ flowerSetNumber = 3;
 
 % import vector of flower file names, change format from cell to matrix
 imageName = jr_import_flower_file_names;
-imageName = cell2mat(imageName);
+
 
 % find max index of flowers
 maxFlowerIndex = size(imageName, 1);
@@ -43,17 +43,6 @@ if ~exist('testInstanceMatrix.mat')
     save('testInstanceMatrix.mat', 'testInstanceMatrix')
 end
 
-% generate labelVectors
-if 1
-   lableVectorOne = -ones(120, 1);
-   lableVectorOne(1:40) = 1;
-   
-   lableVectorTwo = -ones(120,1);
-   lableVectorTwo(41:80) = 1;
-   
-   lableVectorThree = -ones(120,1);
-   lableVectorThree(81:120) = 1;
-end
 
 % train and test models 
 jr_svm_script
