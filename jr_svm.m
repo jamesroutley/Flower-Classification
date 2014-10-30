@@ -1,3 +1,6 @@
+
+function [predictLabels, accuracies, decValues]= jr_svm(flowerSetNumber, trainingInstanceMatrix, testInstanceMatrix)
+
 % initialise predictLabels, accuracies, decValues matrices
  predictLabels = ones(flowerSetNumber, 120);
  accuracies = ones(flowerSetNumber, 3);

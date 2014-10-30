@@ -7,12 +7,11 @@ flowerSetNumber = 3;
 % import vector of flower file names, change format from cell to matrix
 imageName = jr_import_flower_file_names;
 
-
 % find max index of flowers
 maxFlowerIndex = size(imageName, 1);
 
 % generate vector of image categorisation labels
-imageLabels = load('oxfordflower3/jpg/labels.mat');
+imageLabels = load('oxfordflower3/labels.mat');
 imageLabels = (cell2mat(struct2cell(imageLabels)));
 if flowerSetNumber == 3
     imageLabels = imageLabels(1:maxFlowerIndex);
@@ -25,17 +24,23 @@ testIndexVector = [41:80, 121:160, 201:240];
 
 
 
-% generate trainingInstanceMatrix storing training flower feature data
-if ~exist('trainingInstanceMatrix.mat')
+% load / generate trainingInstanceMatrix storing training flower feature data
+if exist('trainingInstanceMatrix.mat')
+    trainingInstanceMatrix = load('trainingInstanceMatrix.mat');
+    trainingInstanceMatrix = (cell2mat(struct2cell(trainingInstanceMatrix)));
+else
     trainingInstanceMatrix = ones(size(trainingIndexVector, 2), 1000);
     for i = 1 : size(trainingIndexVector, 2)
         trainingInstanceMatrix(i, :) = jr_cnn(imageName(trainingIndexVector(i), :));
     end
     save('trainingInstanceMatrix.mat', 'trainingInstanceMatrix');
 end
-    
-% generate testInstanceMatrix storing training flower feature data
-if ~exist('testInstanceMatrix.mat')
+
+% load / generate testInstanceMatrix storing test flower feature data
+if  exist('testInstanceMatrix.mat')
+    testInstanceMatrix = load('testInstanceMatrix.mat');
+    testInstanceMatrix = (cell2mat(struct2cell(testInstanceMatrix)));
+else
     testInstanceMatrix = ones(size(trainingIndexVector, 2), 1000);
     for i = 1 : size(trainingIndexVector, 2)
         testInstanceMatrix(i, :) = jr_cnn(imageName(testIndexVector(i), :));
@@ -44,8 +49,9 @@ if ~exist('testInstanceMatrix.mat')
 end
 
 
+
 % train and test models 
-jr_svm_script
+[predictLabels, accuracies, decValues] = jr_svm(flowerSetNumber, trainingInstanceMatrix, testInstanceMatrix);
 
 
 
