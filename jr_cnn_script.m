@@ -57,7 +57,7 @@ if exist(strcat(imageFolder,'/trainingInstanceMatrix.mat'))
 else
     trainingInstanceMatrix = ones(size(trainingIndexVector, 2), 1000);
     for i = 1 : size(trainingIndexVector, 2)
-        trainingInstanceMatrix(i, :) = jr_cnn(imageName(trainingIndexVector(i), :));
+        trainingInstanceMatrix(i, :) = jr_cnn(imageName(trainingIndexVector(i), :), imageFolder);
     end
     save(strcat(imageFolder,'/trainingInstanceMatrix.mat'), 'trainingInstanceMatrix');
 end
@@ -69,7 +69,7 @@ if  exist(strcat(imageFolder,'/testInstanceMatrix.mat'))
 else
     testInstanceMatrix = ones(size(trainingIndexVector, 2), 1000);
     for i = 1 : size(trainingIndexVector, 2)
-        testInstanceMatrix(i, :) = jr_cnn(imageName(testIndexVector(i), :));
+        testInstanceMatrix(i, :) = jr_cnn(imageName(testIndexVector(i), :), imageFolder);
     end
     save(strcat(imageFolder,'/testInstanceMatrix.mat'), 'testInstanceMatrix')
 end
