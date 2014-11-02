@@ -20,7 +20,7 @@ im_ = im_ - net.normalization.averageImage ;
 
 % run the CNN
 res = vl_simplenn(net, im_) ;
-featureVect = squeeze(gather(res(end).x));
+featureVect = squeeze(gather(res(20).x));
 featureVect = featureVect';
 end
 

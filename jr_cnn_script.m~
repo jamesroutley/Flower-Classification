@@ -55,7 +55,7 @@ if exist(strcat(imageFolder,'/trainingInstanceMatrix.mat'))
     trainingInstanceMatrix = load(strcat(imageFolder,'/trainingInstanceMatrix.mat'));
     trainingInstanceMatrix = (cell2mat(struct2cell(trainingInstanceMatrix)));
 else
-    trainingInstanceMatrix = ones(size(trainingIndexVector, 2), 4096);
+    trainingInstanceMatrix = ones(size(trainingIndexVector, 2), 1000);
     for i = 1 : size(trainingIndexVector, 2)
         trainingInstanceMatrix(i, :) = jr_cnn(imageName(trainingIndexVector(i), :), imageFolder);
     end
