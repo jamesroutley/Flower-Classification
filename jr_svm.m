@@ -12,7 +12,7 @@ for i = 1:flowerSetNumber
     
     % train + test SVMs  
     addpath libsvm-3.18/matlab
-    model = svmtrain(labelVector, trainingInstanceMatrix, '-c 1');
+    model = svmtrain(labelVector, trainingInstanceMatrix, '-c 2 -g 0.0001220703125');
     [predict_label, accuracy, dec_values] = svmpredict(labelVector, testInstanceMatrix, model);
     rmpath libsvm-3.18/matlab
     

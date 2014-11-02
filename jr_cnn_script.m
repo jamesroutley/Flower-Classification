@@ -2,9 +2,10 @@
 %and saves the returned feature vector
 
 % initialise variables
-flowerSetNumber = 5;
+flowerSetNumber = 17;
+flowerSetNumberLable = num2str(flowerSetNumber);
 numberOfImagesPerFlower = 80;
-imageFolder = 'oxfordflower5';
+imageFolder = 'oxfordflower17';
 numTotalImages = flowerSetNumber * numberOfImagesPerFlower;
 numTrainingImages = numTotalImages/2;
 numTestImages = numTotalImages/2;
@@ -51,27 +52,27 @@ end
 
 
 % load / generate trainingInstanceMatrix storing training flower feature data
-if exist(strcat(imageFolder,'/trainingInstanceMatrix.mat'))
-    trainingInstanceMatrix = load(strcat(imageFolder,'/trainingInstanceMatrix.mat'));
+if exist(strcat(imageFolder,'/trainingInstanceMatrix', flowerSetNumberLable, '.mat'))
+    trainingInstanceMatrix = load(strcat(imageFolder,'/trainingInstanceMatrix', flowerSetNumberLable, '.mat'));
     trainingInstanceMatrix = (cell2mat(struct2cell(trainingInstanceMatrix)));
 else
     trainingInstanceMatrix = ones(size(trainingIndexVector, 2), 4096);
     for i = 1 : size(trainingIndexVector, 2)
         trainingInstanceMatrix(i, :) = jr_cnn(imageName(trainingIndexVector(i), :), imageFolder);
     end
-    save(strcat(imageFolder,'/trainingInstanceMatrix.mat'), 'trainingInstanceMatrix');
+    save(strcat(imageFolder,'/trainingInstanceMatrix', flowerSetNumberLable, '.mat'), 'trainingInstanceMatrix');
 end
 
 % load / generate testInstanceMatrix storing test flower feature data
-if  exist(strcat(imageFolder,'/testInstanceMatrix.mat'))
-    testInstanceMatrix = load(strcat(imageFolder,'/testInstanceMatrix.mat'));
+if  exist(strcat(imageFolder,'/testInstanceMatrix', flowerSetNumberLable, '.mat'))
+    testInstanceMatrix = load(strcat(imageFolder,'/testInstanceMatrix', flowerSetNumberLable, '.mat'));
     testInstanceMatrix = (cell2mat(struct2cell(testInstanceMatrix)));
 else
     testInstanceMatrix = ones(size(trainingIndexVector, 2), 4096);
     for i = 1 : size(trainingIndexVector, 2)
         testInstanceMatrix(i, :) = jr_cnn(imageName(testIndexVector(i), :), imageFolder);
     end
-    save(strcat(imageFolder,'/testInstanceMatrix.mat'), 'testInstanceMatrix')
+    save(strcat(imageFolder,'/testInstanceMatrix', flowerSetNumberLable, '.mat'), 'testInstanceMatrix')
 end
 
 
