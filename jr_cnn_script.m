@@ -2,12 +2,13 @@
 %and saves the returned feature vector
 
 % initialise variables
-flowerSetNumber = 102;
+flowerSetNumber = 17;
 flowerSetNumberLable = num2str(flowerSetNumber);
-imageFolder = 'oxfordflower102/';
+numberOfImagesPerFlower = 80;
+imageFolder = 'oxfordflower17/';
 imageTrainFolder = strcat(imageFolder, 'jpgtrain/');
 imageTestFolder = strcat(imageFolder, 'jpgtest/');
-numTotalImages = size(imageLabels, 2);
+numTotalImages = flowerSetNumber * numberOfImagesPerFlower;
 numTrainingImages = numTotalImages;
 numTestImages = numTotalImages;
 
@@ -38,7 +39,6 @@ else
     save(strcat(imageFolder,'trainingInstanceMatrix', flowerSetNumberLable, '.mat'), 'trainingInstanceMatrix');
 end
 
-
 % load / generate testInstanceMatrix storing test flower feature data
 if  exist(strcat(imageFolder,'testInstanceMatrix', flowerSetNumberLable, '.mat'))
     testInstanceMatrix = load(strcat(imageFolder,'testInstanceMatrix', flowerSetNumberLable, '.mat'));
@@ -52,9 +52,9 @@ else
 end
 
 
-if 1
-% train and test models 
-[predictLabels, accuracies, decValues] = jr_svm(flowerSetNumber, numTestImages, trainingInstanceMatrix, testInstanceMatrix, imageLabels);
 
-end
+% train and test models 
+[predictLabels, accuracies, decValues] = jr_svm(flowerSetNumber, numTestImages, trainingInstanceMatrix, testInstanceMatrix);
+
+
 
