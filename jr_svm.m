@@ -8,12 +8,13 @@ function [predictLabels, accuracies, decValues]= jr_svm(flowerSetNumber, numTest
  
 for i = 1:flowerSetNumber
     % generate label vectors
-    labelVector = generateLabelVector(flowerSetNumber, i);
+    trainingLabelVector = jr_svm_genTrainingLabelVector(flowerSetNumber, i);
+    testLabelVector = jr_svm_genTestLabelVector(flowerSetNumber, i);
     
     % train + test SVMs  
     addpath libsvm-3.18/matlab
-    model = svmtrain(labelVector, trainingInstanceMatrix, '-c 1');
-    [predict_label, accuracy, dec_values] = svmpredict(labelVector, testInstanceMatrix, model);
+    model = svmtrain(trainingLabelVector, trainingInstanceMatrix, '-c 2 -g 0.0001220703125');
+    [predict_label, accuracy, dec_values] = svmpredict(testLabelVector, testInstanceMatrix, model);
     rmpath libsvm-3.18/matlab
     
     % store predict_label, accuracy, dec_values

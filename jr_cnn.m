@@ -13,7 +13,7 @@ end
 net = load('cnn_imagenet-vgg-f.mat') ;
 
 % obtain and preprocess an image
-im = imread(strcat(imageFolder,'/jpg/',imageFileName)) ;
+im = imread(strcat(imageFolder, imageFileName)) ;
 im_ = single(im) ; % note: 255 range
 im_ = imresize(im_, net.normalization.imageSize(1:2)) ;
 im_ = im_ - net.normalization.averageImage ;
