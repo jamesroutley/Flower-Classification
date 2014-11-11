@@ -94,7 +94,7 @@ end
 
 % train and test models 
 if 1
-    [prediction_labels, accuracies, decision_values] = ...
+    [prediction_labels, accuracies, decision_values, weight_matrix] = ...
         svm_train_and_test(flower_set_number, num_test_images, ...
             training_instance_matrix, test_instance_matrix);
 end
@@ -119,7 +119,4 @@ for i = 1 : size(area_under_curve, 1)
     area_under_curve(i) = trapz(roc_matrix(2 * i + 1, :), ...
         roc_matrix(2 * i , :));
 end
-
-
-
 
