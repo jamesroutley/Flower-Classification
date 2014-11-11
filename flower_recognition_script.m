@@ -120,6 +120,3 @@ for i = 1 : size(area_under_curve, 1)
         roc_matrix(2 * i , :));
 end
 
-
-
-
