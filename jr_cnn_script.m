@@ -52,7 +52,8 @@ end
 
 % load / generate trainingInstanceMatrix storing training flower feature data
 if exist(strcat(imageFolder,'trainingInstanceMatrix.mat'))
-    trainingInstanceMatrix = load(strcat(imageFolder,'trainingInstanceMatrix.mat'));
+    trainingInstanceMatrix = ...
+        load(strcat(imageFolder,'trainingInstanceMatrix.mat'));
     trainingInstanceMatrix = (cell2mat(struct2cell(trainingInstanceMatrix)));
 else
     trainingInstanceMatrix = jr_cnn_genTrainingMatrix(imageName, imageFolder, trainingIndexVector);
@@ -74,20 +75,25 @@ end
 
 
 % train and test models 
-if 0
+if 1
     [predictLabels, accuracies, decValues] = jr_svm(flowerSetNumber, numTestImages, trainingInstanceMatrix, testInstanceMatrix);
 end
 
-% measure quality of results 
+% measure quality of results (confusion matrix, contingency table, ROC)
 confusionMatrix = jr_confMatrix(decValues);
 contingencyTable = jr_contingencyTable(flowerSetNumber, decValues);
-
-% plot DOC curves
 rocMatrix = jr_rocCurve(decValues);
 
-plot(rocMatrix(2, :), rocMatrix(1, :), 'y', rocMatrix(4, :), rocMatrix(3, :), 'r', rocMatrix(6, :), rocMatrix(5, :), 'g', rocMatrix(8, :), rocMatrix(7, :), 'c', rocMatrix(10, :), rocMatrix(9, :), 'b');
+% plot ROC curves
+plot(rocMatrix(3, :), rocMatrix(2, :), 'y', rocMatrix(5, :), rocMatrix(4, :), 'r', rocMatrix(7, :), rocMatrix(6, :), 'g', rocMatrix(9, :), rocMatrix(8, :), 'c', rocMatrix(11, :), rocMatrix(10, :), 'b');
 legend('1', '2', '3', '4', '5', 'location', 'SouthEast')
-%axis([0 1 0 1])
+axis([0 0.6 0 1])
+
+% calculate Area Under Curve for ROC curves
+AUC = zeros(5,1);
+for i = 1 : size(AUC, 1)
+    AUC(i) = trapz(rocMatrix(2 * i + 1, :), rocMatrix(2 * i , :));
+end
 
 
 

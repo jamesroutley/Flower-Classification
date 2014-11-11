@@ -1,4 +1,6 @@
 function confusionMatrix = jr_confMatrix(decValues)
+% classifies a given image, based on the model which gives the least
+% nevative decision value. Forms a confusion matrix based on the results.
 
     % find the predicted type of each of the 200 test photos
     [Y, decLabels] = max(decValues);
@@ -6,7 +8,7 @@ function confusionMatrix = jr_confMatrix(decValues)
     % generate correct labels of each of the 200 test photos
     actualLabels = ones(5, 40);
     for i = 1:5;
-    actualLabels(i, :) = i;
+        actualLabels(i, :) = i;
     end
     actualLabels = reshape(actualLabels', 1, []);
 

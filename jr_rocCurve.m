@@ -1,8 +1,11 @@
-function rocMatrix = jr_rocCurve(decValues)
+function rocMatrixWithBoundaryValues = jr_rocCurve(decValues)
+% plot true positives and false positives of each model (separately), as
+% the value of the decision boundary changes. 
 
-cutOffVector = linspace(-2,2,101);
+cutOffVector = -linspace(-2,2,101);
 
 rocMatrix = zeros( (size(decValues, 1) * 2 ) , size(cutOffVector, 2) );
+rocMatrixWithBoundaryValues = zeros(size(rocMatrix, 1) + 1, size(rocMatrix, 2));
 
 for i = 1 : size(cutOffVector, 2)
     
@@ -11,7 +14,7 @@ for i = 1 : size(cutOffVector, 2)
         decisions = decValues(j, :) > cutOffVector(i);
         
         % find proportion of true positives and proportion of false positives
-        testLabelVector = jr_svm_genTestLabelVector(5, 1);
+        testLabelVector = jr_svm_genTestLabelVector(size(decValues, 1), j);
 
         numTruePositives = 0;
         numFalsePositives = 0;
@@ -29,5 +32,7 @@ for i = 1 : size(cutOffVector, 2)
     end
 
 end
+rocMatrixWithBoundaryValues(1, :) = cutOffVector(1, :);
+rocMatrixWithBoundaryValues(2:end, :) = rocMatrix(:, :);
 end
 
