@@ -1,18 +1,28 @@
 
 
 % dummy training data matrix
-Tr = [ 1, 0 ; 1.1, 0.1; 0, 1; -0.1, 0.9 ];
-labelVector = [1; 1; 0; 0];
+training_matrix = [ 1, 0 ; 1.1, 0.1; 0, 1; -0.1, 0.9 ];
+label_vector = [1; 1; 0; 0];
 
 % dummy test data
-Te = [0.1, 0];
+test_matrix = [-0.1, 0.9];
+
+sparse_training_matrix = sparse(training_matrix);
+sparse_test_matrix = sparse(test_matrix);
 
 % train SVMs  
-    addpath libsvm-3.18/matlab
-    model = svmtrain(labelVector, Tr, '-c 1 ');
-    rmpath libsvm-3.18/matlab
+addpath liblinear-1.95/matlab
+model = train(label_vector, sparse_training_matrix, '-c 1 ');
+rmpath liblinear-1.95/matlab
+
+% test SVM  
+addpath liblinear-1.95/matlab
+[predict_label, accuracy, dec_values] = predict(1, sparse_test_matrix, model);
+rmpath liblinear-1.95/matlab
+
+decision = model.w * test_matrix';
     
- % test SVM  
-    addpath libsvm-3.18/matlab
-    [predict_label, accuracy, dec_values] = svmpredict(1, Te, model);
-    rmpath libsvm-3.18/matlab
+
+    
+    
+    

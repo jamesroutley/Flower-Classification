@@ -1,0 +1,20 @@
+
+
+% dummy training data matrix
+tr = [ 1, 0 ; 1.1, 0.1; 0, 1; -0.1, 0.9 ];
+labelVector = [1; 1; 0; 0];
+
+% dummy test data
+test_ = [0.1, 0];
+
+
+
+% train SVMs  
+    addpath liblinear-1.95/matlab
+    model = train(labelVector, tr, '-c 1 ');
+    rmpath liblinear-1.95/matlab
+    
+ % test SVM  
+    addpath liblinear-1.95/matlab
+    [predict_label, accuracy, dec_values] = predict(1, Te, model);
+    rmpath liblinear-1.95/matlab
