@@ -1,9 +1,9 @@
-function featureVect = jr_cnn(imageFileName, imageFolder) 
+function feature_vector = cnn_feature_extractor(image_file_name, image_folder) 
 % JR_CNN Feature extraction using ImageNet CNN model.
 % Based on Vedaldi's CNN_IMAGENET_MINIMAL. 
 
 % setup toolbox
-run(fullfile(fileparts(mfilename('fullpath')), '/cnn_matlab/vl_setupnn.m')) ;
+run(fullfile(fileparts(mfilename('fullpath')), '/cnn_matlab/vl_setupnn.m'));
 
 % download a pre-trained CNN from the web
 if ~exist('cnn_imagenet-vgg-f.mat')
@@ -13,15 +13,15 @@ end
 net = load('cnn_imagenet-vgg-f.mat') ;
 
 % obtain and preprocess an image
-im = imread(strcat(imageFolder, imageFileName)) ;
+im = imread(strcat(image_folder, image_file_name)) ;
 im_ = single(im) ; % note: 255 range
 im_ = imresize(im_, net.normalization.imageSize(1:2)) ;
 im_ = im_ - net.normalization.averageImage ;
 
 % run the CNN
 res = vl_simplenn(net, im_) ;
-featureVect = squeeze(gather(res(20).x));
-featureVect = featureVect';
+feature_vector = squeeze(gather(res(20).x));
+feature_vector = feature_vector';
 end
 
 
