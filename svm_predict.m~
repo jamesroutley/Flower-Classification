@@ -1,0 +1,11 @@
+function [prediction_label, decision_values] = ...
+    svm_predict(label_vector, test_instance_matrix, weights)
+
+weights = weights';
+prediction_label = zeros(size(test_instance_matrix, 1), 1);
+
+for i = 1 : size(test_instance_matrix, 1)
+    prediction_label(i) = test_instance_matrix(i) * weights;
+end
+
+decision_values = 

@@ -114,7 +114,9 @@ end
 weight_matrix = svm_train(flower_set_number, training_instance_matrix);
 
 
-
+% test models
+decision_values = ...
+    svm_test(flower_set_number, test_instance_matrix, weight_matrix);
 
 
 

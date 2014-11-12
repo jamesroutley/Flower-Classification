@@ -1,0 +1,13 @@
+function [prediction_labels, accuracies, decision_values] = ...
+    svm_test(flower_set_number, test_instance_matrix, weight_matrix)
+
+% initialise predictLabels, accuracies, decValues matrices
+ prediction_labels = ones(flower_set_number, size(test_instance_matri));
+ accuracies = ones(flower_set_number, 3);
+ decision_values = ones(flower_set_number, num_test_images);
+
+for i = 1 : flower_set_number
+
+    [prediction_label, decision_values] = ...
+        svm_predict( test_instance_matrix, weight_matrix(2, :));
+end
