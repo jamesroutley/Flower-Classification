@@ -18,7 +18,7 @@ for i = 1 : size(cut_off_vector, 2)
         % find proportion of true positives and proportion of false
         % positives
         test_label_vector = ...
-            generate_test_label_vector(size(decision_values, 1), j);
+            generate_label_vector(size(decision_values, 1), j, 40);
 
         num_true_positives = 0;
         num_false_positives = 0;

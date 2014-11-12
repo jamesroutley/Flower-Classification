@@ -18,13 +18,16 @@ image_name = cell2mat(image_name);
 image_labels = load(strcat(image_folder,'labels.mat'));
 image_labels = (cell2mat(struct2cell(image_labels)));
 
-% for simplified 3 flower case only:
+% for simplified 5 flower case only:
 if flower_set_number == 5
     image_labels = image_labels(1:num_total_images);
 end
 
 
-% generate vectors containing the indeces of training and testing data
+% the photos come in sets of 80 photos per flower. To split these sets in
+% half to generate training and testing data, a training_index_vector of
+% [1, 2, ... , 39, 40, 81, 82 ... etc] and a test_index_vector of [41, 42,
+% ... , 79, 80 ... etc] are used to address the photos used by each set. 
 training_index_vector = ones(1, num_training_images);
 test_index_vector = ones(1, num_test_images);
 training_count = 0;
@@ -50,7 +53,7 @@ end
 
 
 
-% load / generate trainingInstanceMatrix storing training flower feature
+% load / generate training_instance_matrix storing training flower feature
 % data
 if exist(strcat(image_folder,'training_instance_matrix.mat'))
     training_instance_matrix = ...
@@ -58,6 +61,20 @@ if exist(strcat(image_folder,'training_instance_matrix.mat'))
     training_instance_matrix = ...
         (cell2mat(struct2cell(training_instance_matrix)));
 else
+    
+    training_instance_matrix = ...
+        ones( size(training_index_vector, 2) , 4096 );
+    training_image_folder = strcat(image_folder, 'jpg/');
+    
+    for i = 1 : size(training_index_vector, 2)
+        training_instance_matrix(i, :) = ...
+            cnn_feature_extractor(image_name( ...
+                training_index_vector(i), :), training_image_folder);
+
+    end
+    
+    % code generates a training matrix using mirrors of the training images
+    %{
     training_instance_matrix = ...
         ones( (size(training_index_vector, 2) * 2) , 4096 );
     training_image_folder = strcat(image_folder, 'jpg/');
@@ -70,11 +87,12 @@ else
             cnn_feature_extractor(image_name( ...
                 training_index_vector(i), :), mirror_image_folder);
     end
+    %}
     save(strcat(image_folder,'training_instance_matrix.mat'), ...
         'training_instance_matrix');
 end
 
-% load / generate testInstanceMatrix storing test flower feature data
+% load / generate test_instance_matrix storing test flower feature data
 if  exist(strcat(image_folder,'test_instance_matrix.mat'))
     test_instance_matrix = load( ...
         strcat(image_folder,'test_instance_matrix.mat'));
@@ -92,18 +110,27 @@ end
 
 
 
-% train and test models 
-if 1
-    [prediction_labels, accuracies, decision_values, weight_matrix] = ...
-        svm_train_and_test(flower_set_number, num_test_images, ...
-            training_instance_matrix, test_instance_matrix);
-end
+% train models 
+weight_matrix = svm_train(flower_set_number, training_instance_matrix);
 
-% measure quality of results (confusion matrix, contingency table, ROC)
+
+% test models
+decision_values = ...
+    svm_test(flower_set_number, test_instance_matrix, weight_matrix);
+
+
+
+
+
+
+
+% measure quality of results; confusion matrix, contingency table, ROC,
+% and error (sum of false positives and false negatives)
 confusion_matrix = generate_confusion_matrix(decision_values);
 contingency_table = generate_contingency_table( ...
     flower_set_number, decision_values);
 roc_matrix = generate_roc_curve(decision_values);
+error = generate_error(contingency_table);
 
 % plot ROC curves
 plot(roc_matrix(3, :), roc_matrix(2, :), 'y', roc_matrix(5, :), ...
@@ -119,4 +146,5 @@ for i = 1 : size(area_under_curve, 1)
     area_under_curve(i) = trapz(roc_matrix(2 * i + 1, :), ...
         roc_matrix(2 * i , :));
 end
+
 
