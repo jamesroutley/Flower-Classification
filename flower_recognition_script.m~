@@ -24,10 +24,7 @@ if flower_set_number == 5
 end
 
 
-% the photos come in sets of 80 photos per flower. To split these sets in
-% half to generate training and testing data, a training_index_vector of
-% [1, 2, ... , 39, 40, 81, 82 ... etc] and a test_index_vector of [41, 42,
-% ... , 79, 80 ... etc] are used to address the photos used by each set. 
+% generate vectors containing the indeces of training and testing data
 training_index_vector = ones(1, num_training_images);
 test_index_vector = ones(1, num_test_images);
 training_count = 0;
@@ -53,7 +50,7 @@ end
 
 
 
-% load / generate training_instance_matrix storing training flower feature
+% load / generate trainingInstanceMatrix storing training flower feature
 % data
 if exist(strcat(image_folder,'training_instance_matrix.mat'))
     training_instance_matrix = ...
@@ -72,6 +69,7 @@ else
                 training_index_vector(i), :), training_image_folder);
 
     end
+    
     
     % code generates a training matrix using mirrors of the training images
     %{
@@ -92,7 +90,7 @@ else
         'training_instance_matrix');
 end
 
-% load / generate test_instance_matrix storing test flower feature data
+% load / generate testInstanceMatrix storing test flower feature data
 if  exist(strcat(image_folder,'test_instance_matrix.mat'))
     test_instance_matrix = load( ...
         strcat(image_folder,'test_instance_matrix.mat'));
