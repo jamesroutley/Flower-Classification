@@ -110,12 +110,21 @@ end
 
 
 
-% train and test models 
-if 1
-    [prediction_labels, accuracies, decision_values, weight_matrix] = ...
-        svm_train_and_test(flower_set_number, num_test_images, ...
-            training_instance_matrix, test_instance_matrix);
-end
+% train models 
+weight_matrix = svm_train(flower_set_number, training_instance_matrix);
+
+
+
+
+
+
+
+
+
+
+
+
+%{
 
 % measure quality of results (confusion matrix, contingency table, ROC)
 confusion_matrix = generate_confusion_matrix(decision_values);
@@ -138,3 +147,4 @@ for i = 1 : size(area_under_curve, 1)
         roc_matrix(2 * i , :));
 end
 
+%}
