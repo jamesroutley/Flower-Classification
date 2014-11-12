@@ -124,10 +124,6 @@ decision_values = ...
 
 
 
-
-
-%{
-
 % measure quality of results (confusion matrix, contingency table, ROC)
 confusion_matrix = generate_confusion_matrix(decision_values);
 contingency_table = generate_contingency_table( ...
@@ -149,4 +145,4 @@ for i = 1 : size(area_under_curve, 1)
         roc_matrix(2 * i , :));
 end
 
-%}
+
