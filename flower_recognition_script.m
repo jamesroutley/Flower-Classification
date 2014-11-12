@@ -124,11 +124,13 @@ decision_values = ...
 
 
 
-% measure quality of results (confusion matrix, contingency table, ROC)
+% measure quality of results; confusion matrix, contingency table, ROC,
+% and error (sum of false positives and false negatives)
 confusion_matrix = generate_confusion_matrix(decision_values);
 contingency_table = generate_contingency_table( ...
     flower_set_number, decision_values);
 roc_matrix = generate_roc_curve(decision_values);
+error = generate_error(contingency_table);
 
 % plot ROC curves
 plot(roc_matrix(3, :), roc_matrix(2, :), 'y', roc_matrix(5, :), ...

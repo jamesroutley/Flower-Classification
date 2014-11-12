@@ -115,24 +115,21 @@ weight_matrix = svm_train(flower_set_number, training_instance_matrix);
 
 
 % test models
-[prediction_label, decision_values] = ...
-    svm_predict(label_vector, test_instance_matrix, weights);
+decision_values = ...
+    svm_test(flower_set_number, test_instance_matrix, weight_matrix);
 
 
 
 
 
 
-
-
-
-%{
 
 % measure quality of results (confusion matrix, contingency table, ROC)
 confusion_matrix = generate_confusion_matrix(decision_values);
 contingency_table = generate_contingency_table( ...
     flower_set_number, decision_values);
 roc_matrix = generate_roc_curve(decision_values);
+error = generate_e
 
 % plot ROC curves
 plot(roc_matrix(3, :), roc_matrix(2, :), 'y', roc_matrix(5, :), ...
@@ -149,4 +146,4 @@ for i = 1 : size(area_under_curve, 1)
         roc_matrix(2 * i , :));
 end
 
-%}
+
