@@ -16,7 +16,7 @@ weight_matrix = zeros(flower_set_number, 4096);
 for i = 1:flower_set_number
     % generate label vectors
     training_label_vector = ...
-        generate_label_vector(flower_set_number, i, 40);
+        generate_label_vector(flower_set_number, i, 80);
 
     
     % train + test SVMs  
