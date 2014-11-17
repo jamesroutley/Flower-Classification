@@ -9,7 +9,7 @@ function contingency_table = generate_contingency_table( ...
 contingency_table = zeros(flower_set_number * 2, 2);
 
 for i = 1 : flower_set_number
-    testLabelVector = generate_label_vector(flower_set_number, i, 40);
+    testLabelVector = generate_label_vector(flower_set_number, i, 20);
     decisions = decision_values(i, :) > 0;
 
     num_true_positives = 0;
@@ -25,8 +25,8 @@ for i = 1 : flower_set_number
     % store calculated values in contincencyTable
     contingency_table((2 * i - 1), 1) = num_true_positives;
     contingency_table((2 * i - 1), 2) = num_false_positives;
-    contingency_table(2 * i, 1) = 40 - num_true_positives;
-    contingency_table(2 * i, 2) = 200 - 40 - num_false_positives;
+    contingency_table(2 * i, 1) = 20 - num_true_positives;
+    contingency_table(2 * i, 2) = 100 - 20 - num_false_positives;
 end
 end
 

@@ -3,7 +3,7 @@ function roc_matrix_with_boundary_values = ...
 % plot true positives and false positives of each model (separately), as
 % the value of the decision boundary changes. 
 
-cut_off_vector = -linspace(-2,2,101);
+cut_off_vector = -linspace(-2,2,10001);
 
 roc_matrix = zeros( (size(decision_values, 1) * 2 ) , size(cut_off_vector, 2) );
 roc_matrix_with_boundary_values = zeros( ...

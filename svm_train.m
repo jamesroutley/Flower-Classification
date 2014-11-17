@@ -2,11 +2,7 @@ function [weight_matrix] = ...
     svm_train(flower_set_number, training_instance_matrix)
 
  % using the default 1. Will improve later
- svm_parameters = {'-c 1'; 
-                   '-c 1'; 
-                   '-c 1'; 
-                   '-c 1'; 
-                   '-c 1'};
+ %svm_parameters = {'-c 0.001'};
                
 % generate sparse training and test instance matrices
 sparse_training_instance_matrix = sparse(training_instance_matrix);
@@ -23,7 +19,7 @@ for i = 1:flower_set_number
     % train + test SVMs  
     addpath liblinear-1.95/matlab
     model = train(training_label_vector, ...
-        sparse_training_instance_matrix, svm_parameters(i));
+        sparse_training_instance_matrix, '-c 0.00001');
     
     weight_matrix(i,:) = model.w(:);
     rmpath liblinear-1.95/matlab

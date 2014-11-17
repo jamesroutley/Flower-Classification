@@ -114,27 +114,22 @@ end
 
 % generate c_training_instance_matrix and c_validation_instance_matrix from
 % training_instance_matrix
+
 c_training_instance_matrix = zeros(size( ...
     training_instance_matrix, 1)/2, size(training_instance_matrix, 2));
 
 c_validation_instance_matrix = zeros(size( ... 
     training_instance_matrix, 1)/2, size(training_instance_matrix, 2));
 
-for i = 1 : size(training_instance_matrix, 1) / 2 
-    c_training_instance_matrix(i, :) = ...
-        training_instance_matrix( (2*i-1), : );
-    c_validation_instance_matrix(i, :) = ...
-        training_instance_matrix( (2*i), : );
-end
-
+for i = 1 : size()
 
 % train models 
-weight_matrix = svm_train(flower_set_number, c_training_instance_matrix);
+weight_matrix = svm_train(flower_set_number, training_instance_matrix);
 
 
 % test models
-decision_values = svm_test( ... 
-    flower_set_number, c_validation_instance_matrix, weight_matrix);
+decision_values = ...
+    svm_test(flower_set_number, test_instance_matrix, weight_matrix);
 
 
 
@@ -144,8 +139,7 @@ decision_values = svm_test( ...
 
 % measure quality of results; confusion matrix, contingency table, ROC,
 % and error (sum of false positives and false negatives)
-confusion_matrix = generate_confusion_matrix( ... 
-    flower_set_number, decision_values);
+confusion_matrix = generate_confusion_matrix(decision_values);
 contingency_table = generate_contingency_table( ...
     flower_set_number, decision_values);
 roc_matrix = generate_roc_curve(decision_values);
