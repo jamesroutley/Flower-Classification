@@ -11,12 +11,13 @@ function [weight_matrix] = ...
 % generate sparse training and test instance matrices
 sparse_training_instance_matrix = sparse(training_instance_matrix);
 
-weight_matrix = zeros(flower_set_number, 4096);
+weight_matrix = zeros(flower_set_number,size(training_instance_matrix, 2));
 
 for i = 1:flower_set_number
     % generate label vectors
     training_label_vector = ...
-        generate_label_vector(flower_set_number, i, 80);
+        generate_label_vector(flower_set_number, i, ... 
+        size(training_instance_matrix, 1) / flower_set_number);
 
     
     % train + test SVMs  
