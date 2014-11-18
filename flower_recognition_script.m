@@ -62,7 +62,6 @@ if exist(strcat(image_folder,'training_instance_matrix.mat'))
         (cell2mat(struct2cell(training_instance_matrix)));
 else
     % generate training matrix using training images
-    %{
     training_instance_matrix = ...
         ones( size(training_index_vector, 2) , 4096 );
     training_image_folder = strcat(image_folder, 'jpg/');
@@ -73,10 +72,10 @@ else
                 training_index_vector(i), :), training_image_folder);
 
     end
-    %}
+
     
     % generate training matrix using training images and mirrors
-
+    %{
     training_instance_matrix = ...
         ones( (size(training_index_vector, 2) * 2) , 4096 );
     training_image_folder = strcat(image_folder, 'jpg/');
@@ -89,7 +88,7 @@ else
             cnn_feature_extractor(image_name( ...
                 training_index_vector(i), :), mirror_image_folder);
     end
-
+    %}
     save(strcat(image_folder,'training_instance_matrix.mat'), ...
         'training_instance_matrix');
 end

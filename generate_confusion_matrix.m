@@ -3,7 +3,7 @@ function confusionMatrix = generate_confusion_matrix(decision_values)
 % nevative decision value. Forms a confusion matrix based on the results.
 
 % find the predicted type of each of the 200 test photos
-[Y, decision_labels] = max(decision_values);
+[~, decision_labels] = max(decision_values);
 
 % generate correct labels of each of the 200 test photos
 actual_labels = ones(5, 40);
