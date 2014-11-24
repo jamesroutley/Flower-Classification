@@ -18,11 +18,12 @@ label_vector = label_vector';
 difference_matrix = zeros(200, 4096);
 sum_of_difference = zeros(200, 1);
 
-comparison_image_name =['image_0001.jpg';
-                        'image_0081.jpg';
-                        'image_0161.jpg';
-                        'image_0241.jpg';
-                        'image_0321.jpg'];
+% generate empty matrix
+comparison_image_name =['image_0000.jpg';
+                        'image_0000.jpg';
+                        'image_0000.jpg';
+                        'image_0000.jpg';
+                        'image_0000.jpg'];
                     
 index_of_comparison_image = zeros(5, 1);
                     
@@ -35,7 +36,7 @@ for i = 1 : size(test_index_vector, 2)
     [~, ranking, ~] = unique(decision_values(:, i));
     ranking = flipud(ranking);
     
-    % TODO sum instance matrices before subtracting them
+    %% find nearest neighbour, store in comparison_image_name
     for j = 1 : 200
         difference_matrix(j, :) = abs( ...
             training_instance_matrix(j, :) - test_instance_matrix(i, :) );
@@ -51,19 +52,21 @@ for i = 1 : size(test_index_vector, 2)
             index_of_comparison_image(k) + 40 * (k - 1)), :);
     end
     
-    % TODO add to end. Danger 
     
-    
+    %% print data to app.js
     fprintf(app, '{ \n');
     
     % insert photo in question into table
-    fprintf(app, strcat('  flower0: "', image_name(test_index_vector(i), :),'", \n' ));
+    fprintf(app, strcat('  flower0: "', image_name( ... 
+        test_index_vector(i), :),'", \n' ));
 
     % insert classification photos into table
     for l = 1 : 5
-        fprintf(app, strcat('  flower', num2str(l),': "', comparison_image_name(ranking(l), :),'",  \n' ));
+        fprintf(app, strcat('  flower', num2str(l),': "', ...
+            comparison_image_name(ranking(l), :),'",  \n' ));
     end
     
+    % Give error warning for incorrectly classified images
     if ranking(1) == label_vector(i)
         fprintf(app, '  danger: 0 \n');
     else
