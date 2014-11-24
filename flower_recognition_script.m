@@ -129,6 +129,9 @@ contingency_table = generate_contingency_table( ...
 roc_matrix = generate_roc_curve(decision_values);
 error = generate_error(contingency_table);
 
+confusion_matrix_accuracy = trace(confusion_matrix) / ...
+    sum(sum(confusion_matrix));
+
 % calculate Area Under Curve for ROC curves
 area_under_curve = zeros(5,1);
 for i = 1 : size(area_under_curve, 1)
@@ -157,6 +160,7 @@ title('ROC Curves for Flower Classifiers')
 xlabel('False Positives Rate')
 ylabel('True Positive Rate')
 
+% generate image of confusion matrix
 ImshowAxesVisible = true;
 imshow(confusion_matrix ./ 40, 'InitialMagnification',10000)  % # you want your cells to be larger than single pixels
  colormap(jet) % # to change the default grayscale colormap 
