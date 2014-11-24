@@ -12,7 +12,7 @@ function [weight_matrix] = ...
 sparse_training_instance_matrix = sparse(training_instance_matrix);
 
 weight_matrix = zeros(flower_set_number,size(training_instance_matrix, 2));
-model_labels = zeros(2, flower_set_number);
+model_labels = zeros(flower_set_number,size(training_instance_matrix, 2));
 
 for i = 1:flower_set_number
     % generate label vectors
@@ -26,11 +26,8 @@ for i = 1:flower_set_number
     model = train(training_label_vector, ...
         sparse_training_instance_matrix, svm_parameters(i));
     
+    % TODO check for multiply by -1
     weight_matrix(i,:) = model.w(:);
-    
-    % check for multiply by -1. TODO, if statement which multiplies
-    % weight_matrix by -1. 
-    model_labels(:,i) = model.Label;
     rmpath liblinear-1.95/matlab
     
 
