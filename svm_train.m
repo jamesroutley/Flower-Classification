@@ -25,6 +25,7 @@ for i = 1:flower_set_number
     model = train(training_label_vector, ...
         sparse_training_instance_matrix, svm_parameters(i));
     
+    % TODO check for multiply by -1
     weight_matrix(i,:) = model.w(:);
     rmpath liblinear-1.95/matlab
     
