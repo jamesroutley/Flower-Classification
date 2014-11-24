@@ -1,4 +1,4 @@
-function generate_app_js(image_name, decision_values, ...
+function generate_app_js(flower_set_number, image_name, decision_values, ...
     training_index_vector, test_index_vector, ...
     training_instance_matrix, test_instance_matrix)
 
@@ -8,8 +8,8 @@ app_beginning = fileread('app_beginning.js');
 app_end = fileread('app_end.js');
 
 % initialise variables
-label_vector = ones(5, 40);
-for i = 1 : 5
+label_vector = ones(flower_set_number, 40);
+for i = 1 : flower_set_number
     label_vector(i, :) = i;
 end
 label_vector = reshape(label_vector', 1, []);
@@ -36,7 +36,7 @@ for i = 1 : size(test_index_vector, 2)
     [~, ranking, ~] = unique(decision_values(:, i));
     ranking = flipud(ranking);
     
-    %% find nearest neighbour, store in comparison_image_name
+    % find nearest neighbour, store in comparison_image_name
     for j = 1 : 200
         difference_matrix(j, :) = abs( ...
             training_instance_matrix(j, :) - test_instance_matrix(i, :) );
@@ -53,7 +53,8 @@ for i = 1 : size(test_index_vector, 2)
     end
     
     
-    %% print data to app.js
+    % print data to app.js
+    
     fprintf(app, '{ \n');
     
     % insert photo in question into table

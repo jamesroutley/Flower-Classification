@@ -136,8 +136,6 @@ for i = 1 : size(area_under_curve, 1)
         roc_matrix(2 * i , :));
 end
 
- 
-
 % plot ROC curves
 % A = area_under_curve(1);
 plot(roc_matrix(3, :), roc_matrix(2, :), 'y', roc_matrix(5, :), ...
@@ -156,10 +154,6 @@ axis([0 0.6 0 1])
 title('ROC Curves for Flower Classifiers')
 xlabel('False Positives Rate')
 ylabel('True Positive Rate')
-
-ImshowAxesVisible = true;
-imshow(confusion_matrix ./ 40, 'InitialMagnification',10000)  % # you want your cells to be larger than single pixels
- colormap(jet) % # to change the default grayscale colormap 
 
 if 0
     generate_app_js(flower_set_number, image_name, decision_values, ...
