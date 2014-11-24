@@ -13,7 +13,8 @@
       flower2: "image_0175.jpg", 
       flower3: "image_0356.jpg", 
       flower4: "image_0265.jpg", 
-      flower5: "image_0103.jpg"
+      flower5: "image_0103.jpg",
+      danger: 1
     },
     {
       flower0: "image_0042.jpg", 
@@ -21,8 +22,9 @@
       flower2: "image_0352.jpg", 
       flower3: "image_0198.jpg", 
       flower4: "image_0265.jpg", 
-      flower5: "image_0093.jpg" 
-    }
+      flower5: "image_0093.jpg",
+      danger: 1
+    },
   ];
   
                                

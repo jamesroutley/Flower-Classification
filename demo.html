@@ -58,7 +58,7 @@
     <div class="container">
       <table class="table" ng-controller="tableCtrl as table"> 
         
-        <tr ng-repeat="row in table.rows">
+        <tr ng-repeat="row in table.rows" ng-class="{danger:row.danger === 1}">
           <td><img src="img/oxfordflower5/jpg/{{row.flower0}}" height="100px" class="img-rounded"></td>
           <td><img src="img/oxfordflower5/jpg/{{row.flower1}}" height="100px" class="img-rounded"></td>
           <td><img src="img/oxfordflower5/jpg/{{row.flower2}}" height="100px" class="img-rounded"></td>
