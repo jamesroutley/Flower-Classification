@@ -185,7 +185,7 @@ ylabel('True Positive Rate')
 
 %}
     
-if 1
+if 0
     generate_app_js(flower_set_number, image_name, decision_values, ...
     training_index_vector, test_index_vector, ...
     training_instance_matrix, test_instance_matrix);
