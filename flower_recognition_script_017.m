@@ -1,10 +1,9 @@
-%JR_CNN_SCRIPT Script generates photo file names and passes them to jr_cnn
-%and saves the returned feature vector
+%FLOWER_RECOGNITION_SCRIPT 5
 
 % initialise variables
-flower_set_number = 5;
+flower_set_number = 17;
 number_of_images_per_flower = 80;
-image_folder = 'oxfordflower5/';
+image_folder = 'oxfordflower17/';
 num_total_images = flower_set_number * number_of_images_per_flower;
 num_training_images = num_total_images/2;
 num_test_images = num_total_images/2;
@@ -17,12 +16,6 @@ image_name = cell2mat(image_name);
 % generate vector of image categorisation labels
 image_labels = load(strcat(image_folder,'labels.mat'));
 image_labels = (cell2mat(struct2cell(image_labels)));
-
-% for simplified 5 flower case only:
-if flower_set_number == 5
-    image_labels = image_labels(1:num_total_images);
-end
-
 
 % the photos come in sets of 80 photos per flower. To split these sets in
 % half to generate training and testing data, a training_index_vector of
@@ -148,6 +141,14 @@ error = generate_error(contingency_table);
 confusion_matrix_accuracy = trace(confusion_matrix) / ...
     sum(sum(confusion_matrix));
 
+% generate image of confusion matrix
+ImshowAxesVisible = true;
+imshow(confusion_matrix ./ 40, 'InitialMagnification',10000)  % # you want your cells to be larger than single pixels
+ colormap(jet) % # to change the default grayscale colormap 
+
+% TODO: ROC calculations 
+%{
+
 % calculate Area Under Curve for ROC curves
 area_under_curve = zeros(5,1);
 for i = 1 : size(area_under_curve, 1)
@@ -176,11 +177,10 @@ title('ROC Curves for Flower Classifiers')
 xlabel('False Positives Rate')
 ylabel('True Positive Rate')
 
-% generate image of confusion matrix
-ImshowAxesVisible = true;
-imshow(confusion_matrix ./ 40, 'InitialMagnification',10000)  % # you want your cells to be larger than single pixels
- colormap(jet) % # to change the default grayscale colormap 
 
+
+%}
+    
 if 0
     generate_app_js(flower_set_number, image_name, decision_values, ...
     training_index_vector, test_index_vector, ...
