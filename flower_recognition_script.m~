@@ -51,18 +51,20 @@ for i = 1:num_total_images %size(imageLabels, 2)
    
 end
 
-use_mirrored_images = 0;
+use_mirrored_images = 1;
+
 
 if use_mirrored_images == 0
     % load / generate training_instance_matrix storing training flower feature
     % data
-    if exist(strcat(image_folder,'training_instance_matrix.mat'))
+    if exist(strcat(image_folder,'training_instance_matrix_mirror.mat'))
         training_instance_matrix = ...
-            load(strcat(image_folder,'training_instance_matrix.mat'));
+            load(strcat(image_folder,'training_instance_matrix_mirror.mat'));
         training_instance_matrix = ...
             (cell2mat(struct2cell(training_instance_matrix)));
     else
         % generate training matrix using training images
+
         training_instance_matrix = ...
             ones( size(training_index_vector, 2) , 4096 );
         training_image_folder = strcat(image_folder, 'jpg/');
@@ -73,9 +75,6 @@ if use_mirrored_images == 0
                     training_index_vector(i), :), training_image_folder);
 
         end
-        
-        save(strcat(image_folder,'training_instance_matrix.mat'),...
-            'training_instance_matrix');
     end
 else
     % load / generate training_instance_matrix storing training flower feature
@@ -86,7 +85,9 @@ else
         training_instance_matrix = ...
             (cell2mat(struct2cell(training_instance_matrix)));
     else
+        
         % generate training matrix using training images and mirrors
+
         training_instance_matrix = ...
             ones( (size(training_index_vector, 2) * 2) , 4096 );
         training_image_folder = strcat(image_folder, 'jpg/');
