@@ -46,7 +46,7 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Results</h1>
-        <p> This page explores the effect that various techniques have on the error of the flower classification models. Error is defined as the sum of false positive and false negative classifications.
+        <p> This page explores the effect that various techniques have on the error of the flower classification models. Accuracy is taken as the sum of leading diagonal values of the confusion matrix / sum of all values in the confusion matrix. 
         </p>
         <p> Our starting point is a set of photos containing 80 examples each of five flowers. For each flower we split the photo set in half to give 40 training photos and 40 test photos. We use the training photos to generate flower classification models, before testing the models on the test set.
         </p>
@@ -197,14 +197,14 @@
                 <div class="row">
                   
                   <div class="col-md-6">
-                    <h3>DOC Curve</h3>
+                    <h3>ROC Curve</h3>
                     <object data="img/oxfordflower5/graphics/ROCstandard.svg" type="image/svg+xml">
                       <img src="img/oxfordflower5/graphics/ROCstandard.png" />
                     </object>
                   </div>
                   
                   <div class="col-md-6">
-                    <h3>Area under DOC curve, Error</h3>
+                    <h3>Area under ROC curve, Error</h3>
                     <table class="table">
                       <tr>
                         <th>Model</th>
@@ -334,14 +334,14 @@
                 <div class="row">
                   
                   <div class="col-md-6">
-                    <h3>DOC Curve</h3>
-                    <object data="img/ROCmirror.svg" type="image/svg+xml">
-                      <img src="img/ROCmirror.png" />
+                    <h3>ROC Curve</h3>
+                    <object data="img/oxfordflower5/graphics/ROCmirror.svg" type="image/svg+xml">
+                      <img src="img/oxfordflower5/graphics/ROCmirror.png" />
                     </object>
                   </div>
                   
                   <div class="col-md-6">
-                    <h3>Area under DOC curve, Error</h3>
+                    <h3>Area under ROC curve, Error</h3>
                     <table class="table">
                       <tr>
                         <th>Model</th>
@@ -391,115 +391,10 @@
           <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
             <div class="panel-body">
                 <div class="row">
-                  <div class="col-md-6">
-                    <h3>Confusion Matrix</h3>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet <table class="table">
-                      <tr>
-                        <th>#</th>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                        <th>4</th>
-                        <th>5</th>
-                      </tr>
-
-                      <tr>
-                        <th>1</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-
-                      <tr>
-                        <th>2</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-
-                      <tr>
-                        <th>3</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-
-                      <tr>
-                        <th>4</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      
-                      <tr>
-                        <th>5</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    </table>
+                  <div class="col-md-12">
+                    <h3>C Parameter</h3>
+                    <p>Changing the C parameter had no effect on the accuracy with this number of flowers</p>
                   </div>
-                  <div class="col-md-6">
-                    <h3>Contingency Table</h3>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                 </div>
-                </div>
-              
-                <div class="row">
-                  
-                  <div class="col-md-6">
-                    <h3>DOC Curve</h3>
-                    <object data="ROCstandard.svg" type="image/svg+xml">
-                      <img src="ROCstandard.png" />
-                    </object>
-                  </div>
-                  
-                  <div class="col-md-6">
-                    <h3>Area under DOC curve, Error</h3>
-                    <table class="table">
-                      <tr>
-                        <th>Model</th>
-                        <th>AUC</th>
-                        <th>Error</th>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>3</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>0.86</td>
-                        <td>14</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>0.96</td>
-                        <td>15</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>0.91</td>
-                        <td>9</td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>0.97</td>
-                        <td>10</td>
-                      </tr>
-                    </table>
-                  </div>
-                  
                 </div>
             </div>
           </div>
@@ -515,65 +410,18 @@
           </div>
           <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
             <div class="panel-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <h3>Confusion Matrix</h3>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                  </div>
-                  <div class="col-md-6">
-                    <h3>Contingency Table</h3>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                 </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3>C Parameter</h3>
+
+                  <p>Changing the C parameter had no effect on the accuracy with this number of flowers</p>
+
                 </div>
-              
-                <div class="row">
-                  
-                  <div class="col-md-6">
-                    <h3>DOC Curve</h3>
-                    <object data="ROCstandard.svg" type="image/svg+xml">
-                      <img src="ROCstandard.png" />
-                    </object>
-                  </div>
-                  
-                  <div class="col-md-6">
-                    <h3>Area under DOC curve, Error</h3>
-                    <table class="table">
-                      <tr>
-                        <th>Model</th>
-                        <th>AUC</th>
-                        <th>Error</th>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>3</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>0.86</td>
-                        <td>14</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>0.96</td>
-                        <td>15</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>0.91</td>
-                        <td>9</td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>0.97</td>
-                        <td>10</td>
-                      </tr>
-                    </table>
-                  </div>
-                  
-                </div>
+              </div>
+
             </div>
           </div>
+        </div>
       </div>
 
       
