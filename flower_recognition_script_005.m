@@ -148,7 +148,7 @@ confusion_matrix_accuracy = trace(confusion_matrix) / ...
     sum(sum(confusion_matrix));
 
 % calculate Area Under Curve for ROC curves
-area_under_curve = zeros(5,1);
+area_under_curve = zeros(flower_set_number,1);
 for i = 1 : size(area_under_curve, 1)
     area_under_curve(i) = trapz(roc_matrix(2 * i + 1, :), ...
         roc_matrix(2 * i , :));
@@ -157,7 +157,6 @@ end
  
 
 % plot ROC curves
-% A = area_under_curve(1);
 plot(roc_matrix(3, :), roc_matrix(2, :), 'y', roc_matrix(5, :), ...
     roc_matrix(4, :), 'r', roc_matrix(7, :), roc_matrix(6, :), 'g', ...
         roc_matrix(9, :), roc_matrix(8, :), 'c', roc_matrix(11, :), ...

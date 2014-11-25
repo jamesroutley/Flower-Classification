@@ -26,7 +26,8 @@ for i = 1 : flower_set_number
     contingency_table((2 * i - 1), 1) = num_true_positives;
     contingency_table((2 * i - 1), 2) = num_false_positives;
     contingency_table(2 * i, 1) = 40 - num_true_positives;
-    contingency_table(2 * i, 2) = 200 - 40 - num_false_positives;
+    contingency_table(2 * i, 2) = flower_set_number * 40 - 40 - ...
+        num_false_positives;
 end
 end
 

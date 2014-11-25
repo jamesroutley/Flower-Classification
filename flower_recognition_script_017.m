@@ -140,32 +140,36 @@ error = generate_error(contingency_table);
 
 confusion_matrix_accuracy = trace(confusion_matrix) / ...
     sum(sum(confusion_matrix));
-
+%{
 % generate image of confusion matrix
 ImshowAxesVisible = true;
 imshow(confusion_matrix ./ 40, 'InitialMagnification',10000)  % # you want your cells to be larger than single pixels
  colormap(jet) % # to change the default grayscale colormap 
-
-% TODO: ROC calculations 
-%{
+figure 
+%}
 
 % calculate Area Under Curve for ROC curves
-area_under_curve = zeros(5,1);
+area_under_curve = zeros(flower_set_number, 1);
 for i = 1 : size(area_under_curve, 1)
     area_under_curve(i) = trapz(roc_matrix(2 * i + 1, :), ...
         roc_matrix(2 * i , :));
 end
 
- 
 
+%{
 % plot ROC curves
-% A = area_under_curve(1);
 plot(roc_matrix(3, :), roc_matrix(2, :), 'y', roc_matrix(5, :), ...
     roc_matrix(4, :), 'r', roc_matrix(7, :), roc_matrix(6, :), 'g', ...
         roc_matrix(9, :), roc_matrix(8, :), 'c', roc_matrix(11, :), ...
             roc_matrix(10, :), 'b');
-    
-
+%}        
+for i = 1 : flower_set_number
+    plot(roc_matrix(2 * i + 1, :), roc_matrix(2 * i, :));
+    hold on
+end
+axis([0 1 0 1])  
+        
+%{
 legend(strcat('Classifier 1 AUC = ', num2str(area_under_curve(1),3)), ...
     strcat('Classifier 2 AUC = ', num2str(area_under_curve(2), 3)), ...
     strcat('Classifier 3 AUC = ', num2str(area_under_curve(3), 3)), ...
