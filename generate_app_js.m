@@ -37,7 +37,7 @@ for i = 1 : size(test_index_vector, 2)
     ranking = flipud(ranking);
     
     % find nearest neighbour, store in comparison_image_name
-    for j = 1 : 200
+    for j = 1 : size(test_instance_matrix, 1)
         difference_matrix(j, :) = abs( ...
             training_instance_matrix(j, :) - test_instance_matrix(i, :) );
         sum_of_difference(j) = sum(difference_matrix(j, :));

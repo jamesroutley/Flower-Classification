@@ -44,7 +44,7 @@ for i = 1:num_total_images %size(imageLabels, 2)
    
 end
 
-use_mirrored_images = 1;
+use_mirrored_images = 0;
 
 if use_mirrored_images == 0
     % load / generate training_instance_matrix storing training flower feature
@@ -185,7 +185,7 @@ ylabel('True Positive Rate')
 
 %}
     
-if 1
+if 0
     generate_app_js(flower_set_number, image_name, decision_values, ...
     training_index_vector, test_index_vector, ...
     training_instance_matrix, test_instance_matrix);
