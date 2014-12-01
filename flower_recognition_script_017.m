@@ -1,4 +1,4 @@
-%FLOWER_RECOGNITION_SCRIPT 5
+% FLOWER_RECOGNITION_SCRIPT 17
 
 % initialise variables
 flower_set_number = 17;
@@ -130,23 +130,7 @@ decision_values = ...
 
 
 
-% measure quality of results; confusion matrix, contingency table, ROC,
-% and error (sum of false positives and false negatives)
-confusion_matrix = generate_confusion_matrix(decision_values);
-contingency_table = generate_contingency_table( ...
-    flower_set_number, decision_values);
-roc_matrix = generate_roc_curve(decision_values);
-error = generate_error(contingency_table);
-
-confusion_matrix_accuracy = trace(confusion_matrix) / ...
-    sum(sum(confusion_matrix));
 %{
-% generate image of confusion matrix
-ImshowAxesVisible = true;
-imshow(confusion_matrix ./ 40, 'InitialMagnification',10000)  % # you want your cells to be larger than single pixels
- colormap(jet) % # to change the default grayscale colormap 
-figure 
-%}
 
 % calculate Area Under Curve for ROC curves
 area_under_curve = zeros(flower_set_number, 1);
@@ -156,20 +140,14 @@ for i = 1 : size(area_under_curve, 1)
 end
 
 
-%{
-% plot ROC curves
-plot(roc_matrix(3, :), roc_matrix(2, :), 'y', roc_matrix(5, :), ...
-    roc_matrix(4, :), 'r', roc_matrix(7, :), roc_matrix(6, :), 'g', ...
-        roc_matrix(9, :), roc_matrix(8, :), 'c', roc_matrix(11, :), ...
-            roc_matrix(10, :), 'b');
-%}        
+        
 for i = 1 : flower_set_number
     plot(roc_matrix(2 * i + 1, :), roc_matrix(2 * i, :));
     hold on
 end
 axis([0 1 0 1])  
         
-%{
+
 legend(strcat('Classifier 1 AUC = ', num2str(area_under_curve(1),3)), ...
     strcat('Classifier 2 AUC = ', num2str(area_under_curve(2), 3)), ...
     strcat('Classifier 3 AUC = ', num2str(area_under_curve(3), 3)), ...
@@ -191,4 +169,37 @@ if 0
     training_instance_matrix, test_instance_matrix);
 end
 
+% measure quality of results; confusion matrix, contingency table, ROC,
+% and error (sum of false positives and false negatives)
+confusion_matrix = generate_confusion_matrix(decision_values);
+contingency_table = generate_contingency_table( ...
+    flower_set_number, decision_values);
+roc_matrix = generate_roc_curve(decision_values);
+error = generate_error(contingency_table);
 
+confusion_matrix_accuracy = trace(confusion_matrix) / ...
+    sum(sum(confusion_matrix));
+imagesc(confusion_matrix); 
+
+% TODO remove /40. generate_confusion_matrix should return normalised
+% matrix
+textStrings = num2str(confusion_matrix(:)/40,'%0.2f');  %# Create strings from the matrix values
+textStrings = strtrim(cellstr(textStrings));  %# Remove any space padding
+
+
+idx = find(strcmp(textStrings(:), '0.00'));
+textStrings(idx) = {'   '};
+
+
+
+[x,y] = meshgrid(1:flower_set_number);   %# Create x and y coordinates for the strings
+hStrings = text(x(:),y(:),textStrings(:),...      %# Plot the strings
+                'HorizontalAlignment','center');
+midValue = mean(get(gca,'CLim'));  %# Get the middle value of the color range
+textColors = repmat(confusion_matrix(:) < midValue,1,3);  %# Choose white or black for the
+                                             %#   text color of the strings so
+                                             %#   they can be easily seen over
+                                             %#   the background color
+set(hStrings,{'Color'},num2cell(textColors,2));  %# Change the text colors
+
+set(gca,'XTick',1:flower_set_number,'YTick',1:flower_set_number,'TickLength',[0 0]);

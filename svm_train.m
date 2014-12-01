@@ -24,7 +24,7 @@ for i = 1:flower_set_number
     % train + test SVMs  
     addpath liblinear-1.95/matlab
     model = train(training_label_vector, ...
-        sparse_training_instance_matrix, '-c 1000');
+        sparse_training_instance_matrix, '-c 1');
     
     weight_matrix(i,:) = model.w(:);
     
