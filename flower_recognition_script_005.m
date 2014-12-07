@@ -65,11 +65,12 @@ if use_mirrored_images == 0
         training_instance_matrix = ...
             ones( size(training_index_vector, 2) , 4096 );
         training_image_folder = strcat(image_folder, 'jpg/');
+        net = load('cnn_imagenet-vgg-f.mat') ;
 
         for i = 1 : size(training_index_vector, 2)
             training_instance_matrix(i, :) = ...
                 cnn_feature_extractor(image_name( ...
-                    training_index_vector(i), :), training_image_folder);
+                    training_index_vector(i), :), training_image_folder, net);
 
         end
         
@@ -90,13 +91,15 @@ else
             ones( (size(training_index_vector, 2) * 2) , 4096 );
         training_image_folder = strcat(image_folder, 'jpg/');
         mirror_image_folder = strcat(image_folder, 'jpgmirror/');
+        net = load('cnn_imagenet-vgg-f.mat') ;
+        
         for i = 1 : size(training_index_vector, 2)
             training_instance_matrix((2*i - 1), :) = ...
                 cnn_feature_extractor(image_name( ...
-                    training_index_vector(i), :), training_image_folder);
+                    training_index_vector(i), :), training_image_folder, net);
             training_instance_matrix(2*i, :) = ...
                 cnn_feature_extractor(image_name( ...
-                    training_index_vector(i), :), mirror_image_folder);
+                    training_index_vector(i), :), mirror_image_folder, net);
         end
 
         save(strcat(image_folder,'training_instance_matrix_mirror.mat'),...
@@ -116,9 +119,11 @@ if  exist(strcat(image_folder,'test_instance_matrix.mat'))
 else
     test_instance_matrix = ones(size(training_index_vector, 2), 4096);
     test_image_folder = strcat(image_folder, 'jpg/');
+    net = load('cnn_imagenet-vgg-f.mat') ;
+    
     for i = 1 : size(training_index_vector, 2)
         test_instance_matrix(i, :) = cnn_feature_extractor(image_name( ...
-            test_index_vector(i), :), test_image_folder);
+            test_index_vector(i), :), test_image_folder, net);
     end
     save(strcat(image_folder,'test_instance_matrix.mat'), ...
         'test_instance_matrix')

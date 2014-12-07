@@ -1,4 +1,4 @@
-function feature_vector = cnn_feature_extractor(image_file_name, image_folder) 
+function feature_vector = cnn_feature_extractor(image_file_name, image_folder, net) 
 % JR_CNN Feature extraction using ImageNet CNN model.
 % Based on Vedaldi's CNN_IMAGENET_MINIMAL. 
 
@@ -10,7 +10,7 @@ if ~exist('cnn_imagenet-vgg-f.mat')
   urlwrite('http://www.vlfeat.org/matconvnet/models/imagenet-vgg-f.mat', ...
     'cnn_imagenet-vgg-f.mat') ;
 end
-net = load('cnn_imagenet-vgg-f.mat') ;
+%net = load('cnn_imagenet-vgg-f.mat') ;
 
 % obtain and preprocess an image
 im = imread(strcat(image_folder, image_file_name)) ;

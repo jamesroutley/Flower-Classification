@@ -1,17 +1,39 @@
 function [weight_matrix, model_labels] = ...
-    svm_train_102(flower_set_number, trnid, valid, instance_matrix, image_labels)
+    svm_train_102(flower_set_number, trnid, valid, instance_matrix, ...
+    image_labels, use_mirrored_images, training_instance_matrix_mirror)
 
 % generate training_instance_matrix, label_vector
-training_instance_matrix = zeros(size(trnid, 2) + size(valid, 2), ...
-    size(instance_matrix, 2));
-label_vector = zeros(size(trnid, 2) + size(valid, 2), 1);
+if use_mirrored_images == 0;
+    training_instance_matrix = zeros(size(trnid, 2) + size(valid, 2), ...
+        size(instance_matrix, 2));
+    label_vector = zeros(size(trnid, 2) + size(valid, 2), 1);
 
-for i = 1 : size(trnid, 2)
-    training_instance_matrix(2*i - 1, :) = instance_matrix(trnid(i), :);
-    training_instance_matrix(2*i, :) = instance_matrix(valid(i), :);
-    label_vector(2*i -1) = image_labels(trnid(i));
-    label_vector(2*i) = image_labels(valid(i));
+    for i = 1 : size(trnid, 2)
+        training_instance_matrix(2*i - 1, :) = instance_matrix(trnid(i), :);
+        training_instance_matrix(2*i, :) = instance_matrix(valid(i), :);
+        label_vector(2*i -1) = image_labels(trnid(i));
+        label_vector(2*i) = image_labels(valid(i));
+    end
 end
+
+% generate training_instance_matrix, label_vector using mirrors
+if use_mirrored_images == 1;
+    training_instance_matrix = zeros((size(trnid, 2) + size(valid, 2)) * 2, ...
+        size(instance_matrix, 2));
+    label_vector = zeros((size(trnid, 2) + size(valid, 2)) * 2, 1);
+
+    for i = 1 : size(trnid, 2)
+        training_instance_matrix(4*i - 3, :) = instance_matrix(trnid(i), :);
+        training_instance_matrix(4*i - 2, :) = instance_matrix(valid(i), :);
+        training_instance_matrix(4*i - 1, :) = training_instance_matrix_mirror(2*i -1, :);
+        training_instance_matrix(4*i, :) = training_instance_matrix_mirror(2*i, :);
+        label_vector(4*i -3) = image_labels(trnid(i));
+        label_vector(4*i -2) = image_labels(trnid(i));
+        label_vector(4*i -1) = image_labels(valid(i));
+        label_vector(4*i) = image_labels(valid(i));
+    end
+end
+
                
 % generate sparse training instance matrices
 sparse_training_instance_matrix = sparse(training_instance_matrix);

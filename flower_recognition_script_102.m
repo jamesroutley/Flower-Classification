@@ -1,7 +1,9 @@
-%FLOWER_RECOGNITION_SCRIPT 5
+% FLOWER_RECOGNITION_SCRIPT 102
+% TODO accuracy at different ranks, plot. Jittering against 17. Improve
+% android. help
 
 % initialise variables
- flower_set_number = 102;
+flower_set_number = 102;
 % number_of_images_per_flower = 80;
 image_folder = 'oxfordflower102/';
 % num_total_images = flower_set_number * number_of_images_per_flower;
@@ -21,6 +23,7 @@ load(strcat(image_folder, 'setid.mat'));
 image_labels = load(strcat(image_folder,'labels.mat'));
 image_labels = (cell2mat(struct2cell(image_labels)));
 
+use_mirrored_images = 1;
 
 
 
@@ -33,27 +36,48 @@ if  exist(strcat(image_folder,'instance_matrix.mat'))
 else
     instance_matrix = ones(size(labels, 2), 4096);
     images_folder = strcat(image_folder, 'jpg/');
+    net = load('cnn_imagenet-vgg-f.mat') ;
+    
     for i = 1 : size(labels, 2)
         instance_matrix(i, :) = cnn_feature_extractor( ... 
-            image_name(i, :), images_folder);
+            image_name(i, :), images_folder, net);
     end
     
     save(strcat(image_folder,'instance_matrix.mat'), ...
         'instance_matrix');
 end
 
+% load / generate training_instance_matrix_mirror
+if use_mirrored_images == 1
+    if exist(strcat(image_folder, 'training_instance_matrix_mirror.mat'))
+        training_instance_matrix_mirror = load( ...
+            strcat(image_folder, 'training_instance_matrix_mirror.mat'));
+        training_instance_matrix_mirror = (cell2mat(struct2cell(training_instance_matrix_mirror)));
+    else
+        training_instance_matrix_mirror = ones(size(trnid, 2) + size(valid, 2), 4096);
+        images_folder = strcat(image_folder, 'jpgmirror/');
+        for i = 1 : size(trnid, 2)
+            training_instance_matrix_mirror(2*i -1, :) = cnn_feature_extractor( ... 
+                image_name(trnid(i), :), images_folder, net);
+            training_instance_matrix_mirror(2*i, :) = cnn_feature_extractor( ... 
+                image_name(valid(i), :), images_folder, net);
+        end
 
-
+        save(strcat(image_folder,'training_instance_matrix_mirror.mat'), ...
+            'training_instance_matrix_mirror');
+    end
+end
 
 
 % train models 
-if 0
+if 1
 [weight_matrix, model_labels] = ...
-    svm_train_102(flower_set_number, trnid, valid, instance_matrix, image_labels);
+    svm_train_102(flower_set_number, trnid, valid, instance_matrix, ...
+    image_labels, use_mirrored_images, training_instance_matrix_mirror);
 end
 
 % test models
-if 0
+if 1
 decision_values = ...
     svm_test_102(flower_set_number, instance_matrix, tstid, weight_matrix);
 end
@@ -61,36 +85,48 @@ end
 
 % measure quality of results; confusion matrix, contingency table, ROC,
 % and error (sum of false positives and false negatives)
+% TODO export confusion matrices
 confusion_matrix = generate_confusion_matrix_102( ... 
     decision_values, tstid, image_labels);
 
 
-
-ave_confustion_matrix_accuracy = trace(confusion_matrix_accuracy) / ...
+% find average accuracy = 85.3% for non mirror; 85.7% mirror
+ave_confustion_matrix_accuracy = trace(confusion_matrix) / ...
     flower_set_number;
 
-
+% generate confusion matrix diagram
+ImshowAxesVisible = true;
+imshow(confusion_matrix, 'InitialMagnification',10000)  % # you want your cells to be larger than single pixels
+ colormap(jet) % # to change the default grayscale colormap 
 
 %{
-confusion_matrix_accuracy = trace(confusion_matrix) / ...
-    sum(sum(confusion_matrix));
-%}
+textStrings = num2str(confusion_matrix(:)/40,'%0.2f');  %# Create strings from the matrix values
+textStrings = strtrim(cellstr(textStrings));  %# Remove any space padding
 
+
+idx = find(strcmp(textStrings(:), '0.00'));
+textStrings(idx) = {'   '};
+
+
+
+[x,y] = meshgrid(1:flower_set_number);   %# Create x and y coordinates for the strings
+hStrings = text(x(:),y(:),textStrings(:),...      %# Plot the strings
+                'HorizontalAlignment','center');
+midValue = mean(get(gca,'CLim'));  %# Get the middle value of the color range
+textColors = repmat(confusion_matrix(:) < midValue,1,3);  %# Choose white or black for the
+                                             %#   text color of the strings so
+                                             %#   they can be easily seen over
+                                             %#   the background color
+set(hStrings,{'Color'},num2cell(textColors,2));  %# Change the text colors
+
+set(gca,'XTick',1:flower_set_number,'YTick',1:flower_set_number,'TickLength',[0 0]);
+%}
 %{ 
 contingency_table = generate_contingency_table( ...
     flower_set_number, decision_values);
 roc_matrix = generate_roc_curve(decision_values);
 error = generate_error(contingency_table);
 
-
-%{
-% generate image of confusion matrix
-ImshowAxesVisible = true;
-imshow(confusion_matrix ./ 40, 'InitialMagnification',10000)  
-% # you want your cells to be larger than single pixels
- colormap(jet) % # to change the default grayscale colormap 
-figure 
-%}
 
 % calculate Area Under Curve for ROC curves
 area_under_curve = zeros(flower_set_number, 1);
