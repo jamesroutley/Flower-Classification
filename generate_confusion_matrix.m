@@ -1,4 +1,4 @@
-function confusionMatrix = generate_confusion_matrix(decision_values)
+function confusion_matrix = generate_confusion_matrix(decision_values)
 % classifies a given image, based on the model which gives the least
 % nevative decision value. Forms a confusion matrix based on the results.
 flower_set_number = size(decision_values, 1);
@@ -14,9 +14,12 @@ end
 actual_labels = reshape(actual_labels', 1, []);
 
 % generate confusion matrix comparing predicted results vs actual results
-confusionMatrix = zeros(flower_set_number);
+confusion_matrix = zeros(flower_set_number);
 for i = 1:size(decision_labels, 2)
-    confusionMatrix(actual_labels(i), decision_labels(i)) = ...
-        confusionMatrix(actual_labels(i), decision_labels(i)) + 1;
+    confusion_matrix(actual_labels(i), decision_labels(i)) = ...
+        confusion_matrix(actual_labels(i), decision_labels(i)) + 1;
 end
+
+confusion_matrix = confusion_matrix / 40;
+
 end

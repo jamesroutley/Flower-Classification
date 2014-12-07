@@ -3,7 +3,7 @@
 
 % use mirrors?
 use_mirrored_images = 0;
-use_jittered_images = 0;
+use_jittered_images = 1;
 
 % initialise variables
 flower_set_number = 17;
@@ -12,8 +12,6 @@ image_folder = 'oxfordflower17/';
 num_total_images = flower_set_number * number_of_images_per_flower;
 num_training_images = num_total_images/2;
 num_test_images = num_total_images/2;
-net = load('cnn_imagenet-vgg-f.mat') ;  % used in CNN. Taken out of cnn 
-                                        % function for speed
 
 
 % import vector of flower file names
@@ -66,15 +64,15 @@ if use_mirrored_images == 1
             ones( (size(training_index_vector, 2) * 2) , 4096 );
         training_image_folder = strcat(image_folder, 'jpg/');
         mirror_image_folder = strcat(image_folder, 'jpgmirror/');
-        
+        net = load('cnn_imagenet-vgg-f.mat') ;
         
         for i = 1 : size(training_index_vector, 2)
             training_instance_matrix((2*i - 1), :) = ...
                 cnn_feature_extractor(image_name( ...
-                    training_index_vector(i), :), training_image_folder, net, use_jittered_images);
+                    training_index_vector(i), :), training_image_folder, net);
             training_instance_matrix(2*i, :) = ...
                 cnn_feature_extractor(image_name( ...
-                    training_index_vector(i), :), mirror_image_folder, net, use_jittered_images);
+                    training_index_vector(i), :), mirror_image_folder, net);
         end
 
         save(strcat(image_folder,'training_instance_matrix_mirror.mat'),...
@@ -100,12 +98,12 @@ elseif use_jittered_images == 1
         for i = 1 : size(training_index_vector, 2)
             training_instance_matrix(i, :) = ...
                 cnn_feature_extractor(image_name( ...
-                    training_index_vector(i), :), training_image_folder, net, use_jittered_images);
+                    training_index_vector(i), :), training_image_folder, net);
 
         end
         
-        save(strcat(image_folder,'training_instance_matrix_jitter.mat'),...
-            'training_instance_matrix');
+        save(strcat(image_folder,'training_instance_matrix.mat'),...
+            'training_instance_matrix_jitter');
     end
     
     
@@ -128,7 +126,7 @@ else
         for i = 1 : size(training_index_vector, 2)
             training_instance_matrix(i, :) = ...
                 cnn_feature_extractor(image_name( ...
-                    training_index_vector(i), :), training_image_folder, net, use_jittered_images);
+                    training_index_vector(i), :), training_image_folder, net);
 
         end
         
