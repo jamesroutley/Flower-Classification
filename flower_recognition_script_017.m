@@ -237,3 +237,10 @@ confusion_matrix_accuracy = trace(confusion_matrix) / ...
 % plot confusion matrix
 plot_confusion_matrix(confusion_matrix)
 
+figure
+
+for i = 1 : flower_set_number
+    plot(roc_matrix(2 * i + 1, :), roc_matrix(2 * i, :));
+    hold on
+end
+axis([0 1 0 1])  
