@@ -3,7 +3,7 @@
 
 % use mirrors?
 use_mirrored_images = 0;
-use_jittered_images = 0;
+use_jittered_images = 1;
 
 % initialise variables
 flower_set_number = 17;
@@ -82,32 +82,44 @@ if use_mirrored_images == 1
     end
     
 elseif use_jittered_images == 1
+    % TODO. I'm changing this code to generate the jittered training matrix
+    % before combining with the standard training matrix. Do the same with
+    % the mirrored index matrix. 
     
-        % load / generate training_instance_matrix storing training flower feature
+    % load / generate training_instance_matrix storing training flower feature
     % data
     if exist(strcat(image_folder,'training_instance_matrix_jitter.mat'))
-        training_instance_matrix = ...
+        training_instance_matrix_jitter = ...
             load(strcat(image_folder,'training_instance_matrix_jitter.mat'));
-        training_instance_matrix = ...
-            (cell2mat(struct2cell(training_instance_matrix)));
+        training_instance_matrix_jitter = ...
+            (cell2mat(struct2cell(training_instance_matrix_jitter)));
     else
         % generate training matrix using training images
-        training_instance_matrix = ...
-            ones( size(training_index_vector, 2) , 4096 );
+        training_instance_matrix_jitter = ...
+            ones( size(training_index_vector, 2), 4096 );
         training_image_folder = strcat(image_folder, 'jpg/');
-        net = load('cnn_imagenet-vgg-f.mat') ;
 
-        for i = 1 : size(training_index_vector, 2)
-            training_instance_matrix(i, :) = ...
+        for i = 1 : size(training_instance_matrix_jitter, 2)
+            training_instance_matrix_jitter(i, :) = ...
                 cnn_feature_extractor(image_name( ...
                     training_index_vector(i), :), training_image_folder, net, use_jittered_images);
 
         end
         
         save(strcat(image_folder,'training_instance_matrix_jitter.mat'),...
-            'training_instance_matrix');
+            'training_instance_matrix_jitter');
     end
     
+    training_instance_matrix_standard = ...
+            load(strcat(image_folder,'training_instance_matrix.mat'));
+        training_instance_matrix_standard = ...
+            (cell2mat(struct2cell(training_instance_matrix_standard)));
+        
+    training_instance_matrix = ones( size(training_index_vector, 2)*2, 4096 );
+    for i = 1: size(training_instance_matrix_jitter, 1)
+        training_instance_matrix(2*i - 1, :) = training_instance_matrix_standard(i, :);
+        training_instance_matrix(2*i, :) = training_instance_matrix_jitter(i, :);
+    end
     
     
 else
@@ -150,8 +162,7 @@ if  exist(strcat(image_folder,'test_instance_matrix.mat'))
 else
     test_instance_matrix = ones(size(training_index_vector, 2), 4096);
     test_image_folder = strcat(image_folder, 'jpg/');
-    net = load('cnn_imagenet-vgg-f.mat') ;
-    
+
     for i = 1 : size(training_index_vector, 2)
         test_instance_matrix(i, :) = cnn_feature_extractor(image_name( ...
             test_index_vector(i), :), test_image_folder, net);

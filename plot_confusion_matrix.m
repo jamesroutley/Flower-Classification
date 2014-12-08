@@ -1,5 +1,4 @@
 function plot_confusion_matrix(confusion_matrix)
-figure
 
 imagesc(confusion_matrix); 
 flower_set_number = size(confusion_matrix, 1);
