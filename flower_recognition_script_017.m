@@ -1,9 +1,14 @@
-% FLOWER_RECOGNITION_SCRIPT 17
+% FLOWER_RECOGNITION_SCRIPT 17 
 % TODO fix mirroring if / else (default non mirroring) 
+% TODO don't average samples 
+% Check mirroring code - looking for ~3%
+% Normalise vector - euclidian normalisation L2 
+% Refactor cnn_feature_extractor, abstract the actual vector generation
+
 
 % use mirrors?
 use_mirrored_images = 0;
-use_jittered_images = 1;
+use_jittered_images = 0;
 
 % initialise variables
 flower_set_number = 17;

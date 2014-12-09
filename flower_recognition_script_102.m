@@ -1,5 +1,6 @@
 % FLOWER_RECOGNITION_SCRIPT 102
-
+% TODO resplit data, run tests again, average accuracy increase, standard
+% deviation, 
 
 use_mirrored_images = 1;
 
@@ -91,7 +92,8 @@ ave_confustion_matrix_accuracy = trace(confusion_matrix) / ...
 
 % generate confusion matrix diagram
 ImshowAxesVisible = true;
-imshow(confusion_matrix, 'InitialMagnification',10000)  % # you want your cells to be larger than single pixels
+imshow(confusion_matrix, 'InitialMagnification',10000)  % # you want your cells 
+to be larger than single pixels
 colormap(jet) % # to change the default grayscale colormap 
  
 plot_rank_accuracy (decision_values, tstid, image_labels)

@@ -1,3 +1,4 @@
+
 function confusion_matrix = generate_confusion_matrix(decision_values)
 % classifies a given image, based on the model which gives the least
 % nevative decision value. Forms a confusion matrix based on the results.
