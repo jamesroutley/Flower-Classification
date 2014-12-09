@@ -1,6 +1,5 @@
 % FLOWER_RECOGNITION_SCRIPT 102
-% TODO accuracy at different ranks, plot. Jittering against 17. Improve
-% android. help
+
 
 use_mirrored_images = 1;
 
@@ -17,7 +16,6 @@ image_name = cell2mat(image_name);
 load(strcat(image_folder, 'setid.mat'));
 
 
-% TODO load setid.mat
 % generate vector of image categorisation labels
 image_labels = load(strcat(image_folder,'labels.mat'));
 image_labels = (cell2mat(struct2cell(image_labels)));
