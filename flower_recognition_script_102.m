@@ -2,13 +2,12 @@
 % TODO accuracy at different ranks, plot. Jittering against 17. Improve
 % android. help
 
+use_mirrored_images = 1;
+
 % initialise variables
 flower_set_number = 102;
-% number_of_images_per_flower = 80;
 image_folder = 'oxfordflower102/';
-% num_total_images = flower_set_number * number_of_images_per_flower;
-% num_training_images = num_total_images/2;
-% num_test_images = num_total_images/2;
+
 
 
 % import vector of flower file names
@@ -22,8 +21,6 @@ load(strcat(image_folder, 'setid.mat'));
 % generate vector of image categorisation labels
 image_labels = load(strcat(image_folder,'labels.mat'));
 image_labels = (cell2mat(struct2cell(image_labels)));
-
-use_mirrored_images = 1;
 
 
 
@@ -97,7 +94,9 @@ ave_confustion_matrix_accuracy = trace(confusion_matrix) / ...
 % generate confusion matrix diagram
 ImshowAxesVisible = true;
 imshow(confusion_matrix, 'InitialMagnification',10000)  % # you want your cells to be larger than single pixels
- colormap(jet) % # to change the default grayscale colormap 
+colormap(jet) % # to change the default grayscale colormap 
+ 
+plot_rank_accuracy (decision_values, tstid, image_labels)
 
 %{
 textStrings = num2str(confusion_matrix(:)/40,'%0.2f');  %# Create strings from the matrix values

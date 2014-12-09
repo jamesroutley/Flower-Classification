@@ -1,5 +1,6 @@
-ranks_checked = 102;
+function plot_rank_accuracy (decision_values, tstid, image_labels)
 
+ranks_checked = 102;
 
 label_vector = zeros(size(tstid, 2), 1);
 
@@ -35,4 +36,6 @@ plot(rank_accuracy);
 axis([1 102 82 100]);
 xlabel('number of ranks considered')
 ylabel('percentage accuracy')
+
+end
 
