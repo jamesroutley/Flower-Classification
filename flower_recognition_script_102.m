@@ -2,7 +2,9 @@
 % TODO resplit data, run tests again, average accuracy increase, standard
 % deviation, 
 
-use_mirrored_images = 1;
+% Refactor code to use new cnn_feature_extractor. 
+
+use_mirrored_images = 0;
 
 % initialise variables
 flower_set_number = 102;

@@ -55,6 +55,7 @@ else
     res = vl_simplenn(net, im_) ;
     feature_vector = squeeze(gather(res(20).x));
     feature_vector = feature_vector';
+    feature_vector = feature_vector / norm(feature_vector);
 end
 end
 
