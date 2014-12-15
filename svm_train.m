@@ -1,12 +1,7 @@
 function [weight_matrix] = ...
     svm_train(flower_set_number, training_instance_matrix)
 
- % using the default 1. Will improve later
- svm_parameters = {'-c 1'; 
-                   '-c 1'; 
-                   '-c 0.001'; 
-                   '-c 1'; 
-                   '-c 0.0001'};
+
                
 % generate sparse training and test instance matrices
 sparse_training_instance_matrix = sparse(training_instance_matrix);

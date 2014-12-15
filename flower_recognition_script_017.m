@@ -15,8 +15,8 @@
 
 
 % use mirrors?
-use_mirrored_images = 0;
-use_jittered_images = 0;
+use_mirror = 0;
+use_jitter = 0;
 
 % initialise variables
 flower_set_number = 17;
@@ -186,6 +186,12 @@ end
 instance_matrix = cnn_generate_instance_matrix ...
     (image_name, image_folder, use_mirror, use_jitter);
 
+
+
+[trnid, valid, tstid] = generate_setid(size(instance_matrix, 1));
+
+[training_instance_matrix, test_instance_matrix] = generate_train_test_matrices
+
 % train models 
 weight_matrix = svm_train(flower_set_number, training_instance_matrix);
 
@@ -235,4 +241,5 @@ for i = 1 : flower_set_number
 end
 axis([0 1 0 1])  
 %}
+    
     
