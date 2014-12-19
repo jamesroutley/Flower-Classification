@@ -2,9 +2,11 @@
 % TODO resplit data, run tests again, average accuracy increase, standard
 % deviation, 
 
+
+
 % Refactor code to use new cnn_feature_extractor. 
 
-use_mirrored_images = 0;
+use_mirrored_images = 1;
 
 % initialise variables
 flower_set_number = 102;
@@ -65,6 +67,8 @@ if use_mirrored_images == 1
             'training_instance_matrix_mirror');
     end
 end
+
+% generate train test matrices
 
 
 % train models 

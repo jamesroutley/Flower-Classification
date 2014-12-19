@@ -33,6 +33,22 @@ tstid_help = id' .* tstid_help;
 
 trnid = trnid_help(trnid_help ~= 0);
 valid = valid_help(valid_help ~= 0);
-tstid = tstid_help(tstid_help ~= 0);
+% Need to extract only unmirrored, unjittered tst images. This is a rough
+% solution:
+tstid_help = tstid_help(tstid_help ~= 0);
+
+
+tstid = zeros(680, 1);
+num_extra_images_per_flower = size(tstid_help, 1) / (flower_set_number * 40);
+if num_extra_images_per_flower ~= 1
+    for i = 1 : size(tstid)
+        tstid(i) = tstid_help(((i-1) * num_extra_images_per_flower) + 1);
+    end
+else
+    tstid = tstid_help;
+end
+
+
+
 
 end
