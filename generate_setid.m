@@ -31,8 +31,8 @@ trnid_help = id' .* trnid_help;
 valid_help = id' .* valid_help;
 tstid_help = id' .* tstid_help;
 
-trnid = trnid_help(trnid_help ~= 0);
-valid = valid_help(valid_help ~= 0);
+trnid = trnid_help(trnid_help ~= 0)';
+valid = valid_help(valid_help ~= 0)';
 % Need to extract only unmirrored, unjittered tst images. This is a rough
 % solution:
 tstid_help = tstid_help(tstid_help ~= 0);
@@ -48,6 +48,7 @@ else
     tstid = tstid_help;
 end
 
+tstid = tstid';
 
 
 

@@ -6,7 +6,8 @@
 
 % Refactor code to use new cnn_feature_extractor. 
 
-use_mirrored_images = 1;
+use_mirror = 0;
+use_jitter = 0;
 
 % initialise variables
 flower_set_number = 102;
@@ -26,7 +27,7 @@ image_labels = load(strcat(image_folder,'labels.mat'));
 image_labels = (cell2mat(struct2cell(image_labels)));
 
 
-
+%{
 % load / generate instance_matrix storing test flower feature data
 
 if  exist(strcat(image_folder,'instance_matrix.mat'))
@@ -67,8 +68,16 @@ if use_mirrored_images == 1
             'training_instance_matrix_mirror');
     end
 end
+%}
+
+% load / generate instance matrix
+instance_matrix = cnn_generate_instance_matrix ...
+    (image_name, image_folder, use_mirror, use_jitter);
+
 
 % generate train test matrices
+[train_instance_matrix, test_instance_matrix] = ...
+    generate_train_test_matrices (instance_matrix, trnid, valid, tstid);
 
 
 % train models 
@@ -78,6 +87,7 @@ if 1
     image_labels, use_mirrored_images, training_instance_matrix_mirror);
 end
 
+%{
 % test models
 if 1
 decision_values = ...
@@ -160,7 +170,7 @@ end
 
 
         
-        
+%}
         
         
         

@@ -17,7 +17,7 @@ if exist(strcat(image_folder,'instance_matrix_standard.mat'))
     instance_matrix_standard = cell2mat(struct2cell( ... 
         load(strcat(image_folder,'instance_matrix_standard.mat'))));
 else
-    instance_matrix_standard = ones(num_images, 4096 );
+    instance_matrix_standard = ones(num_images, 4096);
 
     for i = 1 : num_images
         instance_matrix_standard(i, :) = ...
@@ -35,7 +35,7 @@ if exist(strcat(image_folder,'instance_matrix_mirror.mat'))
     instance_matrix_mirror = cell2mat(struct2cell( ... 
         load(strcat(image_folder,'instance_matrix_mirror.mat'))));
 else
-    instance_matrix_mirror = ones( num_images , 4096 );
+    instance_matrix_mirror = ones(num_images, 4096);
 
     for i = 1 : num_images
         instance_matrix_mirror(i, :) = ...
@@ -53,7 +53,7 @@ if exist(strcat(image_folder,'instance_matrix_jitter.mat'))
     instance_matrix_jitter = cell2mat(struct2cell( ... 
         load(strcat(image_folder,'instance_matrix_jitter.mat'))));
 else
-    instance_matrix_jitter = ones( num_images * 4 , 4096 );
+    instance_matrix_jitter = ones(num_images * 4, 4096);
 
     for i = 1 : num_images
         instance_matrix_jitter(4*i - 3 : 4*i, :) = ...
