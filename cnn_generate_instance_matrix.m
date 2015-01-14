@@ -1,5 +1,5 @@
-function [instance_matrix] = cnn_generate_instance_matrix ...
-    (image_name, image_folder, use_mirror, use_jitter)
+function [instance_matrix, new_image_labels] = cnn_generate_instance_matrix ...
+    (image_name, image_folder, image_labels, use_mirror, use_jitter)
 
 net = load('cnn_imagenet-vgg-f.mat') ;  % used in CNN. Taken out of cnn 
                                         % function for speed
@@ -69,27 +69,37 @@ end
 % construct instance matrix
 if use_mirror == 1 && use_jitter == 1
     instance_matrix = zeros(num_images * 6, 4096);
+    new_image_labels = zeros(num_images * 6, 1);
     for i = 1 : num_images
         instance_matrix(6*i - 5, :) = instance_matrix_standard(i, :);
         instance_matrix(6*i - 4, :) = instance_matrix_mirror(i, :);
         instance_matrix(6*i - 3:6*i, :) = ...
             instance_matrix_jitter(4*i-3:4*i, :);
+        
+        new_image_labels(6*i - 5:6*i) = image_labels(i);
     end
 elseif use_mirror == 1 
     instance_matrix = zeros(num_images * 2, 4096);
+    new_image_labels = zeros(num_images * 2, 1);
     for i = 1 : num_images
         instance_matrix(2*i - 1, :) = instance_matrix_standard(i, :);
         instance_matrix(2*i, :) = instance_matrix_mirror(i, :);
+        
+        new_image_labels(2*i - 1:2*i) = image_labels(i);
     end
 elseif use_jitter == 1
     instance_matrix = zeros(num_images * 5, 4096);
+    new_image_labels = zeros(num_images * 5, 1);
     for i = 1 : num_images
         instance_matrix(5*i - 4, :) = instance_matrix_standard(i, :);
         instance_matrix(5*i - 3:5*i, :) = ...
             instance_matrix_jitter(4*i-3:4*i, :);
+        
+        new_image_labels(5*i - 4:5*i) = image_labels(i);
     end
 else
     instance_matrix = instance_matrix_standard;
+    new_image_labels = image_labels;
 end
 
 

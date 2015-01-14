@@ -1,12 +1,13 @@
 function decision_values = ...
-    svm_test_102(flower_set_number, instance_matrix, tstid, weight_matrix)
-
+    svm_test_102(flower_set_number, test_instance_matrix, weight_matrix)
+%{
 % generate test_instance_matrix
 test_instance_matrix = zeros(size(tstid, 2), size(instance_matrix, 2));
 for i = 1 : size(tstid, 2)
     test_instance_matrix(i, :) = instance_matrix(tstid(i), :);
 end
-
+%}
+    
 % initialise decision_values matrix
  decision_values = ones(flower_set_number, size(test_instance_matrix, 1));
  

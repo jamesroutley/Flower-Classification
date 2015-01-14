@@ -4,7 +4,7 @@
 
 
 
-% Refactor code to use new cnn_feature_extractor. 
+% Refactor code to use new cnn_feature_extractor. DONE?
 
 use_mirror = 0;
 use_jitter = 0;
@@ -76,22 +76,22 @@ instance_matrix = cnn_generate_instance_matrix ...
 
 
 % generate train test matrices
-[train_instance_matrix, test_instance_matrix] = ...
-    generate_train_test_matrices (instance_matrix, trnid, valid, tstid);
+[train_instance_matrix, test_instance_matrix, ...
+    train_label_vector, test_label_vector] = ...
+    generate_train_test_matrices ( ... 
+    instance_matrix, trnid, valid, tstid, image_labels);
 
 
 % train models 
 if 1
-[weight_matrix, model_labels] = ...
-    svm_train_102(flower_set_number, trnid, valid, instance_matrix, ...
-    image_labels, use_mirrored_images, training_instance_matrix_mirror);
+[weight_matrix, model_labels] = svm_train_102( ... 
+    flower_set_number, train_instance_matrix, train_label_vector);
 end
 
-%{
 % test models
 if 1
 decision_values = ...
-    svm_test_102(flower_set_number, instance_matrix, tstid, weight_matrix);
+    svm_test_102(flower_set_number, test_instance_matrix, weight_matrix);
 end
 
 
@@ -109,7 +109,7 @@ ave_confustion_matrix_accuracy = trace(confusion_matrix) / ...
 % generate confusion matrix diagram
 ImshowAxesVisible = true;
 imshow(confusion_matrix, 'InitialMagnification',10000)  % # you want your cells 
-to be larger than single pixels
+% to be larger than single pixels
 colormap(jet) % # to change the default grayscale colormap 
  
 plot_rank_accuracy (decision_values, tstid, image_labels)
@@ -170,7 +170,7 @@ end
 
 
         
-%}
+
         
         
         

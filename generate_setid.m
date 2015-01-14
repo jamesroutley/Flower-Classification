@@ -33,7 +33,7 @@ tstid_help = id' .* tstid_help;
 
 trnid = trnid_help(trnid_help ~= 0)';
 valid = valid_help(valid_help ~= 0)';
-% Need to extract only unmirrored, unjittered tst images. This is a rough
+% Need to extract only unmirrored, unjittered test images. This is a rough
 % solution:
 tstid_help = tstid_help(tstid_help ~= 0);
 
