@@ -1,6 +1,14 @@
 % FLOWER_RECOGNITION_SCRIPT 17 
 % Check mirroring code - looking for ~3% 
 
+%{
+    Refactor generation of test and train matrices. In
+    cnn_generate_instance_matrix generate three instance matrices, for
+    standard, mirror, jitter. Use tstid to generate test_instance_matrix
+    from standard. Join trnid and valid and use to generate
+    train_instance_matrix from the standard, mirror and jitter matrices. 
+%}
+
 % use mirrors?
 use_mirror = 0;
 use_jitter = 0;
@@ -61,11 +69,10 @@ if 0
     train_instance_matrix, test_instance_matrix);
 end
 
-% measure quality of results; confusion matrix, contingency table, ROC,
-% and error (sum of false positives and false negatives)
-confusion_matrix = generate_confusion_matrix(decision_values);
 
-% plot confusion matrix
+confusion_matrix = generate_confusion_matrix_102( ... 
+    decision_values, tstid, new_image_labels);
+
 plot_confusion_matrix(confusion_matrix)
 
 % find confusion_matrix_accuracy

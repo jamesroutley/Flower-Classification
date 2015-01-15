@@ -2,9 +2,9 @@
 % TODO resplit data, run tests again, average accuracy increase, standard
 % deviation, 
 
-use_mirror = 1;
+use_mirror = 0;
 use_jitter = 0;
-do_svm = 1;
+do_svm = 0;
 
 % initialise variables
 flower_set_number = 102;
@@ -60,10 +60,9 @@ confusion_matrix_accuracy = trace(confusion_matrix) / ...
 
 % generate confusion matrix diagram
 ImshowAxesVisible = true;
-imshow(confusion_matrix, 'InitialMagnification',400) 
-colormap(jet)
-
-
+imshow(confusion_matrix, 'InitialMagnification',400)  % # you want your cells 
+colormap(jet) % # to change the default grayscale colormap 
+ 
 plot_rank_accuracy(decision_values, tstid, image_labels)
 
 %{ 
