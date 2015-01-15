@@ -3,17 +3,12 @@
 % deviation, 
 
 
-
-% Refactor code to use new cnn_feature_extractor. DONE?
-
 use_mirror = 0;
 use_jitter = 0;
 
 % initialise variables
 flower_set_number = 102;
 image_folder = 'oxfordflower102/';
-
-
 
 % import vector of flower file names
 image_name = importdata(strcat(image_folder,'files.txt'));
@@ -71,8 +66,8 @@ end
 %}
 
 % load / generate instance matrix
-instance_matrix = cnn_generate_instance_matrix ...
-    (image_name, image_folder, use_mirror, use_jitter);
+[instance_matrix, new_image_labels] = cnn_generate_instance_matrix ...
+    (image_name, image_folder, image_labels, use_mirror, use_jitter);
 
 
 % generate train test matrices
@@ -83,13 +78,13 @@ instance_matrix = cnn_generate_instance_matrix ...
 
 
 % train models 
-if 1
+if 0
 [weight_matrix, model_labels] = svm_train_102( ... 
     flower_set_number, train_instance_matrix, train_label_vector);
 end
 
 % test models
-if 1
+if 0
 decision_values = ...
     svm_test_102(flower_set_number, test_instance_matrix, weight_matrix);
 end

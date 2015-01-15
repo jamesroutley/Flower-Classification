@@ -1,25 +1,15 @@
 % FLOWER_RECOGNITION_SCRIPT 17 
-
 % Check mirroring code - looking for ~3% 
 
-% TODO write generate_test_train function. Take code out of 
-% svm_train/test_102. 
-
-
 % use mirrors?
-use_mirror = 1;
+use_mirror = 0;
 use_jitter = 0;
 
 % initialise variables
 flower_set_number = 17;
-number_of_images_per_flower = 80;
+% number_of_images_per_flower = 80;
 image_folder = 'oxfordflower17/';
-num_total_images = flower_set_number * number_of_images_per_flower;
-
-% PROBS NOT NEEDED
-% num_training_images = num_total_images/2;
-% num_test_images = num_total_images/2;
-
+% num_total_images = flower_set_number * number_of_images_per_flower;
 
 
 % import vector of flower file names
@@ -51,30 +41,24 @@ image_labels = (cell2mat(struct2cell(image_labels)));
 %{
     uses the setid to split the instance_matrix into training and test
     matrices, and the new_image_labels into test and training labels
-
 %}
 [train_instance_matrix, test_instance_matrix, ...
     train_label_vector, test_label_vector] = ...
     generate_train_test_matrices ( ... 
     instance_matrix, trnid, valid, tstid, new_image_labels);
 
-
-%{
 % train models 
-weight_matrix = svm_train(flower_set_number, training_instance_matrix);
+[weight_matrix, model_labels] = svm_train_102(flower_set_number, train_instance_matrix, train_label_vector);
 
 
 % test models
 decision_values = ...
-    svm_test(flower_set_number, test_instance_matrix, weight_matrix);
-
-
-
+    svm_test_102(flower_set_number, test_instance_matrix, weight_matrix);
 
 if 0
     generate_app_js(flower_set_number, image_name, decision_values, ...
-    training_index_vector, test_index_vector, ...
-    training_instance_matrix, test_instance_matrix);
+    sort(cat(1, trnid, valid)), tstid, ...
+    train_instance_matrix, test_instance_matrix);
 end
 
 % measure quality of results; confusion matrix, contingency table, ROC,
@@ -109,6 +93,6 @@ for i = 1 : flower_set_number
 end
 axis([0 1 0 1])  
 %}
-%}
+
     
     
