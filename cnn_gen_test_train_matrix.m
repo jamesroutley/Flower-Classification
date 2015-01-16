@@ -1,10 +1,14 @@
-function [instance_matrix, new_image_labels] = cnn_generate_instance_matrix ...
-    (image_name, image_folder, image_labels, use_mirror, use_jitter)
+function [train_instance_matrix, test_instance_matrix, train_label_vector, test_label_vector] = cnn_gen_test_train_matrix ...
+    (image_name, image_folder, image_labels, use_mirror, use_jitter, setid)
 
 net = load('cnn_imagenet-vgg-f.mat') ;  % used in CNN. Taken out of cnn 
                                         % function for speed
-
+trnid = setid.trnid;
+valid = setid.valid;
+tstid = setid.tstid;
 num_images = size(image_name, 1);
+num_test_images = size(tstid, 2);
+num_train_images = size(trnid, 2) + size(valid, 2);
 cnn_use_mirror = 1;
 cnn_do_not_use_mirror = 0;
 cnn_use_jitter = 1;
@@ -65,7 +69,70 @@ else
         'instance_matrix_jitter');
 end
 
+% construct train_instance_matrix
+%{
+trainid = sort(combine(trnid, valid))
+for each case (stand, mirr, jitt, mirr+jitt):
+    train_instance_matrix = zeros(appropriate size)
+    train_instance_matrix = instance_matrix_standard()
+%}
+trainid = sort(cat(2, trnid, valid));
+if use_mirror == 1 && use_jitter == 1
+    train_instance_matrix = zeros(num_train_images * 6, 4096);
+    train_label_vector = zeros(num_train_images * 6, 1);
+    for i = 1 : num_train_images
+        train_instance_matrix(6*i - 5, :) = instance_matrix_standard(trainid(i), :);
+        train_instance_matrix(6*i - 4, :) = instance_matrix_mirror(trainid(i), :);
+        train_instance_matrix(6*i-3 : 6*i, :) = instance_matrix_jitter(4*trainid(i)-3 : 4*trainid(i), :);
+        
+        train_label_vector(6*i-5 : 6*i) = image_labels(trainid(i));
+    end
+    
+elseif use_jitter == 1
+    train_instance_matrix = zeros(num_train_images * 5, 4096);
+    train_label_vector = zeros(num_train_images * 5, 1);
+    for i = 1 : num_train_images
+        train_instance_matrix(5*i - 4, :) = instance_matrix_standard(trainid(i), :);
+        train_instance_matrix(5*i-3 : 5*i, :) = instance_matrix_jitter(4*trainid(i)-3 : 4*trainid(i), :);
+        %i
+        train_label_vector(5*i-4 : 5*i) = image_labels(trainid(i));
+    end
+    
+elseif use_mirror == 1 
+    train_instance_matrix = zeros(num_train_images * 2, 4096);
+    train_label_vector = zeros(num_train_images * 2, 1);
+    for i = 1 : num_train_images
+        train_instance_matrix(2*i - 1, :) = instance_matrix_standard(trainid(i), :);
+        train_instance_matrix(2*i, :) = instance_matrix_mirror(trainid(i), :);
+        
+        train_label_vector(2*i-1 : 2*i) = image_labels(trainid(i));
+    end
+    
+else
+    train_instance_matrix = zeros(num_train_images, 4096);
+    train_label_vector = zeros(num_train_images, 1);
+    for i = 1 : num_train_images
+        train_instance_matrix(i, :) = instance_matrix_standard(trainid(i), :);
+        
+        train_label_vector(i) = image_labels(trainid(i));
+    end
+end
 
+
+% construct test_instance_matrix
+%{
+iterate through tstid: 
+    test_instance_matrix(i) = instance_matrix_standard(tstid(i))
+%}
+test_instance_matrix = zeros(num_test_images, 4096);
+test_label_vector = zeros(num_test_images, 1);
+for i = 1 : num_test_images
+    test_instance_matrix(i, :) = instance_matrix_standard(tstid(i), :);
+    test_label_vector(i) = image_labels(tstid(i));
+end
+
+%TODO: OLD
+%{
 % construct instance matrix
 if use_mirror == 1 && use_jitter == 1
     instance_matrix = zeros(num_images * 6, 4096);
@@ -101,6 +168,6 @@ else
     instance_matrix = instance_matrix_standard;
     new_image_labels = image_labels;
 end
-
+%}
 
 end
