@@ -1,5 +1,5 @@
 function decision_values = ...
-    svm_test_102(flower_set_number, test_instance_matrix, weight_matrix)
+    svm_test(flower_set_number, test_instance_matrix, weight_matrix)
 %{
 % generate test_instance_matrix
 test_instance_matrix = zeros(size(tstid, 2), size(instance_matrix, 2));

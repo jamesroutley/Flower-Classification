@@ -32,14 +32,14 @@ image_labels = (cell2mat(struct2cell(image_labels)));
 
 % train models 
 if do_svm
-[weight_matrix, model_labels] = svm_train_102( ... 
+[weight_matrix, model_labels] = svm_train( ... 
     flower_set_number, train_instance_matrix, train_label_vector);
 end
 
 % test models
 if do_svm
 decision_values = ...
-    svm_test_102(flower_set_number, test_instance_matrix, weight_matrix);
+    svm_test(flower_set_number, test_instance_matrix, weight_matrix);
 end
 
 
