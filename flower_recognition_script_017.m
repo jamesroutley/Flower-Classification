@@ -7,6 +7,8 @@
     standard, mirror, jitter. Use tstid to generate test_instance_matrix
     from standard. Join trnid and valid and use to generate
     train_instance_matrix from the standard, mirror and jitter matrices. 
+
+    Need to generate setid before cnn_generate_instance_matrix
 %}
 
 % use mirrors?
