@@ -7,16 +7,6 @@ flower_set_number = size(decision_values, 1);
 % find the predicted type of each of the test photos
 [~, decision_labels] = max(decision_values);
 
-%{
-% generate correct labels of each of the test photos
-test_label_vector = zeros(size(tstid, 2), 1);
-
-for i = 1 : size(tstid, 2)
-    test_label_vector(i) = image_labels(tstid(i));
-end
-%}
-
-
 % generate confusion matrix comparing predicted results vs actual results
 confusion_matrix = zeros(flower_set_number);
 for i = 1 : size(decision_labels, 2)

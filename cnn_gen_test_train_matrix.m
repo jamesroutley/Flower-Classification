@@ -1,4 +1,5 @@
-function [train_instance_matrix, test_instance_matrix, train_label_vector, test_label_vector] = cnn_gen_test_train_matrix ...
+function [train_instance_matrix, test_instance_matrix, ...
+    train_label_vector, test_label_vector] = cnn_gen_test_train_matrix ...
     (image_name, image_folder, image_labels, use_mirror, use_jitter, setid)
 
 net = load('cnn_imagenet-vgg-f.mat') ;  % used in CNN. Taken out of cnn 
@@ -70,12 +71,6 @@ else
 end
 
 % construct train_instance_matrix
-%{
-trainid = sort(combine(trnid, valid))
-for each case (stand, mirr, jitt, mirr+jitt):
-    train_instance_matrix = zeros(appropriate size)
-    train_instance_matrix = instance_matrix_standard()
-%}
 trainid = sort(cat(2, trnid, valid));
 if use_mirror == 1 && use_jitter == 1
     train_instance_matrix = zeros(num_train_images * 6, 4096);
@@ -120,10 +115,6 @@ end
 
 
 % construct test_instance_matrix
-%{
-iterate through tstid: 
-    test_instance_matrix(i) = instance_matrix_standard(tstid(i))
-%}
 test_instance_matrix = zeros(num_test_images, 4096);
 test_label_vector = zeros(num_test_images, 1);
 for i = 1 : num_test_images
@@ -131,43 +122,6 @@ for i = 1 : num_test_images
     test_label_vector(i) = image_labels(tstid(i));
 end
 
-%TODO: OLD
-%{
-% construct instance matrix
-if use_mirror == 1 && use_jitter == 1
-    instance_matrix = zeros(num_images * 6, 4096);
-    new_image_labels = zeros(num_images * 6, 1);
-    for i = 1 : num_images
-        instance_matrix(6*i - 5, :) = instance_matrix_standard(i, :);
-        instance_matrix(6*i - 4, :) = instance_matrix_mirror(i, :);
-        instance_matrix(6*i - 3:6*i, :) = ...
-            instance_matrix_jitter(4*i-3:4*i, :);
-        
-        new_image_labels(6*i - 5:6*i) = image_labels(i);
-    end
-elseif use_mirror == 1 
-    instance_matrix = zeros(num_images * 2, 4096);
-    new_image_labels = zeros(num_images * 2, 1);
-    for i = 1 : num_images
-        instance_matrix(2*i - 1, :) = instance_matrix_standard(i, :);
-        instance_matrix(2*i, :) = instance_matrix_mirror(i, :);
-        
-        new_image_labels(2*i - 1:2*i) = image_labels(i);
-    end
-elseif use_jitter == 1
-    instance_matrix = zeros(num_images * 5, 4096);
-    new_image_labels = zeros(num_images * 5, 1);
-    for i = 1 : num_images
-        instance_matrix(5*i - 4, :) = instance_matrix_standard(i, :);
-        instance_matrix(5*i - 3:5*i, :) = ...
-            instance_matrix_jitter(4*i-3:4*i, :);
-        
-        new_image_labels(5*i - 4:5*i) = image_labels(i);
-    end
-else
-    instance_matrix = instance_matrix_standard;
-    new_image_labels = image_labels;
-end
-%}
+
 
 end

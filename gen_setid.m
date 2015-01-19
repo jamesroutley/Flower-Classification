@@ -70,23 +70,5 @@ setid.trnid = trnid_help(trnid_help ~= 0)';
 setid.valid = valid_help(valid_help ~= 0)';
 setid.tstid = tstid_help(tstid_help ~= 0)';
 
-% TODO: OLD SOLUTION: DELETE WHEN THIS WORKS
-%{
-% Need to extract only unmirrored, unjittered test images. This is a rough
-% solution:
-tstid_help = tstid_help(tstid_help ~= 0);
-
-
-tstid = zeros(680, 1);
-num_extra_images_per_flower = size(tstid_help, 1) / (flower_set_number * 40);
-if num_extra_images_per_flower ~= 1
-    for i = 1 : size(tstid)
-        tstid(i) = tstid_help(((i-1) * num_extra_images_per_flower) + 1);
-    end
-else
-    tstid = tstid_help;
-end
-tstid = tstid';
-%}
 
 end

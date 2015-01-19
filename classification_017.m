@@ -2,7 +2,9 @@
 % Check mirroring code - looking for ~3% 
 
 % TODO tidy up mirror + jitter. cnn_options struct could be used. 
-
+%{
+TODO update results page, check mirroring code? change setid in 102. 
+%}
 
 % use mirrors?
 use_mirror = 0;
