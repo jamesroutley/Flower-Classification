@@ -1,21 +1,21 @@
 
 [{
         "title": "Dawn of the Planet of the Apes",
-        "image": "http://api.androidhive.info/json/movies/1.jpg",
+        "image": "http://api.androidhive.info/json/movies/1.jpg"
     },
     {
         "title": "District 9",
-        "image": "http://api.androidhive.info/json/movies/2.jpg",
+        "image": "http://api.androidhive.info/json/movies/2.jpg"
     },
     {
         "title": "Transformers: Age of Extinction",
-        "image": "http://api.androidhive.info/json/movies/3.jpg",
+        "image": "http://api.androidhive.info/json/movies/3.jpg"
     },
     {
         "title": "X-Men: Days of Future Past",
-        "image": "http://api.androidhive.info/json/movies/4.jpg",
+        "image": "http://api.androidhive.info/json/movies/4.jpg"
     },
     {
         "title": "The Machinist",
-        "image": "http://api.androidhive.info/json/movies/5.jpg",
+        "image": "http://api.androidhive.info/json/movies/5.jpg"
 }]
