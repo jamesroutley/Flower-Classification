@@ -5,7 +5,8 @@
 num_tests = 5;
 accuracies = zeros(1, num_tests);
 
-
+% User specifies whether to use mirroring and jittering (use = 1, 
+% don't use = 0)
 use_mirror = 0;
 use_jitter = 0;
 do_svm = 1;
