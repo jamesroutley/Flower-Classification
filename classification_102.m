@@ -29,6 +29,12 @@ image_labels = (cell2mat(struct2cell(image_labels)));
     test_label_vector] = cnn_gen_test_train_matrix(image_name, ...
     image_folder, image_labels, use_mirror, use_jitter, setid);
 
+% Can you do a sanity check here.
+% E.g. checking the number of zeros in your train_instance_matrix and
+% test_instance_matrix. sum(sum(train_instance_matrix == 0)) should be around 0
+% since you don't expect many 0 values in your matrix.
+% Same goes to the labels. None of them should have the default value too.
+
 % train SVM models
 if do_svm
 [weight_matrix, model_labels] = svm_train( ...
