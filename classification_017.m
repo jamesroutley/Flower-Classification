@@ -5,7 +5,8 @@
 
 % User specifies whether to use mirroring and jittering (use = 1, 
 % don't use = 0)
-use_jitter = 0;
+use_mirror = 0;
+use_jitter = 1;
 
 % initialise variables
 flower_set_number = 17;
@@ -33,7 +34,7 @@ image_labels = (cell2mat(struct2cell(image_labels)));
     flower_set_number, train_instance_matrix, train_label_vector);
 
 
-% test SVM models
+% test SVM models 
 decision_values = ...
     svm_test(flower_set_number, test_instance_matrix, weight_matrix);
 

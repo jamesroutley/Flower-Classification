@@ -14,8 +14,8 @@ elseif use_jitter == 1
     
     height = size(im_, 1);
     width = size(im_, 2);
-    desired_height = floor(height * 3/4 );
-    desired_width = floor(width * 3/4 );
+    desired_height = floor(height * 2/3 );
+    desired_width = floor(width * 2/3 );
     %half_height = floor((height - desired_height)/2);
     %half_width = floor((width - desired_width)/2);
     
