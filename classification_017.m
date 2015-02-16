@@ -1,9 +1,9 @@
-% FLOWER_RECOGNITION_SCRIPT 17 
-% Check mirroring code - looking for ~3% 
+% FLOWER_RECOGNITION_SCRIPT 17
+% Check mirroring code - looking for ~3%
 
-% TODO tidy up use_mirror + use_jitter. cnn_options struct could be used. 
+% TODO tidy up use_mirror + use_jitter. cnn_options struct could be used.
 
-% User specifies whether to use mirroring and jittering (use = 1, 
+% User specifies whether to use mirroring and jittering (use = 1,
 % don't use = 0)
 use_jitter = 0;
 
@@ -12,11 +12,11 @@ flower_set_number = 17;
 image_folder = 'oxfordflower17/';
 
 % import vector of flower file names
-image_name = importdata(strcat(image_folder,'files.txt'));
+image_name = importdata(fullfile(image_folder,'files.txt'));
 image_name = cell2mat(image_name);
 
 % generate vector of image categorisation labels
-image_labels = load(strcat(image_folder,'labels.mat'));
+image_labels = load(fullfile(image_folder,'labels.mat'));
 image_labels = (cell2mat(struct2cell(image_labels)));
 
 % generate setid
@@ -28,8 +28,8 @@ image_labels = (cell2mat(struct2cell(image_labels)));
     image_folder, image_labels, use_mirror, use_jitter, setid);
 
 
-% train SVM models 
-[weight_matrix, model_labels] = svm_train( ... 
+% train SVM models
+[weight_matrix, model_labels] = svm_train( ...
     flower_set_number, train_instance_matrix, train_label_vector);
 
 
@@ -38,7 +38,7 @@ decision_values = ...
     svm_test(flower_set_number, test_instance_matrix, weight_matrix);
 
 % generate confusion matrix
-confusion_matrix = gen_conf_mat( ... 
+confusion_matrix = gen_conf_mat( ...
     decision_values, test_label_vector);
 
 plot_confusion_matrix(confusion_matrix)

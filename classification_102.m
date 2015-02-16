@@ -1,6 +1,6 @@
 % FLOWER_RECOGNITION_SCRIPT 102
 
-% User specifies whether to use mirroring and jittering (use = 1, 
+% User specifies whether to use mirroring and jittering (use = 1,
 % don't use = 0)
 use_mirror = 0;
 use_jitter = 0;
@@ -11,17 +11,17 @@ flower_set_number = 102;
 image_folder = 'oxfordflower102/';
 
 % import vector of flower file names
-image_name = importdata(strcat(image_folder,'files.txt'));
+image_name = importdata(fullfile(image_folder,'files.txt'));
 image_name = cell2mat(image_name);
 
 % load setid
-load(strcat(image_folder, 'setid.mat'));
+load(fullfile(image_folder, 'setid.mat'));
 setid.trnid = trnid;
 setid.valid = valid;
 setid.tstid = tstid;
 
 % generate vector of image categorisation labels
-image_labels = load(strcat(image_folder,'labels.mat'));
+image_labels = load(fullfile(image_folder,'labels.mat'));
 image_labels = (cell2mat(struct2cell(image_labels)));
 
 % perform CNN on flower images
@@ -29,9 +29,9 @@ image_labels = (cell2mat(struct2cell(image_labels)));
     test_label_vector] = cnn_gen_test_train_matrix(image_name, ...
     image_folder, image_labels, use_mirror, use_jitter, setid);
 
-% train SVM models 
+% train SVM models
 if do_svm
-[weight_matrix, model_labels] = svm_train( ... 
+[weight_matrix, model_labels] = svm_train( ...
     flower_set_number, train_instance_matrix, train_label_vector);
 end
 
@@ -43,7 +43,7 @@ end
 
 
 % generate confusion matrix
-confusion_matrix = gen_conf_mat( ... 
+confusion_matrix = gen_conf_mat( ...
     decision_values, test_label_vector);
 
 
@@ -53,7 +53,7 @@ confusion_matrix_accuracy = trace(confusion_matrix) / ...
 
 % plot confusion matrix
 %ImshowAxesVisible = true;
-imshow(confusion_matrix, 'InitialMagnification',400) 
+imshow(confusion_matrix, 'InitialMagnification',400)
 colormap(jet)
 
 % plot rank accuracy
