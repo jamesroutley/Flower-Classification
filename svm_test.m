@@ -4,6 +4,9 @@ function decision_values = ...
 % initialise decision_values matrix
  decision_values = ones(flower_set_number, size(test_instance_matrix, 1));
 
+% This loop is unnecessary too...
+% decision_value = test_instance_matrix * weight_matrix should do it.
+% (maybe you need to transpose the matrices prior multiplication)
 for i = 1 : flower_set_number
 
     decision_value = ...
