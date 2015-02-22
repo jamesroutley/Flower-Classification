@@ -5,7 +5,7 @@
 
 % User specifies whether to use mirroring and jittering (use = 1,
 % don't use = 0)
-use_mirror = 0;
+use_mirror = 1;
 use_jitter = 1;
 
 % initialise variables

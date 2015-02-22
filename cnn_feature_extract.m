@@ -1,7 +1,7 @@
 function feature_vector = cnn_feature_extract(im_, net)
 % im_ is not a local variable here.... why underscore?
 
-% JR_CNN Feature extraction using ImageNet CNN model.
+% Feature extraction using ImageNet CNN model.
 % Based on Vedaldi's CNN_IMAGENET_MINIMAL.
 
 % setup toolbox
