@@ -1,0 +1,42 @@
+This startup kit consists of:
+
+- A backend server (backend_server.py) that loads a model from Matlab
+(load_model.m) upon start, and processes requests via use_model.m.
+- A Flask web server that accepts HTTP request and forwards it to the backend
+server and displays the result from the backend server.
+
+-------------------------
+DEPENDENCIES
+-------------------------
+
+- python2.7
+- mlabwrap: http://mlabwrap.sourceforge.net/
+- flask: http://flask.pocoo.org/
+
+-------------------------
+USAGE
+-------------------------
+
+To bring up the backend server:
+
+# Setup Matlab environment. Change the path to your Matlab location.
+# FOR OSX ONLY. CHECK MLABWRAP INSTRUCTION ON OTHER PLATFORMS.
+export PATH=/Applications/MATLAB_R2013a.app/bin/:$PATH
+export MATLAB_HOME=/Applications/MATLAB_R2013a.app
+export DYLD_FALLBACK_LIBRARY_PATH="${MATLAB_HOME}/bin/maci64"
+
+$ python backend_server.py
+
+To test the backend server (should outputs "101"):
+
+$ python test_backend_server.py
+
+To bring up the frontend server:
+
+$ python flask_server.py
+
+To test the frontend server, go to browser and enter:
+
+http://localhost:5000/5
+
+Browser should show "105".
