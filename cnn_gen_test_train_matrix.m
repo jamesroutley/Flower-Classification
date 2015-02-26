@@ -11,13 +11,6 @@ num_images = size(image_name, 1);
 num_test_images = size(tstid, 2);
 num_train_images = size(trnid, 2) + size(valid, 2);
 
-% These variables are actually constants. Use CAPTICAL letters to highlight
-% them. Also, you don't need to use them here. Just put 1 or 0 in your function
-% calls.
-cnn_use_mirror = 1;
-cnn_do_not_use_mirror = 0;
-cnn_use_jitter = 1;
-cnn_do_not_use_jitter = 0;
 
 folder = fullfile(image_folder, 'jpg/');
 
@@ -35,7 +28,7 @@ else
     for i = 1 : num_images
         instance_matrix_standard(i, :) = ...
             cnn(image_name(i, :), folder, net, ...
-            cnn_do_not_use_mirror, cnn_do_not_use_jitter);
+            0, 0);
     end
 
     save(fullfile(image_folder,'instance_matrix_standard.mat'),...
@@ -53,7 +46,7 @@ else
     for i = 1 : num_images
         instance_matrix_mirror(i, :) = ...
             cnn(image_name(i, :), folder, net, ...
-            cnn_use_mirror, cnn_do_not_use_jitter);
+            1, 0);
     end
 
     save(fullfile(image_folder,'instance_matrix_mirror.mat'), ...
@@ -66,12 +59,12 @@ if exist(fullfile(image_folder,'instance_matrix_jitter.mat'))
     instance_matrix_jitter = cell2mat(struct2cell( ...
         load(fullfile(image_folder,'instance_matrix_jitter.mat'))));
 else
-    instance_matrix_jitter = ones(num_images * 4, 4096);
+    instance_matrix_jitter = ones(num_images * 5, 4096);
 
     for i = 1 : num_images
-        instance_matrix_jitter(4*i - 3 : 4*i, :) = ...
+        instance_matrix_jitter(5*i - 4 : 5*i, :) = ...
             cnn(image_name(i, :), folder, net, ...
-            cnn_do_not_use_mirror, cnn_use_jitter);
+            0, 1);
     end
 
     save(fullfile(image_folder,'instance_matrix_jitter.mat'), ...
@@ -85,23 +78,23 @@ end
 
 trainid = sort(cat(2, trnid, valid));
 if use_mirror == 1 && use_jitter == 1
+    train_instance_matrix = zeros(num_train_images * 7, 4096);
+    train_label_vector = zeros(num_train_images * 7, 1);
+    for i = 1 : num_train_images
+        train_instance_matrix(7*i - 6, :) = instance_matrix_standard(trainid(i), :);
+        train_instance_matrix(7*i - 5, :) = instance_matrix_mirror(trainid(i), :);
+        train_instance_matrix(7*i-4 : 7*i, :) = instance_matrix_jitter(5*trainid(i)-4 : 5*trainid(i), :);
+
+        train_label_vector(7*i-6 : 7*i) = image_labels(trainid(i));
+    end
+
+elseif use_jitter == 1
     train_instance_matrix = zeros(num_train_images * 6, 4096);
     train_label_vector = zeros(num_train_images * 6, 1);
     for i = 1 : num_train_images
         train_instance_matrix(6*i - 5, :) = instance_matrix_standard(trainid(i), :);
-        train_instance_matrix(6*i - 4, :) = instance_matrix_mirror(trainid(i), :);
-        train_instance_matrix(6*i-3 : 6*i, :) = instance_matrix_jitter(4*trainid(i)-3 : 4*trainid(i), :);
-
-        train_label_vector(6*i-5 : 6*i) = image_labels(trainid(i));
-    end
-
-elseif use_jitter == 1
-    train_instance_matrix = zeros(num_train_images * 5, 4096);
-    train_label_vector = zeros(num_train_images * 5, 1);
-    for i = 1 : num_train_images
-        train_instance_matrix(5*i - 4, :) = instance_matrix_standard(trainid(i), :);
-        train_instance_matrix(5*i-3 : 5*i, :) = instance_matrix_jitter(4*trainid(i)-3 : 4*trainid(i), :);
-        train_label_vector(5*i-4 : 5*i) = image_labels(trainid(i));
+        train_instance_matrix(6*i-4 : 6*i, :) = instance_matrix_jitter(5*trainid(i)-4 : 5*trainid(i), :);
+        train_label_vector(6*i-3 : 6*i) = image_labels(trainid(i));
     end
 
 elseif use_mirror == 1

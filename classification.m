@@ -6,7 +6,7 @@ TODO: read in a weight matrix from memory. Refactor to make it a function?
 Need to look at how matlab code is called by python. 
 %}
 
-function ranking = classification(im)
+function ranking = classification(im, weight_matrix)
 % im = imread('oxfordflower17/jpg/image_0001.jpg');
 
 im_ = single(im);
