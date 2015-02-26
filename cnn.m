@@ -14,14 +14,14 @@ if use_mirror == 1
     feature_vector = cnn_feature_extract(im_, net);
 
 elseif use_jitter == 1
-    feature_vector = zeros(4, 4096);
+    feature_vector = zeros(5, 4096);
 
     height = size(im_, 1);
     width = size(im_, 2);
     desired_height = floor(height * 2/3 );
     desired_width = floor(width * 2/3 );
-    %half_height = floor((height - desired_height)/2);
-    %half_width = floor((width - desired_width)/2);
+    half_height = floor((height - desired_height)/2);
+    half_width = floor((width - desired_width)/2);
 
     % generate images
     im_jittered = {
@@ -29,8 +29,8 @@ elseif use_jitter == 1
         im_(1:desired_height, width-desired_width: width, :);
         im_(height-desired_height : height, 1:desired_width, :);
         im_(height-desired_height : height, width-desired_width: width, :);
-        %im_(half_height : half_height + desired_height, ...
-        %    half_width : half_width + desired_width, : )
+        im_(half_height : half_height + desired_height, ...
+            half_width : half_width + desired_width, : )
         };
 
     for i = 1 : size(im_jittered)
