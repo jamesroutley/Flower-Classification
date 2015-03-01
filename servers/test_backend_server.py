@@ -9,9 +9,5 @@ blub.connect(('localhost', 60000))
 
 # Send query.
 ch = ConnectionHandler(blub)
-ch.send('1')
+ch.send('image_00001.jpg')
 print 'Received %s' % ch.recv()
-
-
-
-

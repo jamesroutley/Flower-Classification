@@ -1,4 +1,4 @@
-function feature_vector = cnn_feature_extract(im_, net)
+function feature_vector = server_cnn_feature_extract(im_, net)
 % im_ is not a local variable here.... why underscore?
 
 % Feature extraction using ImageNet CNN model.

@@ -25,11 +25,17 @@ class ServerRequestHandler(SocketServer.BaseRequestHandler):
     start = time.time()
 
     # TODO(James): Add your classification code here...
+    ranking = mlab.server_classification(data, self.server.weight_matrix, self.server.net)
+    print('Ranking:')
+    print(ranking)
+
+    print(int(ranking[0]))
+    connectionHandler.send(str(int(ranking[0])))
 
     # Use model via use_model.
-    output = mlab.use_model(self.server.model, int(data))
-    print('Output %d' % output)
-    connectionHandler.send('%d' % output)
+    #output = mlab.use_model(self.server.model, int(data))
+    #print('Output %d' % output)
+    #connectionHandler.send('%d' % output)
 
     t = time.time() - start
 
@@ -42,10 +48,16 @@ class Server(SocketServer.ThreadingMixIn, SocketServer.TCPServer):
 
     #TODO(James): Add your model loading code here...
 
+    self.weight_matrix = mlab.load_weight_matrix()
+    print('weight_matirx ready')
+    self.net = mlab.load_net()
+    print('net ready')
+    print('backend server ready:')
+
     # Loads model from load_model.
-    self.model = mlab.load_model()
-    print('Model is ready:')
-    print self.model
+    # self.model = mlab.load_model()
+    # print('Model is ready:')
+    # print self.model
 
 if __name__ == '__main__':
   host = 'localhost'
@@ -53,5 +65,3 @@ if __name__ == '__main__':
 
   server = Server((host, port), ServerRequestHandler)
   server.serve_forever()
-
-
