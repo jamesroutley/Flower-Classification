@@ -21,8 +21,8 @@ To bring up the backend server:
 
 # Setup Matlab environment. Change the path to your Matlab location.
 # FOR OSX ONLY. CHECK MLABWRAP INSTRUCTION ON OTHER PLATFORMS.
-export PATH=/Applications/MATLAB_R2013a.app/bin/:$PATH
-export MATLAB_HOME=/Applications/MATLAB_R2013a.app
+export PATH=/Applications/MATLAB_R2014b.app/bin/:$PATH
+export MATLAB_HOME=/Applications/MATLAB_R2014b.app
 export DYLD_FALLBACK_LIBRARY_PATH="${MATLAB_HOME}/bin/maci64"
 
 $ python backend_server.py
