@@ -20,4 +20,5 @@ class_decision_values = feature_vector * weight_matrix';
 % is stored to 7dp so it probably won't be an issue.
 [~, ranking, ~] = unique(class_decision_values);
 ranking = flipud(ranking);
+ranking = ranking(1:8)
 end
