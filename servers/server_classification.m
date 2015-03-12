@@ -1,15 +1,15 @@
-%{ 
+%{
 classification script. Reads in a single image and classifies it. Uses the
-weight matrix stored in MatLab's workspace.
+weight matrix stored in MatLabs workspace.
 
 TODO: read in a weight matrix from memory. Refactor to make it a function?
-Need to look at how matlab code is called by python. 
+Need to look at how matlab code is called by python.
 %}
 
 function ranking = server_classification(im_name, weight_matrix, net)
 % im = imread('oxfordflower17/jpg/image_0001.jpg');
 
-im = imread(im_name);
+im = imread(fullfile('images/', im_name));
 im_ = single(im);
 feature_vector = server_cnn_feature_extract(im_, net);
 

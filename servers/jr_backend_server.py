@@ -26,12 +26,8 @@ class ServerRequestHandler(SocketServer.BaseRequestHandler):
 
         # Run classification script
         ranking = mlab.server_classification(data, self.server.weight_matrix, self.server.net)
-        #print('Ranking:')
-        #print(ranking)
-
-        #print(int(ranking[0]))
+        
         connectionHandler.send(str(gen_json(ranking)))
-        #print gen_json(ranking)
 
         t = time.time() - start
 

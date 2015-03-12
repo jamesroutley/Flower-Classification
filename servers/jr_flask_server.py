@@ -13,10 +13,6 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-def allowed_file(filename):
-    return '.' in filename and \
-        filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
-
 @app.route('/')
 def Index():
     return('Hello World')
@@ -37,10 +33,23 @@ def AddHundred(num):
     print json_list
     return json.dumps(json_list, separators=(',',':'))
 
+@app.route('/upload', methods = ['GET', 'POST'])
+def Upload():
+    if request.method == 'POST':
+        print request.headers
+        filename = request.headers['Uploaded-File']
+        file = request.files[filename]
+        if file and allowed_file(filename):
+            secure_name = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_name))
+            resp = call_backend(secure_name)
+            print resp
+            return resp
 
 @app.route('/uploadnew', methods=['GET', 'POST'])
 def upload_new():
     if request.method == 'POST':
+        print request.files
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -70,7 +79,13 @@ def call_backend(filename):
     ch = ConnectionHandler(blub)
     ch.send(filename)
     # Display the result.
-    return ch.recv()
+    json_list = ch.recv()
+    print json_list
+    return json.dumps(json_list, separators=(',',':'))
+
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 
 if __name__ == "__main__":
