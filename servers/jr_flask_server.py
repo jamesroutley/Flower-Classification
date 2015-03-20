@@ -33,6 +33,7 @@ def AddHundred(num):
     print json_list
     return json.dumps(json_list, separators=(',',':'))
 
+#todo fix variable names
 @app.route('/upload', methods = ['GET', 'POST'])
 def Upload():
     if request.method == 'POST':
@@ -43,6 +44,7 @@ def Upload():
             secure_name = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_name))
             resp = call_backend(secure_name)
+            #print resp
             print resp
             return resp
 
@@ -81,7 +83,8 @@ def call_backend(filename):
     # Display the result.
     json_list = ch.recv()
     print json_list
-    return json.dumps(json_list, separators=(',',':'))
+    return json_list
+    #return json.dumps(json_list, separators=(',',':'))
 
 def allowed_file(filename):
     return '.' in filename and \

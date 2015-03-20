@@ -14,6 +14,7 @@ import time
 from ConnectionHandler import ConnectionHandler
 from mlabwrap import mlab
 import os
+import json
 
 # The handler is created for each of incoming http requests and handle() will be
 # called each time.
@@ -26,7 +27,7 @@ class ServerRequestHandler(SocketServer.BaseRequestHandler):
 
         # Run classification script
         ranking = mlab.server_classification(data, self.server.weight_matrix, self.server.net)
-        
+
         connectionHandler.send(str(gen_json(ranking)))
 
         t = time.time() - start
@@ -34,19 +35,24 @@ class ServerRequestHandler(SocketServer.BaseRequestHandler):
         print('Finished processing. Required %f seconds.' % t)
 
 def gen_json(ranking):
+
     name_lookup = []
     for i in range(1, 103):
-        name_lookup.append('name' + str(i))
+        name_lookup.append("name" + str(i))
 
     url_lookup = []
     for i in range(1, 103):
-        url_lookup.append('url' + str(i))
+        url_lookup.append("url" + str(i))
+
+    url_dummy = ["http://jamesroutley.co.uk/Flower-Classification/img/oxfordflower17/jpg/image_0001.jpg",    "http://jamesroutley.co.uk/Flower-Classification/img/oxfordflower17/jpg/image_1061.jpg", "http://jamesroutley.co.uk/Flower-Classification/img/oxfordflower17/jpg/image_0914.jpg", "http://jamesroutley.co.uk/Flower-Classification/img/oxfordflower17/jpg/image_0356.jpg", "http://jamesroutley.co.uk/Flower-Classification/img/oxfordflower17/jpg/image_1283.jpg", "http://jamesroutley.co.uk/Flower-Classification/img/oxfordflower17/jpg/image_1061.jpg", "http://jamesroutley.co.uk/Flower-Classification/img/oxfordflower17/jpg/image_0914.jpg", "http://jamesroutley.co.uk/Flower-Classification/img/oxfordflower17/jpg/image_0356.jpg"]
 
     json_list = []
+    j = 0
     for i in ranking:
-        json_list.append({'title': name_lookup[int(i[0] - 1)], 'image': url_lookup[int(i[0] - 1)]})
+        json_list.append({"title": name_lookup[int(i[0] - 1)], "image": url_dummy[j]})
+        j = j + 1
 
-    return json_list
+    return json.dumps(json_list, separators=(',',':'))
 
 
 
