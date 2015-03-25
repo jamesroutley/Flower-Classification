@@ -8,9 +8,9 @@
 
 \section{Definition of the problem} 
 
-\section{Why problem is worth solving}
+\section{Why problem is worth solving, challenges which occur during this type of classification}
 
-\section{Summary of solution}
+\section{Achievements}
 
 
 
@@ -20,10 +20,18 @@
 
 \chapter{Literature Review}
 
+couple of pages long 3-5
+
+Gives reader knowledge of what people have done before on this topic. 
+
+Have people writen apps like this before (there are for dogs, leaves) - look up these papers and compare them.
+
+Look over previous papers on flower classification 
+
 CNNs, where they came from, who invented them, imagenet challenge
 
 
-
+Describe data - how many classes, how many images, give examples of flowers
 
 
 \chapter{Classification}
@@ -31,14 +39,17 @@ CNNs, where they came from, who invented them, imagenet challenge
 \section{Overview of classification pipeline}
 Photo of a flower is taken by the user. CNN converts the photo into a characteristic vector. SVM classifiers used to determine the species of flower. 
 
-\section{Convolutional neural network}
-Used to generate characteristic vector from an image. Treated as a black box in this project.
+\section{Convolutional neural network inspired feature extraction}
+Used to generate characteristic vector from an image. Treated as a black box in this project. Feature extraction (not end to end). Borrow graphs from Andrea. Look up his papers on his network. How the network was trained - imagenet. Look up the data it was trained on. 
 
-\section{Support Vector Machine}
+\section{Support Vector Machine for image classification}
 
 \subsection{How SVMs work}
 
 \subsection{Training and testing SVMs}
+
+
+\section{Experiments - this should be half the content. 7 pages, half should be experiments}
 
 \subsection{SVM accuracy}
 
@@ -50,7 +61,7 @@ Used to generate characteristic vector from an image. Treated as a black box in 
 
 \subsection{How SVMs are used in the classification pipeline}
 
-\section{MatLab classification script}
+\section{REMOVE: MatLab classification script}
 
 \subsection{Explication of classification script}
 Script uses the CNN to generate a characteristic vector from an inputted photo. We test that vector against the 102 weight vectors found during training to produce a classification prediction.
@@ -59,7 +70,9 @@ Script uses the CNN to generate a characteristic vector from an inputted photo. 
 
 
 
-\chapter{Client architecture}
+\chapter{Client architecture join chapter with Server. }
+
+TODO: don't group sections by activities (this is an Android specific way of doing things Keep client section quite short 3 pages)
 
 
 \section{Overview of client architecture}
@@ -133,7 +146,7 @@ Description of code used in the Detail Activity
 
 
 
-\chapter{Conclusions and extensions}
+\chapter{Conclusions and Future Work: mirror on intro. Intro discusses challenges, conclusions describe how challenges were minimised. Were goals achieved}
 
 \section{Conclusions}
 
