@@ -1,1 +1,1 @@
-rank = server_classification(im_name, weight_matrix, net);
+ranking = server_classification(im_name, weight_matrix, net);
