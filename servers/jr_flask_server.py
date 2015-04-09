@@ -8,16 +8,20 @@ from flask import jsonify
 import json
 
 UPLOAD_FOLDER = 'images/'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+EXAMPLE_IMAGE_FOLDER = 'example_images/'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['EXAMPLE_IMAGE_FOLDER'] = EXAMPLE_IMAGE_FOLDER
 
+
+# Replace with /upload
 @app.route('/')
 def Index():
     return('Hello World')
 
-
+# Remove
 @app.route('/<num>')
 def AddHundred(num):
     # Connect to the matlab backend.
@@ -34,7 +38,7 @@ def AddHundred(num):
     return json.dumps(json_list, separators=(',',':'))
 
 #todo fix variable names
-@app.route('/upload', methods = ['GET', 'POST'])
+@app.route('/androidupload', methods = ['GET', 'POST'])
 def Upload():
     if request.method == 'POST':
         print request.headers
@@ -44,11 +48,11 @@ def Upload():
             secure_name = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_name))
             resp = call_backend(secure_name)
-            #print resp
             print resp
             return resp
 
-@app.route('/uploadnew', methods=['GET', 'POST'])
+# make nicer
+@app.route('/upload', methods=['GET', 'POST'])
 def upload_new():
     if request.method == 'POST':
         print request.files
@@ -68,9 +72,9 @@ def upload_new():
     </form>
     '''
 
-@app.route('/uploadnew/<filename>')
+@app.route('/img/<filename>')
 def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],
+    return send_from_directory(app.config['EXAMPLE_IMAGE_FOLDER'],
                                filename)
 
 def call_backend(filename):
@@ -80,11 +84,7 @@ def call_backend(filename):
     # Send query.
     ch = ConnectionHandler(blub)
     ch.send(filename)
-    # Display the result.
-    json_list = ch.recv()
-    print json_list
-    return json_list
-    #return json.dumps(json_list, separators=(',',':'))
+    return ch.recv()
 
 def allowed_file(filename):
     return '.' in filename and \

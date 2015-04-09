@@ -1,14 +1,59 @@
-\documentclass[11pt, a4paper]{report}
-\usepackage{fontspec}
-\setmainfont{Arial}
+%-------------------------------
+% 4YP REPORT
+%-------------------------------
 
+% JAMES ROUTLEY
+
+% COMPILE WITH XeLaTeX
+
+%-------------------------------
+% Preamble
+%-------------------------------
+\documentclass[11pt, a4paper]{report}
+\linespread{1.669} % similar to double line spacing in word
+\usepackage[margin=20mm]{geometry}
+\usepackage{fontspec, amsmath}
+\usepackage[hang,small]{caption} % make captions look better
+\setmainfont{Arial}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{0.5cm}
+
+
+
+%-------------------------------
+% Document
+%-------------------------------
 \begin{document}
 
+
+%-------------------------------
+% Contents
+%-------------------------------
+\setlength{\parskip}{0.0cm}
+\tableofcontents
+\setlength{\parskip}{0.4cm}
+
+
+%-------------------------------
+% Introduction
+%-------------------------------
 \chapter{Introduction}
 
 \section{Definition of the problem} 
 
 \section{Why problem is worth solving, challenges which occur during this type of classification}
+
+\section{Description of data}
+
+This project makes use of the Oxford 17 category flower dataset and the Oxford 102 category flower dataset. 
+
+'Both contain sets of images of flowers which commonly occur in the United Kingdom. The images have large scale pose and light variations. In addition, there are categories that have large variations within the category and several very similar categories.' - ?
+
+The 102 dataset are split into training, validation and test sets.
+
+The more manageable 17 dataset was used at first to get an overview of the classification process.
+
+Once an initial classification pipeline was developed, the more comprehensive 102 dataset was used. 
 
 \section{Achievements}
 
@@ -17,141 +62,264 @@
 
 
 
-
+%-------------------------------
+% Literature Review
+%-------------------------------
 \chapter{Literature Review}
 
-couple of pages long 3-5
+(3-5 pages long. Gives reader knowledge of what people have done before on this topic.) 
 
-Gives reader knowledge of what people have done before on this topic. 
+\section{Visual Classification Apps}
 
-Have people writen apps like this before (there are for dogs, leaves) - look up these papers and compare them.
+Similar apps (there are for dogs, leaves) - look up these papers and compare them.
 
-Look over previous papers on flower classification 
+\section{Flower Classification}
+
+Look over previous papers on flower classification
+
+\section{Convolutional Neural Networks}
 
 CNNs, where they came from, who invented them, imagenet challenge
 
 
-Describe data - how many classes, how many images, give examples of flowers
+Description of LibLinear
 
 
+
+
+
+
+
+
+
+
+
+
+
+%-------------------------------
+% Classification
+%-------------------------------
 \chapter{Classification}
 
 \section{Overview of classification pipeline}
-Photo of a flower is taken by the user. CNN converts the photo into a characteristic vector. SVM classifiers used to determine the species of flower. 
 
-\section{Convolutional neural network inspired feature extraction}
-Used to generate characteristic vector from an image. Treated as a black box in this project. Feature extraction (not end to end). Borrow graphs from Andrea. Look up his papers on his network. How the network was trained - imagenet. Look up the data it was trained on. 
+A photograph of a flower supplied to the classification software. A convolutional neural network is used to produce a feature vector, which describes the content of the photograph. A number of support vector machine classifiers compare the feature vector to previously trained models, and predict the species of flower. 
 
-\section{Support Vector Machine for image classification}
+\section{Convolutional neural network (CNN) inspired feature extraction}
 
-\subsection{How SVMs work}
+The pipeline makes use of the first seven layers of the fast convolutional neural network CNN-F introduced in 'Return of the Devil in the Details:
+Delving Deep into Convolutional Nets'~\cite{Chatfield14}. This algorithm takes a photo as its input and produces a vector which describes the features of the photo. The photo is cropped to 224x224 pixels and normalised before use and the outputted feature vector is also normalised.
 
-\subsection{Training and testing SVMs}
+%TODO add that I'm using the fast cnn
+
+The CNN is trained on the ImageNet Large Scale Visual Recognition Challenge 2012 (ILSVRC2012) dataset. Details of the training can be found in ~\cite{Chatfield14}.
+
+The feature extraction process itself is treated as a black box in this project. 
+
+ 
 
 
-\section{Experiments - this should be half the content. 7 pages, half should be experiments}
-
-\subsection{SVM accuracy}
-
-\subsection{Improving SVM accuracy}
-
-\subsubsection{Mirroring}
-
-\subsubsection{Sampling (Jittering?)}
+\section{Support vector machine (SVM) image classification}
 
 \subsection{How SVMs are used in the classification pipeline}
 
-\section{REMOVE: MatLab classification script}
-
-\subsection{Explication of classification script}
-Script uses the CNN to generate a characteristic vector from an inputted photo. We test that vector against the 102 weight vectors found during training to produce a classification prediction.
-
-
-
-
-
-\chapter{Client architecture join chapter with Server. }
-
-TODO: don't group sections by activities (this is an Android specific way of doing things Keep client section quite short 3 pages)
+The classification pipieline uses the open source support vector machine (SVM) library LibLinear for quick, large scale classification. 1 vs the rest classification is used. $n$ SVM models are trained for $n$ flower categories, producing $n$ weight vectors, $\vec{w_{1}}, \vec{w_{2}}, ..., \vec{w_{n}}$. These weight vectors are stacked into a weight matrix $\vec{W}$:
+$$
+\vec{W} = 
+\begin{pmatrix}
+\vec{w_{1}}\\  
+\vec{w_{2}}\\ 
+\vdots \\ 
+\vec{w_{n}}
+\end{pmatrix}
+$$
 
 
-\section{Overview of client architecture}
-Android application consists of three activities, or screens with which the user interacts. The Main Activity allows the user to take a photo or choose a photo from gallery to upload. The photo is uploaded to the server, which classifies the flower, and returns the result to the Results Activity. The results activity displays the eight top classification results, and allows the user to click on each, and find out more information in the Detail Activity. 
 
-\section{Main Activity}
+During classification, the scalar product of the unseen flower's feature vector, $\vec{x}$ and each of the weight vectors is found, to produce a vector of prediction values, $p_{1}, p_{2}, ...,  p_{n}$:
+$$
+\vec{x}.\vec{W} =
+\begin{pmatrix}
+p_{1}\\  
+p_{2}\\ 
+\vdots \\ 
+p_{n}
+\end{pmatrix}
+$$
 
-Main Activity consists of two buttons, which launch the camera and gallery image picker respectively.
+The value of $p_{i}$ indicates how closely the unseen flower's features matched those of category $i$. The higher the product, the more closely they match. The unseen flower's category is therefore predicted to be that which produced the greatest prediction value. 
 
-\subsection{Camera intent}
 
-\subsection{Gallery image picker intent}
 
-\section{Results Activity}
+\subsection{Training and testing SVMs}
 
-Description of code used in the Results Activity
+Before use, the SVM models must be trained, to produce the weight matrix $W$. They are trained using a set of images which are known to be of certain categories. These models are then tested, using a set of images also known to be of certain categories, to check they are sufficiently accurate. 
+
+
+
+\subsubsection{Training} 
+
+SVM models are trained using LibLinear's training function. To train a model to recognise a flower category $i$, all photos in the training and validation sets are passed to the training function, with the photos of category $i$ labeled as in the category, and all other flowers labeled as not in the category. The flowers are labeled as in or not in the category by passing a 1 or -1 respectively to the training function, alongside that flower's feature vector.
+
+The training function produces a weight vector of order 4096, which describes the characteristics of the flowers in that category. The similarity between a new flower and those in the category can be found by comparing the new flower's feature vector and the category's weight vector.
+
+\subsubsection{Testing}
+
+Testing allows the quality of each SVM model to be checked. Testing uses the test subset of the flower datasets. Each flower in the test set is run against each of the SVM models generated during training. The dot product of the  flower's feature vector and each of the model's weight vectors is found. The greater the result of the dot product, the greater the correlation between the tested flower and that category. Thus the category which produces the greatest dot product result is predicted to be the category of the flower.
+
+By comparing the actual categories of the flowers in the test set to the predicted categories, an overall percentage accuracy can be calculated.
+
+\subsection{C Parameter}
+
+Adjusting the C Parameter of a SVM changes allows for a solution with a larger margin, in return for the violation of some constraints. To find the optimal C Parameter, SVM models are trained using the training set images  before testing against the validation set images. The change in classification accuracy is recorded as the C Parameter is changed. 
+
+
+\section{Experiments}
+(half the content. 7 pages, half should be experiments)
+
+\subsection{SVM accuracy}
+
+\subsubsection{How we define accuracy}
+
+Accuracy is defined as the percentage number of correct classifications, where under correct classification, the category of the model which most closely identifies with the flower is indeed the category of that flower.
+
+Accuracy is found by classifying all images in the test sets, and checking the classified categories against the actual categories. 
+
+\subsubsection{Rank accuracy}
+
+%TODO re-write
+Rank accuracy measures the percentage accuracy of the correct category being in the top $j$ classified categories. As a user will be receiving results on their phone, a selection of likely flower categories can presented to that user, who can make the final decision. How rank accuracy changes as we consider more ranks therefore can give us an indication as to how many results to present the user. The more results are presented, the more likely the correct classification will be included, but the more cluttered the presentation is.
+
+
+
+\subsection{Improving SVM accuracy}
+
+\subsubsection{Mirroring of training set images}
+
+As most flowers have vertical symmetry, the number of images in a training set can be doubled by vertically mirroring each image in the set. As a new flower image may more closely resemble one of the training set image's mirrors, this results in a higher classification accuracy without needing to expand the training set with new images.
+
+\subsubsection{Sampling training set images}
+
+The number of images in the training set can be further expanded by sampling several smaller images from each training image. As a new flower image may more closely resemble one of the training set image's samples, this again results in a higher classification accuracy without needing to expand the training set with new images.
+
+\subsubsection{Mirroring and sampling test images}
+
+%TODO rewrite with more maths (explain that classification returns several 102 dimension vectors, which are then averaged or max taken)
+For the same reasons as laid out above, mirroring and sampling the test image can improve classification accuracy. As, for each image taken by the user, several images are now being classified, the results from the different classifications can be averaged, or the maximum taken
+
+\subsection{Results}
+% TODO Numbers + graphs showing accuracies with the different data sets, and improvements.
+
+
+%TODO stick table to results title
+\begin{table}[h]
+\centering 
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l|cc}
+  & {\bf 17 flower dataset} & {\bf 102 flower dataset} \\
+  \hline
+  Standard & & 85.1\% \\
+  Mirroring & & 85.5\% \\
+  Sampling & & 85.4\% \\
+  Mirroring and Sampling & & 86.0\% 
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+\caption{Mean classification accuracy for the Oxford 17 and 102 flower datasets while using the standard, mirrored and subsampled training image sets}
+\label{table:accuracy}
+\end{table}
+
+%TODO change this - might use more images for 17? 
+If the images in the test set happen to closely match those in the training set, the classification accuracy would be higher than if the opposite were true. To account for these idiosyncrasies, the script which calculates classification accuracy is run five times. Each time it uses 20 randomly selected images as the training set and the rest of the images as the test set. The mean accuracy and the standard deviation of the results are found. 20 images are used as this is the number of images used in the training set defined in the dataset. 
+
+\begin{table}[h]
+\centering 
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l|cc}
+  & {\bf 17 flower dataset} & {\bf 102 flower dataset} \\
+  \hline
+  Standard & & 0.0059\% \\
+  Mirroring & & 0.0068\% \\
+  Sampling & & 85.4\% \\
+  Mirroring and Sampling & & 86.0\% 
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+\caption{Standard deviation of classification accuraies for the Oxford 17 and 102 flower datasets while using the standard, mirrored and subsampled training image sets}
+\label{table:standarddeviation}
+\end{table}
+
+\subsubsection{Analysis of results}
+Standard Deviation low, indicating good something
+
+Mirror and Sampling have little effect on accuracy - these effects could already be looked at by the CNN
+
+%TODO (100) finish once results in
+Confusion Matrices allow deeper analysis of results. Certain categories perform badly. This explain why (similar looking flowers? - give photos)
+
+%TODO talk about the visualisation website?
+
+
+
+\chapter{Client and Server Architecture}
+
+(~3 pages long)
+
+
+\section{Client architecture}
+Android application allows the user to take the photo and upload it to the server, which performs the classification before sending the results back to the application for display.
 
 \subsection{Uploading the photo}
+HTTP connection, 
+Using an Async Task to keep the slow data connection off the UI thread
 
-\subsubsection{AsyncTask (keeping slow processes such as web connections off the UI thread)}
+\subsection{Receiving results}
 
-\subsubsection{Connecting to the server}
-
-\subsection{Loading classification results}
-
-\subsubsection{Parsing JSON Array}
-
-\subsubsection{ListView}
-
-\subsubsection{Picasso image downloader library}
-
-\section{Detail Activity}
-
-Description of code used in the Detail Activity
-
-\subsection{TODO after Detail Activity implemented}
+Description of data sent (name, species, link to image, wikipedia excerpt, links to google and wikipedia)
+Data sent as JSON string,
 
 
 
+\section{Server architecture}
+Flask server receives HTTP request, saves photo to a folder. Passes filename to the backend server which runs the classification script, returns a JSON Array of info to the Flask server, which sends it back to the Android client. 
+
+\subsection{Flask server}
+
+How server accepts the photo
+
+Error catching (safe filenames, only certain filetypes allowed
 
 
+\subsection{Connection between servers}
 
+\subsection{Backend server}
+Description of how server works
 
-
-\chapter{Server architecture}
-
-\section{Overview of server architecture}
-
-\section{Flask server}
-
-\subsection{How server accepts the photo}
-
-\subsection{Error catching}
-
-\subsubsection{Safe filenames}
-
-\subsubsection{Allowed filetypes}
-
-\section{Connection between servers}
-
-\section{Backend server}
-
-\subsection{Description of how server works}
-
-\subsection{mlwrap}
+mlwrap
 
 
 
 
 
+%-------------------------------
+% Application design
+%-------------------------------
+\chapter{Application Design}
+"...describing the design of the app, showing screen shots of the interface as it goes through an example, plust a gallery of results."
 
 
 
-\chapter{Conclusions and Future Work: mirror on intro. Intro discusses challenges, conclusions describe how challenges were minimised. Were goals achieved}
+
+\chapter{Conclusions and Future Work}
+Mirror of intro. Intro discusses challenges, conclusions describe how challenges were minimised. Were goals achieved
 
 \section{Conclusions}
 
 \section{Porting algorithm to Android}
 
+%-------------------------------
+% Bibliography
+%-------------------------------
+\bibliography{4yp}{}
+\bibliographystyle{plain}
 
 
 \end{document}
