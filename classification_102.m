@@ -5,7 +5,7 @@
 cnn_options.train_mirror = 0;
 cnn_options.train_jitter = 0;
 cnn_options.test_mirror = 0;
-cnn_options.test_jitter = 0;
+cnn_options.test_jitter = 1;
 do_svm = 1;
 
 % initialise variables
