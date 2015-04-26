@@ -1,46 +1,138 @@
 This is BibTeX, Version 0.99d (TeX Live 2014)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: /Users/admin/Documents/MATLAB/4YP/CNN-SVM-practice/report/.texpadtmp/Routley 4YP Report.aux
-The style file: plain.bst
-Database file #1: ../4yp.bib
-You've used 1 entry,
-            2118 wiz_defined-function locations,
-            503 strings with 4348 characters,
-and the built_in function-call counts, 354 in all, are:
-= -- 27
-> -- 23
-< -- 0
-+ -- 9
-- -- 8
-* -- 24
-:= -- 66
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 7
-chr.to.int$ -- 0
-cite$ -- 1
-duplicate$ -- 14
-empty$ -- 29
-format.name$ -- 8
-if$ -- 70
+The style file: biblatex.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: Routley_4YP_Report-blx.bib
+Database file #2: ../4yp.bib
+Warning--string name "“pocoo”" is undefined
+--line 9 of file ../4yp.bib
+Warning--string name "“flask" is undefined
+--line 10 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 10 of file ../4yp.bib
+ :   title = “flask 
+ :                    (A Python Microframework)”,
+I'm skipping whatever remains of this entry
+Warning--string name "“google”" is undefined
+--line 17 of file ../4yp.bib
+Unbalanced braces---line 22 of file ../4yp.bib
+ : 
+ : }
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--string name "“square”" is undefined
+--line 25 of file ../4yp.bib
+Warning--string name "“picasso”" is undefined
+--line 26 of file ../4yp.bib
+Unbalanced braces---line 30 of file ../4yp.bib
+ : 
+ : }
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--string name "“alexander" is undefined
+--line 36 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 36 of file ../4yp.bib
+ :   author = “alexander 
+ :                         Schmolck and Vivek Rathod”,
+I'm skipping whatever remains of this entry
+Warning--string name "“imagenet”" is undefined
+--line 43 of file ../4yp.bib
+Warning--string name "“imagenet" is undefined
+--line 44 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 44 of file ../4yp.bib
+ :   title = “imagenet 
+ :                       Large Scale Visual Recognition Competition 2012 (ILSVRC2012)”,
+I'm skipping whatever remains of this entry
+Warning--string name "“google”" is undefined
+--line 51 of file ../4yp.bib
+Warning--string name "“material" is undefined
+--line 52 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 52 of file ../4yp.bib
+ :   title = “material 
+ :                       Design | Android Developers”,
+I'm skipping whatever remains of this entry
+Warning--string name "“google”" is undefined
+--line 59 of file ../4yp.bib
+Warning--string name "“design" is undefined
+--line 60 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 60 of file ../4yp.bib
+ :   title = “design 
+ :                     | Android Developers”,
+I'm skipping whatever remains of this entry
+Warning--string name "“google”" is undefined
+--line 67 of file ../4yp.bib
+Warning--string name "“downloads" is undefined
+--line 68 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 68 of file ../4yp.bib
+ :   title = “downloads 
+ :                        | Android Developers”,
+I'm skipping whatever remains of this entry
+Warning--string name "“machine" is undefined
+--line 76 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 76 of file ../4yp.bib
+ :   author = “machine 
+ :                       Learning Group at National Taiwan University”,
+I'm skipping whatever remains of this entry
+Warning--string name "“google”" is undefined
+--line 84 of file ../4yp.bib
+Warning--string name "“activity" is undefined
+--line 85 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 85 of file ../4yp.bib
+ :   title = “activity 
+ :                       | Android Developers”,
+I'm skipping whatever remains of this entry
+Biblatex version: 2.8
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+You've used 12 entries,
+            6047 wiz_defined-function locations,
+            1159 strings with 8898 characters,
+and the built_in function-call counts, 17379 in all, are:
+= -- 539
+> -- 153
+< -- 106
++ -- 80
+- -- 64
+* -- 443
+:= -- 704
+add.period$ -- 0
+call.type$ -- 12
+change.case$ -- 11
+chr.to.int$ -- 34
+cite$ -- 22
+duplicate$ -- 2218
+empty$ -- 2637
+format.name$ -- 81
+if$ -- 4165
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 1
-newline$ -- 8
-num.names$ -- 2
-pop$ -- 11
+int.to.str$ -- 12
+missing$ -- 0
+newline$ -- 91
+num.names$ -- 38
+pop$ -- 3651
 preamble$ -- 1
-purify$ -- 6
+purify$ -- 16
 quote$ -- 0
-skip$ -- 7
+skip$ -- 942
 stack$ -- 0
-substring$ -- 5
-swap$ -- 2
-text.length$ -- 0
+substring$ -- 153
+swap$ -- 482
+text.length$ -- 125
 text.prefix$ -- 0
-top$ -- 0
-type$ -- 4
+top$ -- 1
+type$ -- 444
 warning$ -- 0
-while$ -- 2
-width$ -- 2
-write$ -- 12
+while$ -- 76
+width$ -- 0
+write$ -- 78
+(There were 10 error messages)

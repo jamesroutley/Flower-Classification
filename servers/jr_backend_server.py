@@ -5,9 +5,6 @@
 #
 #    python backend_server.py
 #
-# Test this server via:
-#
-#    python test_backend_sever.py
 
 import SocketServer
 import time

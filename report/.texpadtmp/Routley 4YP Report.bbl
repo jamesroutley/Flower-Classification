@@ -1,9 +1,92 @@
-\begin{thebibliography}{1}
+% $ biblatex auxiliary file $
+% $ biblatex version 2.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
 
-\bibitem{Chatfield14}
-K.~Chatfield, K.~Simonyan, A.~Vedaldi, and A.~Zisserman.
-\newblock Return of the devil in the details: Delving deep into convolutional
-  nets.
-\newblock In {\em British Machine Vision Conference}, 2014.
+\entry{Chatfield14}{inproceedings}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Chatfield}{C.}%
+     {K.}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Simonyan}{S.}%
+     {K.}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Vedaldi}{V.}%
+     {A.}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zisserman}{Z.}%
+     {A.}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{CK+1}
+  \strng{fullhash}{CKSKVAZA1}
+  \field{booktitle}{British Machine Vision Conference}
+  \field{title}{Return of the Devil in the Details: Delving Deep into
+  Convolutional Nets}
+  \field{year}{2014}
+\endentry
 
-\end{thebibliography}
+\entry{CNN:Imagenet}{misc}{}
+\endentry
+
+\entry{SVM:LibLinear}{misc}{}
+\endentry
+
+\entry{AndroidDev:Activity}{misc}{}
+\endentry
+
+\entry{AndroidDev:AsyncTask}{misc}{}
+  \field{title}{AsyncTask | Android Developers}
+  \verb{url}
+  \verb http://developer.android.com/reference/android/os/AsyncTask.html
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\entry{AndroidDev:Picasso}{misc}{}
+  \verb{url}
+  \verb http://square.github.io/picasso/
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\entry{Server:Flask}{misc}{}
+\endentry
+
+\entry{Server:Mlwrap}{misc}{}
+\endentry
+
+\entry{AndroidDev:Design}{misc}{}
+\endentry
+
+\entry{AndroidDev:Material}{misc}{}
+\endentry
+
+\entry{AndroidDev:Icons}{misc}{}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

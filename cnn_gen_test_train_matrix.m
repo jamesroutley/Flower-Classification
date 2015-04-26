@@ -94,7 +94,7 @@ elseif use_jitter == 1
     for i = 1 : num_train_images
         train_instance_matrix(6*i - 5, :) = instance_matrix_standard(trainid(i), :);
         train_instance_matrix(6*i-4 : 6*i, :) = instance_matrix_jitter(5*trainid(i)-4 : 5*trainid(i), :);
-        train_label_vector(6*i-3 : 6*i) = image_labels(trainid(i));
+        train_label_vector(6*i-5 : 6*i) = image_labels(trainid(i));
     end
 
 elseif use_mirror == 1
