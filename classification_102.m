@@ -2,11 +2,11 @@
 
 % User specifies whether to use mirroring and jittering (use = 1,
 % don't use = 0)
-cnn_options.train_mirror = 0;
-cnn_options.train_jitter = 0;
+cnn_options.train_mirror = 1;
+cnn_options.train_jitter = 1;
 cnn_options.test_mirror = 0;
-cnn_options.test_jitter = 1;
-do_svm = 1;
+cnn_options.test_jitter = 0;
+do_svm = 0;
 
 % initialise variables
 flower_set_number = 102;
@@ -55,7 +55,7 @@ confusion_matrix = gen_conf_mat( ...
     decision_values, test_label_vector);
 
 
-% find average accuracy = 85.3% for non mirror; 85.7% mirror
+% find average accuracy
 confusion_matrix_accuracy = trace(confusion_matrix) / ...
     flower_set_number;
 

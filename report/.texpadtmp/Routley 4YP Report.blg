@@ -15,124 +15,130 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: Routley_4YP_Report-blx.bib
 Database file #2: ../4yp.bib
-Warning--string name "“pocoo”" is undefined
+Warning--string name "“chai" is undefined
 --line 9 of file ../4yp.bib
+I was expecting an "="---line 9 of file ../4yp.bib
+ :  author = “chai, y. 
+ :                       and Lempitsky, V. and Zisserman, A.”,
+I'm skipping whatever remains of this entry
+Warning--string name "“pocoo”" is undefined
+--line 17 of file ../4yp.bib
 Warning--string name "“flask" is undefined
---line 10 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 10 of file ../4yp.bib
+--line 18 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 18 of file ../4yp.bib
  :   title = “flask 
  :                    (A Python Microframework)”,
 I'm skipping whatever remains of this entry
 Warning--string name "“google”" is undefined
---line 17 of file ../4yp.bib
-Unbalanced braces---line 22 of file ../4yp.bib
- : 
- : }
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-Warning--string name "“square”" is undefined
 --line 25 of file ../4yp.bib
-Warning--string name "“picasso”" is undefined
---line 26 of file ../4yp.bib
 Unbalanced braces---line 30 of file ../4yp.bib
  : 
  : }
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
+Warning--string name "“square”" is undefined
+--line 33 of file ../4yp.bib
+Warning--string name "“picasso”" is undefined
+--line 34 of file ../4yp.bib
+Unbalanced braces---line 38 of file ../4yp.bib
+ : 
+ : }
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
 Warning--string name "“alexander" is undefined
---line 36 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 36 of file ../4yp.bib
+--line 44 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 44 of file ../4yp.bib
  :   author = “alexander 
  :                         Schmolck and Vivek Rathod”,
 I'm skipping whatever remains of this entry
 Warning--string name "“imagenet”" is undefined
---line 43 of file ../4yp.bib
+--line 51 of file ../4yp.bib
 Warning--string name "“imagenet" is undefined
---line 44 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 44 of file ../4yp.bib
+--line 52 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 52 of file ../4yp.bib
  :   title = “imagenet 
  :                       Large Scale Visual Recognition Competition 2012 (ILSVRC2012)”,
 I'm skipping whatever remains of this entry
 Warning--string name "“google”" is undefined
---line 51 of file ../4yp.bib
+--line 59 of file ../4yp.bib
 Warning--string name "“material" is undefined
---line 52 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 52 of file ../4yp.bib
+--line 60 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 60 of file ../4yp.bib
  :   title = “material 
  :                       Design | Android Developers”,
 I'm skipping whatever remains of this entry
 Warning--string name "“google”" is undefined
---line 59 of file ../4yp.bib
+--line 67 of file ../4yp.bib
 Warning--string name "“design" is undefined
---line 60 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 60 of file ../4yp.bib
+--line 68 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 68 of file ../4yp.bib
  :   title = “design 
  :                     | Android Developers”,
 I'm skipping whatever remains of this entry
 Warning--string name "“google”" is undefined
---line 67 of file ../4yp.bib
+--line 75 of file ../4yp.bib
 Warning--string name "“downloads" is undefined
---line 68 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 68 of file ../4yp.bib
+--line 76 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 76 of file ../4yp.bib
  :   title = “downloads 
  :                        | Android Developers”,
 I'm skipping whatever remains of this entry
 Warning--string name "“machine" is undefined
---line 76 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 76 of file ../4yp.bib
+--line 84 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 84 of file ../4yp.bib
  :   author = “machine 
  :                       Learning Group at National Taiwan University”,
 I'm skipping whatever remains of this entry
 Warning--string name "“google”" is undefined
---line 84 of file ../4yp.bib
+--line 92 of file ../4yp.bib
 Warning--string name "“activity" is undefined
---line 85 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 85 of file ../4yp.bib
+--line 93 of file ../4yp.bib
+I was expecting a `,' or a `}'---line 93 of file ../4yp.bib
  :   title = “activity 
  :                       | Android Developers”,
 I'm skipping whatever remains of this entry
 Biblatex version: 2.8
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-You've used 12 entries,
+You've used 13 entries,
             6047 wiz_defined-function locations,
-            1159 strings with 8898 characters,
-and the built_in function-call counts, 17379 in all, are:
-= -- 539
+            1161 strings with 8910 characters,
+and the built_in function-call counts, 18677 in all, are:
+= -- 577
 > -- 153
-< -- 106
-+ -- 80
+< -- 114
++ -- 81
 - -- 64
-* -- 443
-:= -- 704
+* -- 457
+:= -- 727
 add.period$ -- 0
-call.type$ -- 12
+call.type$ -- 13
 change.case$ -- 11
 chr.to.int$ -- 34
-cite$ -- 22
-duplicate$ -- 2218
-empty$ -- 2637
+cite$ -- 24
+duplicate$ -- 2400
+empty$ -- 2857
 format.name$ -- 81
-if$ -- 4165
+if$ -- 4486
 int.to.chr$ -- 0
-int.to.str$ -- 12
+int.to.str$ -- 13
 missing$ -- 0
-newline$ -- 91
+newline$ -- 94
 num.names$ -- 38
-pop$ -- 3651
+pop$ -- 3980
 preamble$ -- 1
 purify$ -- 16
 quote$ -- 0
-skip$ -- 942
+skip$ -- 1013
 stack$ -- 0
-substring$ -- 153
-swap$ -- 482
-text.length$ -- 125
+substring$ -- 154
+swap$ -- 516
+text.length$ -- 133
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 444
+type$ -- 482
 warning$ -- 0
-while$ -- 76
+while$ -- 77
 width$ -- 0
-write$ -- 78
-(There were 10 error messages)
+write$ -- 80
+(There were 11 error messages)

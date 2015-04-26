@@ -2,13 +2,18 @@
 % test sets of photos and finds the mean and standard deviation of the
 % accuracies. 
 
+num_flowers = 102;
+
 num_tests = 5;
 accuracies = zeros(1, num_tests);
+r_accuracies = zeros(num_flowers, num_tests);
 
 % User specifies whether to use mirroring and jittering (use = 1, 
 % don't use = 0)
-use_mirror = 0;
-use_jitter = 1;
+cnn_options.train_mirror = 1;
+cnn_options.train_jitter = 1;
+cnn_options.test_mirror = 0;
+cnn_options.test_jitter = 0;
 do_svm = 1;
 
 
@@ -42,7 +47,7 @@ for count = 1 : num_tests
 
     [train_instance_matrix, test_instance_matrix, train_label_vector, ...
         test_label_vector] = cnn_gen_test_train_matrix(image_name, ...
-        image_folder, image_labels, use_mirror, use_jitter, setid);
+        image_folder, image_labels, cnn_options, setid);
 
 
     % train models 
@@ -65,11 +70,21 @@ for count = 1 : num_tests
         flower_set_number;
     
     accuracies(count) = confusion_matrix_accuracy;
+    
+    r_accuracies(:, count) = gen_rank_accuracy(decision_values, ...
+        setid.tstid, image_labels, num_flowers);
 
 end
 
 accuracy_mean = mean(accuracies);
 accuracy_std = std(accuracies);
+accuracy_rank = mean(r_accuracies, 2);
+
+figure 
+plot(accuracy_rank);
+axis([1 102 82 100]);
+xlabel('number of ranks considered')
+ylabel('percentage accuracy')
  
     
     
