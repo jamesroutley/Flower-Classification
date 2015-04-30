@@ -2,9 +2,11 @@
 
 % User specifies whether to use mirroring and jittering (use = 1,
 % don't use = 0)
-use_mirror = 1;
-use_jitter = 1;
-do_svm = 1;
+cnn_options.train_mirror = 0;
+cnn_options.train_jitter = 0;
+cnn_options.test_mirror = 0;
+cnn_options.test_jitter = 0;
+do_svm = 0;
 
 % initialise variables
 flower_set_number = 102;
@@ -27,7 +29,7 @@ image_labels = (cell2mat(struct2cell(image_labels)));
 % perform CNN on flower images
 [train_instance_matrix, test_instance_matrix, train_label_vector, ...
     test_label_vector] = cnn_gen_test_train_matrix(image_name, ...
-    image_folder, image_labels, use_mirror, use_jitter, setid);
+    image_folder, image_labels, cnn_options, setid);
 
 % Can you do a sanity check here.
 % E.g. checking the number of zeros in your train_instance_matrix and
@@ -53,7 +55,7 @@ confusion_matrix = gen_conf_mat( ...
     decision_values, test_label_vector);
 
 
-% find average accuracy = 85.3% for non mirror; 85.7% mirror
+% find average accuracy
 confusion_matrix_accuracy = trace(confusion_matrix) / ...
     flower_set_number;
 
