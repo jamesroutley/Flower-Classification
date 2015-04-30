@@ -1,4 +1,4 @@
-function plot_rank_accuracy_new (decision_values, tstid, image_labels)
+function plot_rank_accuracy (decision_values, tstid, image_labels)
 
 ranks = 102;
 % get the image labels for the images in the test set

@@ -13,10 +13,7 @@ test_jitter = cnn_options.test_jitter;
                                         
 trnid = setid.trnid;
 valid = setid.valid;
-tstid = setid.tstid;
 num_images = size(image_name, 1);
-num_test_images = size(tstid, 2);
-num_train_images = size(trnid, 2) + size(valid, 2);
 num_val_images = size(valid, 2);
 num_trn_images = size(trnid, 2);
 
@@ -82,38 +79,35 @@ end
 
 % construct train_instance_matrix
 
-% Why dont you just concatenate the up to 3 matrices? The operation below seems
-% slow and error prone....
 
-trainid = sort(cat(2, trnid, valid));
 if train_mirror == 1 && train_jitter == 1
-    train_instance_matrix = zeros(num_train_images * 7, 4096);
-    train_label_vector = zeros(num_train_images * 7, 1);
-    for i = 1 : num_train_images
-        train_instance_matrix(7*i - 6, :) = instance_matrix_standard(trainid(i), :);
-        train_instance_matrix(7*i - 5, :) = instance_matrix_mirror(trainid(i), :);
-        train_instance_matrix(7*i-4 : 7*i, :) = instance_matrix_jitter(5*trainid(i)-4 : 5*trainid(i), :);
+    train_instance_matrix = zeros(num_trn_images * 7, 4096);
+    train_label_vector = zeros(num_trn_images * 7, 1);
+    for i = 1 : num_trn_images
+        train_instance_matrix(7*i - 6, :) = instance_matrix_standard(trnid(i), :);
+        train_instance_matrix(7*i - 5, :) = instance_matrix_mirror(trnid(i), :);
+        train_instance_matrix(7*i-4 : 7*i, :) = instance_matrix_jitter(5*trnid(i)-4 : 5*trnid(i), :);
 
-        train_label_vector(7*i-6 : 7*i) = image_labels(trainid(i));
+        train_label_vector(7*i-6 : 7*i) = image_labels(trnid(i));
     end
 
 elseif train_jitter == 1
-    train_instance_matrix = zeros(num_train_images * 6, 4096);
-    train_label_vector = zeros(num_train_images * 6, 1);
-    for i = 1 : num_train_images
-        train_instance_matrix(6*i - 5, :) = instance_matrix_standard(trainid(i), :);
-        train_instance_matrix(6*i-4 : 6*i, :) = instance_matrix_jitter(5*trainid(i)-4 : 5*trainid(i), :);
-        train_label_vector(6*i-5 : 6*i) = image_labels(trainid(i));
+    train_instance_matrix = zeros(num_trn_images * 6, 4096);
+    train_label_vector = zeros(num_trn_images * 6, 1);
+    for i = 1 : num_trn_images
+        train_instance_matrix(6*i - 5, :) = instance_matrix_standard(trnid(i), :);
+        train_instance_matrix(6*i-4 : 6*i, :) = instance_matrix_jitter(5*trnid(i)-4 : 5*trnid(i), :);
+        train_label_vector(6*i-5 : 6*i) = image_labels(trnid(i));
     end
 
 elseif train_mirror == 1
-    train_instance_matrix = zeros(num_train_images * 2, 4096);
-    train_label_vector = zeros(num_train_images * 2, 1);
-    for i = 1 : num_train_images
-        train_instance_matrix(2*i - 1, :) = instance_matrix_standard(trainid(i), :);
-        train_instance_matrix(2*i, :) = instance_matrix_mirror(trainid(i), :);
+    train_instance_matrix = zeros(num_trn_images * 2, 4096);
+    train_label_vector = zeros(num_trn_images * 2, 1);
+    for i = 1 : num_trn_images
+        train_instance_matrix(2*i - 1, :) = instance_matrix_standard(trnid(i), :);
+        train_instance_matrix(2*i, :) = instance_matrix_mirror(trnid(i), :);
 
-        train_label_vector(2*i-1 : 2*i) = image_labels(trainid(i));
+        train_label_vector(2*i-1 : 2*i) = image_labels(trnid(i));
     end
 
 else
@@ -130,39 +124,39 @@ end
 % construct test_instance_matrix
 
 if test_mirror == 1 && test_jitter == 1
-   test_instance_matrix = zeros(num_test_images, 4096);
-    test_label_vector = zeros(num_test_images, 1);
-    for i = 1 : num_test_images
+   test_instance_matrix = zeros(num_val_images, 4096);
+    test_label_vector = zeros(num_val_images, 1);
+    for i = 1 : num_val_images
         test_instance_matrix(i, :) = ( ... 
-            instance_matrix_standard(tstid(i), :) + ...
-            instance_matrix_mirror(tstid(i), :) + ...
-        	sum( instance_matrix_jitter(5*tstid(i)-4 : 5*tstid(i), :), 1) ...
+            instance_matrix_standard(valid(i), :) + ...
+            instance_matrix_mirror(valid(i), :) + ...
+        	sum( instance_matrix_jitter(5*valid(i)-4 : 5*valid(i), :), 1) ...
             /7);
 
-        test_label_vector(i) = image_labels(tstid(i));
+        test_label_vector(i) = image_labels(valid(i));
     end
 
 elseif test_jitter == 1
-    test_instance_matrix = zeros(num_test_images, 4096);
-    test_label_vector = zeros(num_test_images, 1);
-    for i = 1 : num_test_images
+    test_instance_matrix = zeros(num_val_images, 4096);
+    test_label_vector = zeros(num_val_images, 1);
+    for i = 1 : num_val_images
         test_instance_matrix(i, :) = ( ...
-            instance_matrix_standard(tstid(i), :) + ...
-            sum(instance_matrix_jitter(5*tstid(i)-4 : 5*tstid(i), :), 1) ...
+            instance_matrix_standard(valid(i), :) + ...
+            sum(instance_matrix_jitter(5*valid(i)-4 : 5*valid(i), :), 1) ...
             /6);
         
-        test_label_vector(i) = image_labels(tstid(i));
+        test_label_vector(i) = image_labels(valid(i));
     end
 
 elseif test_mirror == 1
-    test_instance_matrix = zeros(num_test_images, 4096);
-    test_label_vector = zeros(num_test_images, 1);
-    for i = 1 : num_test_images
+    test_instance_matrix = zeros(num_val_images, 4096);
+    test_label_vector = zeros(num_val_images, 1);
+    for i = 1 : num_val_images
         test_instance_matrix(i, :) = ...
-            (instance_matrix_standard(tstid(i), :) + ...
-            instance_matrix_mirror(tstid(i), :)) / 2;
+            (instance_matrix_standard(valid(i), :) + ...
+            instance_matrix_mirror(valid(i), :)) / 2;
 
-        test_label_vector(i) = image_labels(tstid(i));
+        test_label_vector(i) = image_labels(valid(i));
     end
 
 else
