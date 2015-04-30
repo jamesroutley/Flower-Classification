@@ -18,7 +18,7 @@ cnn_options.test_jitter = 0;
 c_param_int = [];
 c_param_powers = -6:6;
 for i = 1:size(c_param_powers, 2)
-    c_param_int = [c_param_int, 10^c_param_powers(i)]
+    c_param_int = [c_param_int, 10^c_param_powers(i)];
 end
 
 
