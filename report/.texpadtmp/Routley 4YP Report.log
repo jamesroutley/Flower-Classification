@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99991 (TeX Live 2014) (preloaded format=xelatex 2015.3.20)  26 APR 2015 22:46
+This is XeTeX, Version 3.14159265-2.6-0.99991 (TeX Live 2014) (preloaded format=xelatex 2015.3.20)  27 APR 2015 16:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -893,7 +893,7 @@ File: img/OxfLogo.png Graphic file (type QTm)
  <use  "img/OxfLogo.png" >
 
 LaTeX Font Warning: Font shape `EU1/Arial(0)/m/sc' undefined
-(Font)              using `EU1/Arial(0)/m/n' instead on input line 48.
+(Font)              using `EU1/Arial(0)/m/n' instead on input line 46.
 
 (/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
 File: se-ascii-print.def 2011/12/02 v1.10 stringenc: Printable ASCII characters
@@ -911,23 +911,23 @@ Chapter 1.
 
 ] [4]
 Chapter 2.
-LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 142.
+LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 140.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/euenc/eu1lmtt.fd
 File: eu1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [5
 
 ]
-Overfull \hbox (2.36899pt too wide) in paragraph at lines 156--159
+Overfull \hbox (2.36899pt too wide) in paragraph at lines 154--157
 []\EU1/Arial(0)/m/sc/10.95 ([]$[][][][][] [] [] [] [][][][] [] [][][][][][] [] [][][] [] [][][][][] [] [][][][] [] [][][][][][][] [] [][] [] [][][] [] [][][][][][][][][][][][][] [] [][][][][][]$[], []$[][][][][] [] [] [] [][][][] []
  []
 
 
-Overfull \hbox (44.71254pt too wide) in paragraph at lines 156--159
+Overfull \hbox (44.71254pt too wide) in paragraph at lines 154--157
 [][][][][][] [] [][][] [] [][][][][] [] [][][][] [] [][][][][][][] [] [][] [] [][][] [] [][][][][][][][][][][][]$[]\EU1/Arial(0)/m/sc/10.95 , []$[][][][][] [] [] [] [][][][][][] [] [][][][][] [] [][][] [] [][] [] [][][] [] [][][][][][][][][] []
  []
 
 
-Overfull \hbox (31.11273pt too wide) in paragraph at lines 162--163
+Overfull \hbox (31.11273pt too wide) in paragraph at lines 160--161
 []\EU1/Arial(0)/m/sc/10.95 ([]$[][][][][] [] [] [] [][][][] [] [][][][][][] [] [][][] [] [][][][][] [] [][][][] [] [][][][][][][] [] [][] [] [][] [] [][][][][] [] [][][][][][][][][][][][][]$[], []$[][][][][] [] [] [] [][][][] [] [][][][][][] []
  []
 
@@ -936,36 +936,37 @@ Chapter 3.
 File: img/08.png Graphic file (type QTm)
 <use  "img/08.png" > [7
 
-] [8] [9]
-File: img/09.png Graphic file (type QTm)
- <use  "img/09.png" >
-File: img/10.png Graphic file (type QTm)
- <use  "img/10.png" > [10] [11] [12]
+] [8] [9] [10]
 File: img/15.png Graphic file (type QTm)
  <use  "img/15.png" >
-Overfull \hbox (6.55316pt too wide) in paragraph at lines 376--377
+Overfull \hbox (6.55316pt too wide) in paragraph at lines 338--339
  [][] 
  []
 
 File: img/16.png Graphic file (type QTm)
 <use  "img/16.png" >
-Overfull \hbox (15.5781pt too wide) in paragraph at lines 384--385
+Overfull \hbox (15.5781pt too wide) in paragraph at lines 346--347
  [][] 
  []
 
+[11]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 File: img/19.png Graphic file (type QTm)
 <use  "img/19.png" >
 File: img/21.png Graphic file (type QTm)
- <use  "img/21.png" > [13] [14] [15] [16]
+ <use  "img/21.png" >
+File: img/09.png Graphic file (type QTm)
+ <use  "img/09.png" >
+File: img/10.png Graphic file (type QTm)
+ <use  "img/10.png" > [12] [13] [14] [15] [16]
 Chapter 4.
 File: img/11.png Graphic file (type QTm)
 <use  "img/11.png" >
 File: img/12.png Graphic file (type QTm)
  <use  "img/12.png" >
-Overfull \hbox (3.66364pt too wide) in paragraph at lines 454--455
+Overfull \hbox (3.66364pt too wide) in paragraph at lines 459--460
  [][] 
  []
 
@@ -977,12 +978,12 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 ] [18] [19]
 File: img/07.png Graphic file (type QTm)
  <use  "img/07.png" >
-Overfull \hbox (10.09175pt too wide) in paragraph at lines 503--504
+Overfull \hbox (10.09175pt too wide) in paragraph at lines 508--509
  [][] 
  []
 
 
-Overfull \hbox (6.29926pt too wide) in paragraph at lines 512--513
+Overfull \hbox (6.29926pt too wide) in paragraph at lines 517--518
 \EU1/Arial(0)/m/sc/10.95 function stops filenames which could negatively affect computer behaviour, and prevents name clashes. 
  []
 
@@ -990,19 +991,19 @@ Overfull \hbox (6.29926pt too wide) in paragraph at lines 512--513
 Chapter 5.
 File: img/03.png Graphic file (type QTm)
 <use  "img/03.png" >
-Overfull \hbox (8.90845pt too wide) in paragraph at lines 544--546
+Overfull \hbox (8.90845pt too wide) in paragraph at lines 549--551
  [][] 
  []
 
 File: img/05.png Graphic file (type QTm)
 <use  "img/05.png" >
-Overfull \hbox (8.91753pt too wide) in paragraph at lines 549--551
+Overfull \hbox (8.91753pt too wide) in paragraph at lines 554--556
  [][] 
  []
 
 File: img/06.png Graphic file (type QTm)
 <use  "img/06.png" >
-Overfull \hbox (8.91753pt too wide) in paragraph at lines 554--556
+Overfull \hbox (8.91753pt too wide) in paragraph at lines 559--561
  [][] 
  []
 
@@ -1012,19 +1013,23 @@ Overfull \hbox (8.91753pt too wide) in paragraph at lines 554--556
 File: img/13.png Graphic file (type QTm)
  <use  "img/13.png" > [23]
 File: img/14.png Graphic file (type QTm)
- <use  "img/14.png" > [24] [25]
+ <use  "img/14.png" > [24]
 Chapter 6.
-[26
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 622.
+
+[25
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 630.
- [27
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 637.
+ [26
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 630.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 637.
  (/Users/admin/Documents/MATLAB/4YP/CNN-SVM-practice/report/.texpadtmp/Routley 4YP Report.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 630.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 630.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 637.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 637.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1032,15 +1037,15 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package logreq Info: Writing requests to '"Routley 4YP Report".run.xml'.
 \openout1 = `"Routley 4YP Report.run.xml"'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 630.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 637.
  ) 
 Here is how much of TeX's memory you used:
  26812 strings out of 493734
  487575 string characters out of 6146348
- 654431 words of memory out of 5000000
+ 653431 words of memory out of 5000000
  29908 multiletter control sequences out of 15000+600000
  13666 words of font info for 81 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
- 46i,11n,48p,10431b,845s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 46i,11n,48p,10431b,847s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on /Users/admin/Documents/MATLAB/4YP/CNN-SVM-practice/report/.texpadtmp/Routley 4YP Report.pdf (28 pages).
+Output written on /Users/admin/Documents/MATLAB/4YP/CNN-SVM-practice/report/.texpadtmp/Routley 4YP Report.pdf (27 pages).

@@ -7,8 +7,8 @@
 % don't use = 0)
 cnn_options.train_mirror = 0;
 cnn_options.train_jitter = 0;
-cnn_options.test_mirror = 1;
-cnn_options.test_jitter = 1;
+cnn_options.test_mirror = 0;
+cnn_options.test_jitter = 0;
 
 % initialise variables
 flower_set_number = 17;

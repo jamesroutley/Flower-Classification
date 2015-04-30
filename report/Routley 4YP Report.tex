@@ -41,8 +41,6 @@
 
 % Upper part of the page. The '~' is needed because \\
 % only works if a paragraph has started.
-% \includegraphics[width=0.15\textwidth]{./logo}~\\[1cm]
-
 \includegraphics[width=0.16\textwidth]{img/OxfLogo.png}~\\[1.5cm]
 
 \textsc{\LARGE University of Oxford}\\[1.5cm]
@@ -189,7 +187,7 @@ Description of LibLinear?
 %-------------------------------
 \chapter{Classification}
 
-\section{Overview of classification pipeline}
+This chapter discusses the classification process, which takes an image as its input and outputs a classification result. The process is summarised in Figure~\ref{img:08}
 
 \begin{figure}[hbt]
 	\centering
@@ -199,11 +197,11 @@ Description of LibLinear?
 \end{figure}
 
 
-\section{Convolutional neural network (CNN) inspired feature extraction}
+\section{Convolutional neural network (CNN) based feature extraction}
 
-The pipeline makes use of the first six layers of the fast convolutional neural network CNN-F introduced in “Chatfield et al.~\cite{Chatfield14}. This algorithm takes a photo as its input and produces a vector which describes the features of the photo. The photo is cropped to 224x224 pixels and normalised before use and the outputted feature vector is also normalised.
+The pipeline makes use of the first six layers of the fast convolutional neural network CNN-F introduced in Chatfield et al.~\cite{Chatfield14}. This algorithm takes a photo of size 244x244 pixels as its input and produces a vector which describes the features of the photo. The feature vector is of order $4096$ and is L2 normalised before being passed to the support vector machine (SVM), as SVMs work best with L2 normalised vectors.
 
-The CNN is trained on the ImageNet Large Scale Visual Recognition Challenge 2012 (ILSVRC2012) dataset~\cite{CNN:Imagenet}. Details of the training can be found in ~\cite{Chatfield14}. The feature extraction process itself is treated as a black box in this project. 
+The CNN is trained on the ImageNet Large Scale Visual Recognition Challenge 2012 (ILSVRC2012) dataset~\cite{CNN:Imagenet}. Details of the training can be found in~\cite{Chatfield14}. The feature extraction process itself is treated as a black box in this project. 
 
  
 
@@ -212,14 +210,14 @@ The CNN is trained on the ImageNet Large Scale Visual Recognition Challenge 2012
 
 \subsection{How SVMs are used in the classification pipeline}
 
-The classification pipieline uses the open source support vector machine (SVM) library LibLinear~\cite{SVM:LibLinear} for quick, large scale classification. One-vs-the-rest classification is used. $n$ SVM models are trained for $N$ flower categories, producing $N$ weight vectors, $\vect{w_{1}}, \vect{w_{2}}, ..., \vect{w_{N}}$. These weight vectors are stacked into a weight matrix $\vect{W}$: 
+The classification pipieline uses the open source support vector machine (SVM) library LibLinear~\cite{SVM:LibLinear} for quick, large scale classification. One-vs-the-rest classification is used. $N$ SVM models are trained for $N$ flower categories, producing $N$ weight vectors, $\vect{w_{1}}, \vect{w_{2}}, ..., \vect{w_{N}}$. These weight vectors are stacked into a weight matrix $\vect{W}$: 
 $$
 \vect{W} = 
 \begin{pmatrix}
-\vect{w_{1}}\\  
-\vect{w_{2}}\\ 
+\vect{w_{1}'}\\  
+\vect{w_{2}'}\\ 
 \vdots \\ 
-\vect{w_{n}}
+\vect{w_{N}'}
 \end{pmatrix}
 $$
 
@@ -232,11 +230,13 @@ $$
 p_{1}\\  
 p_{2}\\ 
 \vdots \\ 
-p_{n}
+p_{N}
 \end{pmatrix}
 $$
 
-The value of $p_{i}$ indicates how closely the unseen flower's features matched those of category $i$. The higher the product, the more closely they match. The unseen flower's category is therefore predicted to be that which produced the greatest prediction value. 
+The value of $p_{i}$ indicates how closely the unseen flower's features matched those of category $i$. The higher the product, the more closely they match. A ranked list of categorisation possibilities is calculated by ordering the prediction values by size. 
+
+% The unseen flower's category is therefore predicted to be that which produced the greatest prediction value. 
 
 
 
@@ -244,7 +244,9 @@ The value of $p_{i}$ indicates how closely the unseen flower's features matched 
 
 Before use, the SVM model $\vect{W}$ must be trained. They are trained using a set of images which are known to be of certain categories. These models are then tested, using a set of images also known to be of certain categories, to check they are sufficiently accurate. 
 
-The C parameter of the SVM must be adjusted. The C Parameter allows for a solution with a larger margin, in return for the violation of some constraints. To find the optimal C Parameter, SVM models are trained using the training set images  before testing against the validation set images. The change in classification accuracy is recorded as the C Parameter is changed. 
+The $C$ parameter of the SVM must be adjusted. The $C$ parameter allows for a solution with a larger margin, in return for the violation of some constraints. To find the optimal $C$ parameter, SVM models are trained using the training set images  before testing against the validation set images. The change in classification accuracy is recorded as the $C$ parameter is changed. 
+
+%TODO add $C$ parameter analysis
 
 
 
@@ -252,7 +254,7 @@ The C parameter of the SVM must be adjusted. The C Parameter allows for a soluti
 
 SVM models are trained using LibLinear's training function. To train a model to recognise a flower category $i$, all photos in the training and validation sets are passed to the training function, with the photos of category $i$ labeled as in the category, and all other flowers labeled as not in the category. The flowers are labeled as in or not in the category by passing a 1 or -1 respectively to the training function, alongside that flower's feature vector.
 
-The training function produces a weight vector of order 4096, which describes the characteristics of the flowers in that category. %The similarity between a new flower and those in the category can be found by comparing the new flower's feature vector and the category's weight vector.
+The training function produces a weight vector of order 4096, which describes the characteristics of the flowers in that category. 
 
 \subsubsection{Testing}
 
@@ -264,13 +266,13 @@ By comparing the actual categories of the flowers in the test set to the predict
 \section{Experiments}
 %TODO aim to make this section 7 pages
 
-\subsection{SVM accuracy}
+This section describes the experiments and results performed whilst testing the quality of the classification pipeline. 
 
 \subsubsection{How we define accuracy}
 
 Accuracy is defined as the percentage number of correct classifications, where under correct classification, the category of the model which most closely identifies with the flower is indeed the category of that flower:
 $$
-Accuracy = \frac{Number\ of\ correctly\ classified\ flowers}{Total\ number\ of\ flowers}
+Accuracy = \frac{Number\ of\ correctly\ classified\ flowers}{Number\ of\ flower\ categories}
 \times 100
 $$
 
@@ -280,50 +282,10 @@ Accuracy is found by classifying all images in the test sets, and checking the c
 
 Rank accuracy measures the percentage accuracy of the correct category being in the top $K$ classified categories. As a user will be receiving results on their phone, a selection of likely flower categories can presented to that user, who can make the final decision. How rank accuracy changes as we consider more ranks therefore can give us an indication as to how many results to present the user. The more results are presented, the more likely the correct classification will be included, but the more cluttered the presentation is.
 $$
-Rank\ accuracy = \frac{Number\ of\ correctly\ classified\ flowers\ considering\ the\ top\ K\ results}{Total\ number\ of\ flowers}
+Rank\ accuracy = \frac{Number\ of\ correctly\ classified\ flowers\ considering\ the\ top\ K\ results}{Number\ of\ flower\ categories}
 \times 100
 $$
 
-
-
-\subsection{Improving SVM accuracy}
-
-\subsubsection{Mirroring and sampling training set images}
-
-\begin{figure}[hbt]
-	\centering
-  \includegraphics[totalheight=4cm]{img/09.png}
-  \caption{An example flower shown with its vertical mirror}
-  \label{img:09}
-\end{figure}
-
-\begin{figure}[hbt]
-	\centering
-  \includegraphics[totalheight=8cm]{img/10.png}
-  \caption{An example flower shown with the images sampled from it}
-  \label{img:10}
-\end{figure}
-
-Taking mirrors and samples of the images in the test set (Figures~\ref{img:09} and~\ref{img:10}) allows the test set to be expanded. The objective of this is to get the most out of the training set images. Both techniques generate new images from which new feature vectors can be calculated. These can be used to improve the quality of the SVM model. 
-
-Only the vertical mirror can be used, as shown in Figure~\ref{img:09}, as flowers only exhibit vertical symmetry. 
-
-
-\subsubsection{Mirroring and sampling test images}
-
-For the same reasons as laid out above, mirroring and sampling the test image can improve classification accuracy.
-
-For each image, several image vectors $\vect{x_{i}}$ are now being produced. Each one of these is run against the weight matrix to produce several vectors of prediction values $\vect{p_{i}}$. To classify the flower, these vectors of prediction values must be combined. This can be done by finding the mean of each corresponding value, or by taking the maximum of each corresponding value:
-$$
-\begin{aligned}
-	\vect{x} &= \sum_{n = 0}^{n} \vect{x}_{i} \\
-	& or \\
-	&= max(\vect{x}_i)
-\end{aligned}
-$$
-
-%TODO complete analysis when completed
-(I've implemented this, and see a 1-2\% increase in accuracy - need to discuss how to present data in supervision)
 
 
 \subsection{Results}
@@ -418,7 +380,7 @@ The rank accuracy graph shows that classification accuracy quickly increases as 
 \begin{figure}[hbt]
 	\centering
   \includegraphics[totalheight=8cm]{img/19.png}
-  \caption{Confusion matrix for the 17 flower dataset, obtained using mirroring and sampling}
+  \caption{Rank accuracy for the 17 flower dataset, obtained using mirroring and sampling}
   \label{img:19}
 \end{figure}
 
@@ -428,6 +390,49 @@ The rank accuracy graph shows that classification accuracy quickly increases as 
   \caption{Rank accuracy for 102 flower dataset, using both mirroring and sampling}
   \label{img:21}
 \end{figure}
+
+
+
+\section{Training and test set augmentation}
+
+\subsubsection{Mirroring and sampling training set images}
+
+\begin{figure}[hbt]
+	\centering
+  \includegraphics[totalheight=4cm]{img/09.png}
+  \caption{An example flower shown with its vertical mirror}
+  \label{img:09}
+\end{figure}
+
+\begin{figure}[hbt]
+	\centering
+  \includegraphics[totalheight=8cm]{img/10.png}
+  \caption{An example flower shown with the images sampled from it}
+  \label{img:10}
+\end{figure}
+
+Taking mirrors and samples of the images in the training set (Figures~\ref{img:09} and~\ref{img:10}) allows the training set to be expanded. The objective of this is to get the most out of the training set images. Both techniques generate new images from which new feature vectors can be calculated. These can be used to improve the quality of the SVM model. 
+
+Only the vertical mirror can be used, as shown in Figure~\ref{img:09}, as flowers only exhibit vertical symmetry. 
+
+
+\subsubsection{Mirroring and sampling test images}
+
+For the same reasons as laid out above, mirroring and sampling the test image can improve classification accuracy.
+
+For each image, several image vectors $\vect{x_{i}}$ are now being produced. Each one of these is run against the weight matrix to produce several vectors of prediction values $\vect{p_{i}}$. To classify the flower, these vectors of prediction values must be combined. This can be done by finding the mean of each corresponding value, or by taking the maximum of each corresponding value:
+$$
+\begin{aligned}
+	\vect{x} &= \sum_{n = 0}^{n} \vect{x}_{i} \\
+	& or \\
+	&= max(\vect{x}_i)
+\end{aligned}
+$$
+
+%TODO complete analysis when completed
+(I've implemented this, and see a 1-2\% increase in accuracy - need to discuss how to present data in supervision)
+
+
 
 
 
@@ -464,7 +469,7 @@ The client is an Android application which is made up of three activities~\cite{
 
 After the application is launched, the Main Activity of the application (Figure~\ref{img:12} (a)) presents the user with two buttons, which allow the user to take a photo, or upload a photo previously taken from a gallery. Both of these buttons trigger intent calls. Intents are objects native to the Android system, which allow an application to request an action from another app component. The intent call starts the built-in camera or the gallery application, and allows the user to take or pick a photo without having to write that code into the application. 
 
-Once a photo is taken or chosen, the second activity of the application (Figure~\ref{img:12} (c)) is called, and the filename of the photo is passed to it. 
+Once a photo is taken or chosen, the second activity of the application (Figure~\ref{img:12} (b)) is called, and the filename of the photo is passed to it. 
 
 %\begin{figure}[hbt]
 %	\centering
@@ -485,7 +490,7 @@ Once the photo has been uploaded to the server, and the classification has been 
 
 The array consists of a number of flower objects, each of which contains the flower name, species, the URL of an example image, a snippet of information about the flower from Wikipedia and a links to that flower's Wikipedia page and google search.
 
-The results are placed in a list, shown in Figure~\ref{img:03} (b), and the images are downloaded from their URLs using an image downloading and caching library named Picasso~\cite{AndroidDev:Picasso}. Picasso allows for the downloading, display and cacheing of an image with a single line of code. If an the user scrolls down the list and an image scrolled off the screen, it is destroyed in order to save memory space. If the user scrolls up again, the cacheing implemented by Picasso allows that same image to be loaded from memory, rather than be downloaded again. This improves performance as loading from memory is essentially instantaneous while downloading the image can take a few seconds.
+The results are placed in a list, shown in Figure~\ref{img:03} (b), and the images are downloaded from their URLs using an image downloading and caching library named Picasso~\cite{AndroidDev:Picasso}. Picasso allows for the downloading, display and cacheing of an image with a single line of code. If the user scrolls down the list and an image scrolled off the screen, it is destroyed in order to save memory space. If the user scrolls up again, the cacheing implemented by Picasso allows that same image to be loaded from memory, rather than be downloaded again. This improves performance as loading from memory is essentially instantaneous while downloading the image can take a few seconds.
 
 If an image in the list is clicked, a detailed view of that flower is shown (Figure~\ref{img:03} (c)). This shows the user extra information about the flower, and presents them with buttons which allow them to Google search the flower or go to the flower's Wikipedia page. 
 
@@ -518,7 +523,7 @@ Error catching is implemented as the incoming POST requests cannot be assumed to
 The backend server acts as a python wrapper around the Matlab classification code. It uses the python to Matlab bridge Mlwrap~\cite{Server:Mlwrap}, which allows Matlab functions as if they were python functions. 
 
 
-Upon starting, the server opens an instance of Matlab, loads the convolutional neural network and the weight matrix $\vect{W}$. Each of these actions take several seconds but only need to be done once. By completing them upon start, they don't need to be run when a classification request is received, speeding up the classification time. 
+Upon starting, the server opens an instance of Matlab and loads the convolutional neural network and the weight matrix $\vect{W}$. Due to the large size of these files (245MB and 3.2MB respectively) loading takes several seconds but only need to be done once. By completing them upon start, they don't need to be run when a classification request is received, speeding up the classification time. 
 
 It receives the filename from the front end server, and passes the filename and CNN to the Matlab classification function. This Matlab function returns a list of the category numbers of the eight top classification results. 
 
@@ -608,15 +613,17 @@ When the results are returned to the client, the images which are downloaded hav
 
 %TODO cite google's thing about useful back button if it can be found. 
 
+
+
+\chapter{Conclusions and future work}
+Mirror of intro. Intro discusses challenges, conclusions describe how challenges were minimised. Were goals achieved
+
+
 \subsection{No good classification option}
 
 It would appear unpolished if the application gave normal classification results for an image which is not a flower. If, after classification, the image does not closely match any of the categories ($p_{i} < -x \forall i = 1 ... n$), the user is notified, but the classification results are still provided.  
 
 (TODO: run tests to find suitable x)
-
-
-\chapter{Conclusions and future work}
-Mirror of intro. Intro discusses challenges, conclusions describe how challenges were minimised. Were goals achieved
 
 \section{Conclusions}
 
