@@ -77,18 +77,35 @@ else
         'instance_matrix_jitter');
 end
 
+% load / generate the mirror jitter instance matrix
+if exist(fullfile(image_folder,'instance_matrix_jitter_mirror.mat'))
+    instance_matrix_jitter_mirror = cell2mat(struct2cell( ...
+        load(fullfile(image_folder,'instance_matrix_jitter_mirror.mat'))));
+else
+    instance_matrix_jitter_mirror = ones(num_images * 5, 4096);
+
+    for i = 1 : num_images
+        instance_matrix_jitter_mirror(5*i - 4 : 5*i, :) = ...
+            cnn(image_name(i, :), folder, net, ...
+            1, 1);
+    end
+
+    save(fullfile(image_folder,'instance_matrix_jitter_mirror.mat'), ...
+        'instance_matrix_jitter_mirror');
+end
+
 % construct train_instance_matrix
 
-
 if train_mirror == 1 && train_jitter == 1
-    train_instance_matrix = zeros(num_trn_images * 7, 4096);
-    train_label_vector = zeros(num_trn_images * 7, 1);
+    train_instance_matrix = zeros(num_trn_images * 12, 4096);
+    train_label_vector = zeros(num_trn_images * 12, 1);
     for i = 1 : num_trn_images
-        train_instance_matrix(7*i - 6, :) = instance_matrix_standard(trnid(i), :);
-        train_instance_matrix(7*i - 5, :) = instance_matrix_mirror(trnid(i), :);
-        train_instance_matrix(7*i-4 : 7*i, :) = instance_matrix_jitter(5*trnid(i)-4 : 5*trnid(i), :);
+        train_instance_matrix(12*i - 11, :) = instance_matrix_standard(trnid(i), :);
+        train_instance_matrix(12*i - 10, :) = instance_matrix_mirror(trnid(i), :);
+        train_instance_matrix(12*i-9 : 12*i-5, :) = instance_matrix_jitter(5*trnid(i)-4 : 5*trnid(i), :);
+        train_instance_matrix(12*i-4 : 12*i, :) = instance_matrix_jitter_mirror(5*trnid(i)-4 : 5*trnid(i), :);
 
-        train_label_vector(7*i-6 : 7*i) = image_labels(trnid(i));
+        train_label_vector(12*i-11 : 12*i) = image_labels(trnid(i));
     end
 
 elseif train_jitter == 1
@@ -130,8 +147,9 @@ if test_mirror == 1 && test_jitter == 1
         test_instance_matrix(i, :) = ( ... 
             instance_matrix_standard(valid(i), :) + ...
             instance_matrix_mirror(valid(i), :) + ...
-        	sum( instance_matrix_jitter(5*valid(i)-4 : 5*valid(i), :), 1) ...
-            /7);
+        	sum( instance_matrix_jitter(5*valid(i)-4 : 5*valid(i), :), 1) + ...
+            sum( instance_matrix_jitter_mirror(5*valid(i)-4 : 5*valid(i), :), 1) ...
+            /12);
 
         test_label_vector(i) = image_labels(valid(i));
     end
