@@ -2,11 +2,11 @@
 
 % User specifies whether to use mirroring and jittering (use = 1,
 % don't use = 0)
-cnn_options.train_mirror = 0;
-cnn_options.train_jitter = 0;
+cnn_options.train_mirror = 1;
+cnn_options.train_jitter = 1;
 cnn_options.test_mirror = 0;
 cnn_options.test_jitter = 0;
-do_svm = 0;
+do_svm = 1;
 
 % initialise variables
 flower_set_number = 102;

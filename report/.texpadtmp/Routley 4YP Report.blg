@@ -15,130 +15,130 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: Routley_4YP_Report-blx.bib
 Database file #2: ../4yp.bib
-Warning--string name "“chai" is undefined
+Warning--string name "?chai" is undefined
 --line 9 of file ../4yp.bib
 I was expecting an "="---line 9 of file ../4yp.bib
- :  author = “chai, y. 
- :                       and Lempitsky, V. and Zisserman, A.”,
+ :  author = ?chai, y. 
+ :                     and Lempitsky, V. and Zisserman, A.?,
 I'm skipping whatever remains of this entry
-Warning--string name "“pocoo”" is undefined
+Warning--string name "?pocoo?" is undefined
 --line 17 of file ../4yp.bib
-Warning--string name "“flask" is undefined
+Warning--string name "?flask" is undefined
 --line 18 of file ../4yp.bib
 I was expecting a `,' or a `}'---line 18 of file ../4yp.bib
- :   title = “flask 
- :                    (A Python Microframework)”,
+ :   title = ?flask 
+ :                  (A Python Microframework)?,
 I'm skipping whatever remains of this entry
-Warning--string name "“google”" is undefined
+Warning--string name "?google?" is undefined
 --line 25 of file ../4yp.bib
 Unbalanced braces---line 30 of file ../4yp.bib
  : 
  : }
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-Warning--string name "“square”" is undefined
+Warning--string name "?square?" is undefined
 --line 33 of file ../4yp.bib
-Warning--string name "“picasso”" is undefined
+Warning--string name "?picasso?" is undefined
 --line 34 of file ../4yp.bib
 Unbalanced braces---line 38 of file ../4yp.bib
  : 
  : }
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-Warning--string name "“alexander" is undefined
+Warning--string name "?alexander" is undefined
 --line 44 of file ../4yp.bib
 I was expecting a `,' or a `}'---line 44 of file ../4yp.bib
- :   author = “alexander 
- :                         Schmolck and Vivek Rathod”,
+ :   author = ?alexander 
+ :                       Schmolck and Vivek Rathod?,
 I'm skipping whatever remains of this entry
-Warning--string name "“imagenet”" is undefined
+Warning--string name "?imagenet?" is undefined
 --line 51 of file ../4yp.bib
-Warning--string name "“imagenet" is undefined
+Warning--string name "?imagenet" is undefined
 --line 52 of file ../4yp.bib
 I was expecting a `,' or a `}'---line 52 of file ../4yp.bib
- :   title = “imagenet 
- :                       Large Scale Visual Recognition Competition 2012 (ILSVRC2012)”,
+ :   title = ?imagenet 
+ :                     Large Scale Visual Recognition Competition 2012 (ILSVRC2012)?,
 I'm skipping whatever remains of this entry
-Warning--string name "“google”" is undefined
+Warning--string name "?google?" is undefined
 --line 59 of file ../4yp.bib
-Warning--string name "“material" is undefined
+Warning--string name "?material" is undefined
 --line 60 of file ../4yp.bib
 I was expecting a `,' or a `}'---line 60 of file ../4yp.bib
- :   title = “material 
- :                       Design | Android Developers”,
+ :   title = ?material 
+ :                     Design | Android Developers?,
 I'm skipping whatever remains of this entry
-Warning--string name "“google”" is undefined
+Warning--string name "?google?" is undefined
 --line 67 of file ../4yp.bib
-Warning--string name "“design" is undefined
+Warning--string name "?design" is undefined
 --line 68 of file ../4yp.bib
 I was expecting a `,' or a `}'---line 68 of file ../4yp.bib
- :   title = “design 
- :                     | Android Developers”,
+ :   title = ?design 
+ :                   | Android Developers?,
 I'm skipping whatever remains of this entry
-Warning--string name "“google”" is undefined
+Warning--string name "?google?" is undefined
 --line 75 of file ../4yp.bib
-Warning--string name "“downloads" is undefined
+Warning--string name "?downloads" is undefined
 --line 76 of file ../4yp.bib
 I was expecting a `,' or a `}'---line 76 of file ../4yp.bib
- :   title = “downloads 
- :                        | Android Developers”,
+ :   title = ?downloads 
+ :                      | Android Developers?,
 I'm skipping whatever remains of this entry
-Warning--string name "“machine" is undefined
+Warning--string name "?machine" is undefined
 --line 84 of file ../4yp.bib
 I was expecting a `,' or a `}'---line 84 of file ../4yp.bib
- :   author = “machine 
- :                       Learning Group at National Taiwan University”,
+ :   author = ?machine 
+ :                     Learning Group at National Taiwan University?,
 I'm skipping whatever remains of this entry
-Warning--string name "“google”" is undefined
+Warning--string name "?google?" is undefined
 --line 92 of file ../4yp.bib
-Warning--string name "“activity" is undefined
+Warning--string name "?activity" is undefined
 --line 93 of file ../4yp.bib
 I was expecting a `,' or a `}'---line 93 of file ../4yp.bib
- :   title = “activity 
- :                       | Android Developers”,
+ :   title = ?activity 
+ :                     | Android Developers?,
 I'm skipping whatever remains of this entry
 Biblatex version: 2.8
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-You've used 13 entries,
+You've used 14 entries,
             6047 wiz_defined-function locations,
-            1161 strings with 8910 characters,
-and the built_in function-call counts, 18677 in all, are:
-= -- 577
-> -- 153
-< -- 114
-+ -- 81
-- -- 64
-* -- 457
-:= -- 727
+            1167 strings with 9033 characters,
+and the built_in function-call counts, 21354 in all, are:
+= -- 662
+> -- 252
+< -- 134
++ -- 108
+- -- 102
+* -- 653
+:= -- 886
 add.period$ -- 0
-call.type$ -- 13
-change.case$ -- 11
+call.type$ -- 14
+change.case$ -- 18
 chr.to.int$ -- 34
-cite$ -- 24
-duplicate$ -- 2400
-empty$ -- 2857
-format.name$ -- 81
-if$ -- 4486
+cite$ -- 26
+duplicate$ -- 2712
+empty$ -- 3151
+format.name$ -- 146
+if$ -- 5097
 int.to.chr$ -- 0
-int.to.str$ -- 13
+int.to.str$ -- 15
 missing$ -- 0
-newline$ -- 94
-num.names$ -- 38
-pop$ -- 3980
+newline$ -- 115
+num.names$ -- 76
+pop$ -- 4300
 preamble$ -- 1
-purify$ -- 16
+purify$ -- 27
 quote$ -- 0
-skip$ -- 1013
+skip$ -- 1179
 stack$ -- 0
-substring$ -- 154
-swap$ -- 516
-text.length$ -- 133
+substring$ -- 167
+swap$ -- 612
+text.length$ -- 155
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 482
+type$ -- 520
 warning$ -- 0
-while$ -- 77
+while$ -- 91
 width$ -- 0
-write$ -- 80
+write$ -- 100
 (There were 11 error messages)

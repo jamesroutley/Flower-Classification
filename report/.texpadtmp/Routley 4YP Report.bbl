@@ -16,6 +16,27 @@
   {}
 \endgroup
 
+\entry{arXiv:1412.4564}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Vedaldi}{V.}%
+     {A.}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lenc}{L.}%
+     {K.}{K.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{VALK1}
+  \strng{fullhash}{VALK1}
+  \field{title}{MatConvNet -- Convolutional Neural Networks for MATLAB}
+  \field{volume}{abs/1412.4564}
+  \field{journaltitle}{CoRR}
+  \field{year}{2014}
+\endentry
+
 \entry{Chai11}{inproceedings}{}
 \endentry
 
