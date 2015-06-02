@@ -25,11 +25,22 @@ class ServerRequestHandler(SocketServer.BaseRequestHandler):
         # Run classification script
         ranking = mlab.server_classification(data, self.server.weight_matrix, self.server.net)
 
-        connectionHandler.send(str(gen_json(ranking)))
+        connectionHandler.send(str(gen_json_1(ranking)))
 
         t = time.time() - start
 
         print('Finished processing. Required %f seconds.' % t)
+
+def gen_json_1(ranking):
+    print ranking
+    with open('f.json') as data_file:
+        data = json.load(data_file)
+
+    json_list = []
+    for i in ranking:
+        json_list.append(data[str(int(i[0]-1))])
+
+    return json.dumps(json_list, separators=(',',':'))
 
 def gen_json(ranking):
 

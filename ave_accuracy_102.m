@@ -12,8 +12,8 @@ r_accuracies = zeros(num_flowers, num_tests);
 % don't use = 0)
 cnn_options.train_mirror = 0;
 cnn_options.train_jitter = 0;
-cnn_options.test_mirror = 0;
-cnn_options.test_jitter = 0;
+cnn_options.test_mirror = 1;
+cnn_options.test_jitter = 1;
 do_svm = 1;
 
 
@@ -53,7 +53,7 @@ for count = 1 : num_tests
     % train models 
     if do_svm
     [weight_matrix, model_labels] = svm_train( ... 
-        flower_set_number, train_instance_matrix, train_label_vector);
+        flower_set_number, train_instance_matrix, train_label_vector, cnn_options);
     end
 
     % test models

@@ -8,9 +8,13 @@ Need to look at how matlab code is called by python.
 
 function ranking = classification(im, weight_matrix)
 % im = imread('oxfordflower17/jpg/image_0001.jpg');
+mirror = 0;
+sample = 0;
 
 im_ = single(im);
 net = load('cnn_imagenet-vgg-f.mat');
+
+
 feature_vector = cnn_feature_extract(im_, net);
 
 class_decision_values = feature_vector * weight_matrix';

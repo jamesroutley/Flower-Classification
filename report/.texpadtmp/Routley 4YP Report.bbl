@@ -16,28 +16,22 @@
   {}
 \endgroup
 
-\entry{arXiv:1412.4564}{article}{}
-  \name{author}{2}{}{%
+\entry{LitRev:Chai}{misc}{}
+  \name{author}{1}{}{%
     {{}%
-     {Vedaldi}{V.}%
-     {A.}{A.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Lenc}{L.}%
-     {K.}{K.}%
+     {Chai}{C.}%
+     {Y.}{Y.}%
      {}{}%
      {}{}}%
   }
-  \strng{namehash}{VALK1}
-  \strng{fullhash}{VALK1}
-  \field{title}{MatConvNet -- Convolutional Neural Networks for MATLAB}
-  \field{volume}{abs/1412.4564}
-  \field{journaltitle}{CoRR}
-  \field{year}{2014}
-\endentry
-
-\entry{Chai11}{inproceedings}{}
+  \strng{namehash}{CY1}
+  \strng{fullhash}{CY1}
+  \field{sortinit}{C}
+  \field{title}{Recognition between a Large Number of Flower Species}
+  \verb{url}
+  \verb http://www.robots.ox.ac.uk/~vgg/research/flowers_demo/docs/Chai11.pdf
+  \endverb
+  \field{year}{2011}
 \endentry
 
 \entry{Chatfield14}{inproceedings}{}
@@ -65,49 +59,249 @@
   }
   \strng{namehash}{CK+1}
   \strng{fullhash}{CKSKVAZA1}
+  \field{sortinit}{C}
   \field{booktitle}{British Machine Vision Conference}
   \field{title}{Return of the Devil in the Details: Delving Deep into
   Convolutional Nets}
   \field{year}{2014}
 \endentry
 
+\entry{REF08a}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Fan}{F.}%
+     {Rong-En}{R.-E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Chang}{C.}%
+     {Kai-Wei}{K.-W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hsieh}{H.}%
+     {Cho-Jui}{C.-J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wang}{W.}%
+     {Xiang-Rui}{X.-R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lin}{L.}%
+     {Chih-Jen}{C.-J.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{FRE+1}
+  \strng{fullhash}{FRECKWHCJWXRLCJ1}
+  \field{sortinit}{F}
+  \field{pages}{1871\bibrangedash 1874}
+  \field{title}{{LIBLINEAR}: A Library for Large Linear Classification}
+  \field{volume}{9}
+  \field{journaltitle}{Journal of Machine Learning Research}
+  \field{year}{2008}
+\endentry
+
 \entry{CNN:Imagenet}{misc}{}
-\endentry
-
-\entry{SVM:LibLinear}{misc}{}
-\endentry
-
-\entry{AndroidDev:Activity}{misc}{}
-\endentry
-
-\entry{AndroidDev:AsyncTask}{misc}{}
-  \field{title}{AsyncTask | Android Developers}
+  \name{author}{1}{}{%
+    {{}%
+     {Imagenet}{I.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{I1}
+  \strng{fullhash}{I1}
+  \field{sortinit}{I}
+  \field{note}{[Online; accessed 12-April-2015]}
+  \field{title}{ImageNet Large Scale Visual Recognition Competition 2012
+  (ILSVRC2012)}
   \verb{url}
-  \verb http://developer.android.com/reference/android/os/AsyncTask.html
+  \verb http://image-net.org/challenges/LSVRC/2012/browse-synsets
   \endverb
   \field{year}{2015}
 \endentry
 
-\entry{AndroidDev:Picasso}{misc}{}
+\entry{leafsnap_eccv2012}{inproceedings}{}
+  \name{author}{7}{}{%
+    {{}%
+     {Kumar}{K.}%
+     {Neeraj}{N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Belhumeur}{B.}%
+     {Peter~N.}{P.~N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Biswas}{B.}%
+     {Arijit}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Jacobs}{J.}%
+     {David~W.}{D.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kress}{K.}%
+     {W.~John}{W.~J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lopez}{L.}%
+     {Ida}{I.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Soares}{S.}%
+     {Joao V.~B.}{J.~V.~B.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{KN+1}
+  \strng{fullhash}{KNBPNBAJDWKWJLISJVB1}
+  \field{sortinit}{K}
+  \field{booktitle}{The 12th European Conference on Computer Vision (ECCV)}
+  \field{title}{Leafsnap: A Computer Vision System for Automatic Plant Species
+  Identification}
+  \field{year}{2012}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{LitRev:DeepLearning}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Lab}{L.}%
+     {LISA}{L.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{LL1}
+  \strng{fullhash}{LL1}
+  \field{sortinit}{L}
+  \field{note}{[Online; accessed 3-May-2015]}
+  \field{title}{Convolutional Neural Networks (LeNet): DeepLearning 0.1
+  documentation}
   \verb{url}
-  \verb http://square.github.io/picasso/
+  \verb http://deeplearning.net/tutorial/lenet.htmll
   \endverb
   \field{year}{2015}
 \endentry
 
-\entry{Server:Flask}{misc}{}
+\entry{conf/eccv/LiuKJB12}{inproceedings}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Liu}{L.}%
+     {Jiongxin}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kanazawa}{K.}%
+     {Angjoo}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Jacobs}{J.}%
+     {David~W.}{D.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Belhumeur}{B.}%
+     {Peter~N.}{P.~N.}%
+     {}{}%
+     {}{}}%
+  }
+  \name{editor}{5}{}{%
+    {{}%
+     {Fitzgibbon}{F.}%
+     {Andrew~W.}{A.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lazebnik}{L.}%
+     {Svetlana}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Perona}{P.}%
+     {Pietro}{P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sato}{S.}%
+     {Yoichi}{Y.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schmid}{S.}%
+     {Cordelia}{C.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{LJ+1}
+  \strng{fullhash}{LJKAJDWBPN1}
+  \field{sortinit}{L}
+  \field{booktitle}{ECCV (1)}
+  \field{pages}{172\bibrangedash 185}
+  \field{series}{Lecture Notes in Computer Science}
+  \field{title}{Dog Breed Classification Using Part Localization.}
+  \verb{url}
+  \verb http://dblp.uni-trier.de/db/conf/eccv/eccv2012-1.html#LiuKJB12
+  \endverb
+  \field{volume}{7572}
+  \field{year}{2012}
 \endentry
 
-\entry{Server:Mlwrap}{misc}{}
+\entry{Nilsback08}{inproceedings}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Nilsback}{N.}%
+     {M-E.}{M.-E.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Zisserman}{Z.}%
+     {A.}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{NMEZA1}
+  \strng{fullhash}{NMEZA1}
+  \field{sortinit}{N}
+  \field{booktitle}{Proceedings of the Indian Conference on Computer Vision,
+  Graphics and Image Processing}
+  \field{title}{Automated Flower Classification over a Large Number of Classes}
+  \field{year}{2008}
+  \warn{\item Invalid format of field 'month'}
 \endentry
 
-\entry{AndroidDev:Design}{misc}{}
-\endentry
-
-\entry{AndroidDev:Material}{misc}{}
-\endentry
-
-\entry{AndroidDev:Icons}{misc}{}
+\entry{arXiv:1412.4564}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Vedaldi}{V.}%
+     {A.}{A.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lenc}{L.}%
+     {K.}{K.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{VALK1}
+  \strng{fullhash}{VALK1}
+  \field{sortinit}{V}
+  \field{title}{MatConvNet -- Convolutional Neural Networks for MATLAB}
+  \field{volume}{abs/1412.4564}
+  \field{journaltitle}{CoRR}
+  \field{year}{2014}
 \endentry
 
 \lossort

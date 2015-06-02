@@ -4,14 +4,14 @@
 % TODO tidy up use_mirror + use_jitter. cnn_options struct could be used.
 
 % User specifies whether to use mirroring and jittering (use = 1,
-% don't use = 0)
-cnn_options.train_mirror = 1;
-cnn_options.train_jitter = 1;
-cnn_options.test_mirror = 1;
-cnn_options.test_jitter = 1;
+% don't use = 0
+cnn_options.train_mirror = 0;
+cnn_options.train_jitter = 0;
+cnn_options.test_mirror = 0;
+cnn_options.test_jitter = 0;
 
-%c_param_int = [0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000, 100000];
-c_param_int = [0.000001, 100000];
+c_param_int = [0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000, 100000];
+%c_param_int = [0.000001, 100000];
 num_runs = size(c_param_int, 2);
 %c_param = '-c 0.1';
 
@@ -61,4 +61,8 @@ for i = 1 : num_runs
     accuracies(i) = trace(confusion_matrix) / ...
         flower_set_number;
 end
+
+semilogx(c_param_int, accuracies * 100)
+xlabel('C parameter')
+ylabel('percentage accuracy')
 

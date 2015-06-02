@@ -15,130 +15,53 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: Routley_4YP_Report-blx.bib
 Database file #2: ../4yp.bib
-Warning--string name "?chai" is undefined
---line 9 of file ../4yp.bib
-I was expecting an "="---line 9 of file ../4yp.bib
- :  author = ?chai, y. 
- :                     and Lempitsky, V. and Zisserman, A.?,
-I'm skipping whatever remains of this entry
-Warning--string name "?pocoo?" is undefined
---line 17 of file ../4yp.bib
-Warning--string name "?flask" is undefined
---line 18 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 18 of file ../4yp.bib
- :   title = ?flask 
- :                  (A Python Microframework)?,
-I'm skipping whatever remains of this entry
-Warning--string name "?google?" is undefined
---line 25 of file ../4yp.bib
-Unbalanced braces---line 30 of file ../4yp.bib
- : 
- : }
+I was expecting a `,' or a `}'---line 11 of file ../4yp.bib
+ :  
+ :  booktitle = "13th Annual Computer Vision Conference"
 (Error may have been on previous line)
-I'm skipping whatever remains of this entry
-Warning--string name "?square?" is undefined
---line 33 of file ../4yp.bib
-Warning--string name "?picasso?" is undefined
---line 34 of file ../4yp.bib
-Unbalanced braces---line 38 of file ../4yp.bib
- : 
- : }
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-Warning--string name "?alexander" is undefined
---line 44 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 44 of file ../4yp.bib
- :   author = ?alexander 
- :                       Schmolck and Vivek Rathod?,
-I'm skipping whatever remains of this entry
-Warning--string name "?imagenet?" is undefined
---line 51 of file ../4yp.bib
-Warning--string name "?imagenet" is undefined
---line 52 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 52 of file ../4yp.bib
- :   title = ?imagenet 
- :                     Large Scale Visual Recognition Competition 2012 (ILSVRC2012)?,
-I'm skipping whatever remains of this entry
-Warning--string name "?google?" is undefined
---line 59 of file ../4yp.bib
-Warning--string name "?material" is undefined
---line 60 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 60 of file ../4yp.bib
- :   title = ?material 
- :                     Design | Android Developers?,
-I'm skipping whatever remains of this entry
-Warning--string name "?google?" is undefined
---line 67 of file ../4yp.bib
-Warning--string name "?design" is undefined
---line 68 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 68 of file ../4yp.bib
- :   title = ?design 
- :                   | Android Developers?,
-I'm skipping whatever remains of this entry
-Warning--string name "?google?" is undefined
---line 75 of file ../4yp.bib
-Warning--string name "?downloads" is undefined
---line 76 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 76 of file ../4yp.bib
- :   title = ?downloads 
- :                      | Android Developers?,
-I'm skipping whatever remains of this entry
-Warning--string name "?machine" is undefined
---line 84 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 84 of file ../4yp.bib
- :   author = ?machine 
- :                     Learning Group at National Taiwan University?,
-I'm skipping whatever remains of this entry
-Warning--string name "?google?" is undefined
---line 92 of file ../4yp.bib
-Warning--string name "?activity" is undefined
---line 93 of file ../4yp.bib
-I was expecting a `,' or a `}'---line 93 of file ../4yp.bib
- :   title = ?activity 
- :                     | Android Developers?,
 I'm skipping whatever remains of this entry
 Biblatex version: 2.8
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-You've used 14 entries,
+You've used 10 entries,
             6047 wiz_defined-function locations,
-            1167 strings with 9033 characters,
-and the built_in function-call counts, 21354 in all, are:
-= -- 662
-> -- 252
-< -- 134
-+ -- 108
-- -- 102
-* -- 653
-:= -- 886
+            1190 strings with 10185 characters,
+and the built_in function-call counts, 28973 in all, are:
+= -- 980
+> -- 971
+< -- 237
++ -- 297
+- -- 371
+* -- 2387
+:= -- 1916
 add.period$ -- 0
-call.type$ -- 14
-change.case$ -- 18
-chr.to.int$ -- 34
-cite$ -- 26
-duplicate$ -- 2712
-empty$ -- 3151
-format.name$ -- 146
-if$ -- 5097
+call.type$ -- 10
+change.case$ -- 93
+chr.to.int$ -- 36
+cite$ -- 18
+duplicate$ -- 3358
+empty$ -- 3100
+format.name$ -- 708
+if$ -- 6418
 int.to.chr$ -- 0
-int.to.str$ -- 15
+int.to.str$ -- 20
 missing$ -- 0
-newline$ -- 115
-num.names$ -- 76
-pop$ -- 4300
+newline$ -- 305
+num.names$ -- 382
+pop$ -- 3013
 preamble$ -- 1
-purify$ -- 27
+purify$ -- 122
 quote$ -- 0
-skip$ -- 1179
+skip$ -- 1636
 stack$ -- 0
-substring$ -- 167
-swap$ -- 612
-text.length$ -- 155
-text.prefix$ -- 0
+substring$ -- 363
+swap$ -- 1088
+text.length$ -- 265
+text.prefix$ -- 9
 top$ -- 1
-type$ -- 520
+type$ -- 368
 warning$ -- 0
-while$ -- 91
+while$ -- 206
 width$ -- 0
-write$ -- 100
-(There were 11 error messages)
+write$ -- 294
+(There was 1 error message)

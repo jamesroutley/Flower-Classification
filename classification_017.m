@@ -5,10 +5,10 @@
 
 % User specifies whether to use mirroring and jittering (use = 1,
 % don't use = 0)
-cnn_options.train_mirror = 0;
-cnn_options.train_jitter = 0;
-cnn_options.test_mirror = 1;
-cnn_options.test_jitter = 1;
+cnn_options.train_mirror = 1;
+cnn_options.train_jitter = 1;
+cnn_options.test_mirror = 0;
+cnn_options.test_jitter = 0;
 
 % initialise variables
 flower_set_number = 17;
@@ -33,7 +33,7 @@ image_labels = (cell2mat(struct2cell(image_labels)));
 
 % train SVM models
 [weight_matrix, model_labels] = svm_train( ...
-    flower_set_number, train_instance_matrix, train_label_vector);
+    flower_set_number, train_instance_matrix, train_label_vector, cnn_options);
 
 
 % test SVM models 
