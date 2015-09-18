@@ -1,7 +1,7 @@
 Flower-Classification
 =====================
 
-The objective of this project is to create an Android application which will take photos of flowers, and then correctly classify it by species. 
+A proof of concept application built with help from Andrew Zisserman and Oxford University’s Visual Geometry Group. The application allows a user to take a photo of a flower, and uses computer vision and machine learning algorithms to automatically classify the species of the flower.
 
-I am currently testing SVM techniques in using LibLinear in MATLAB.
+The application can identify 102 common flower species with a practical accuracy of 96%.
 
